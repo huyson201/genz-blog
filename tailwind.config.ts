@@ -12,6 +12,7 @@ const config: Config = {
       backgroundImage: {
         shadow: "url(../assets/shadow-1.svg)",
         "shadow-2": "url(../assets/shadow-2.svg)",
+        security: "url(../assets/security.svg)",
         "primary-gradient":
           "linear-gradient(90deg,#0ea5ea,#0bd1d1 51%,#0ea5ea)",
       },

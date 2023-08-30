@@ -78,3 +78,8 @@ body {
     @apply inline-flex items-center text-sm dark:text-on_text_gray_2 hover:text-blue transition-colors
     text-[#667085] dark:hover:text-blue;
 }
+/* login */
+.form-separator{
+    @apply text-center my-6 relative before:absolute before:w-[80%] before:h-[1px] before:bg-[#c2d4ee] dark:before:bg-on_dark_border
+    before:top-2/4 before:left-2/4 before:-translate-y-2/4 before:-translate-x-2/4;
+}
