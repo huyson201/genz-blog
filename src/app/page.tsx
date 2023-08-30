@@ -1,113 +1,99 @@
+import Wrapper from '@/components/Common/Wrapper/Wrapper'
+import TypingAnimation from '@/components/TypingAnimation/TypingAnimation'
 import Image from 'next/image'
+import ProfileImg from '@/assets/profile.jpg'
+import Link from 'next/link'
+import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa6'
+import BlogSection from '@/components/BlogSection/BlogSection'
+import LastCommentSection from '@/components/LastCommentSection/LastCommentSection'
+import Pagination from '@/components/Pagination/Pagination'
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+    <main>
+      {/* home cover */}
+      <section className='home-cover'>
+        <Wrapper className='relative z-[2]'>
+          <div className='flex py-24 xl:px-16 justify-between'>
+            <div className='w-full lg:w-2/4'>
+              <span className='dark:text-on_dark_text_gray font-bold text-[#7e9cc7] text-sm transition-colors'>Hello Everyone!</span>
+              <h1 className='text-on_light_text_white dark:text-white text-[29px] xs:text-[34px] sm:text-[44px] md:text-[64px] font-extrabold transition-colors'>I&lsquo;m</h1>
+              <TypingAnimation className='relative text-[29px] xs:text-[34px] sm:text-[44px] md:text-[64px] font-extrabold gradient-text' words={['Son Nguyen', "Developer"]} />
+              <p className='text-[#7f92b0] lg:w-3/4'>
+                I use animation as a third dimension by which to simplify experiences and kuiding thro each and every interaction. I’m not adding motion just to spruce things up, but doing it in ways that.
+              </p>
+              {/* subscribe */}
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+              <form className='subscribe-form'>
+                <input className='w-full text-sm outline-none placeholder-[#7f92b0] text-[#7f92b0] bg-transparent' type="email" placeholder='Type your email address' />
+                <button className='bg-primary-gradient bg-200% text-sm font-bold px-4 py-[10px] rounded-md text-white hover:bg-right transition-all'>
+                  Subscribe
+                </button>
+              </form>
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+              {/* social box */}
+              <div className='flex items-center gap-4 mt-8'>
+                <Link href={"#"} className='social-links'>
+                  <FaFacebookF />
+                </Link>
+                <Link href={"#"} className='social-links'>
+                  <FaInstagram />
+                </Link>
+                <Link href={"#"} className='social-links'>
+                  <FaTwitter />
+                </Link>
+              </div>
+            </div>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+            <div className='hidden lg:block lg:w-2/4'>
+              <Image className='w-2/3 picture-anime ml-auto rounded-xl' alt='profile picture' src={ProfileImg} />
+            </div>
+          </div>
+        </Wrapper>
+      </section>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
+      {/* recent posts */}
+      <section>
+        <Wrapper>
+          <div className='py-12 xl:px-16'>
+            <div>
+              <h2 className='gradient-text text-[45px] font-bold'>Recent posts</h2>
+              <p className='dark:text-on_dark_text_gray text-[18px] text-[#708ab0] transition-colors'>Don&#39;t miss the latest trends</p>
+            </div>
+            <div className='mt-12 md:space-x-6 md:flex space-y-12 md:space-y-0'>
+              {/* blogs list */}
+              <div className='md:w-2/3'>
+                <div className='lg:flex lg:flex-wrap lg:gap-6 space-y-6 lg:space-y-0'>
+                  {
+                    Array(10).fill(0).map((_, index) => {
+                      return <BlogSection key={`blog-${index}`} />
+                    })
+                  }
+                </div>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+                {/* pagination */}
+                <Pagination />
+              </div>
+
+              {/* sidebar  */}
+              <div className='md:w-1/3'>
+                <div className='dark:border-on_dark_border border-gray-300 border rounded-xl bg-on_light_card_bg dark:bg-on_dark_card_bg p-6 transition-colors'>
+                  <h2 className='text-xl gradient-text font-bold pb-[10px] relative
+                                 after:content-[""] after:absolute after:w-1/3 after:h-0.5 mb-10 after:bg-primary-gradient
+                                 after:bottom-0 after:left-0'>
+                    Last Comment
+                  </h2>
+                  {
+                    Array(5).fill(0).map((_, index) => {
+                      return <LastCommentSection key={`cmt-${index}`} isLast={index === 4} />
+                    })
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+        </Wrapper>
+      </section>
     </main>
   )
 }

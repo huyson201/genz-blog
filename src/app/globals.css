@@ -2,26 +2,79 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+@layer componets{
+    .gradient-text{
+        @apply bg-gradient-to-r from-blue via-teal to-teal text-transparent bg-clip-text ;
+    }
 }
-
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+ @apply font-noto_sans;
+}
+
+.cursor-animate{
+    animation: cursor 1s infinite;
+}
+
+@keyframes cursor {
+    to{
+        opacity: 0;
+    }
+}
+
+.picture-anime{
+    animation: picture-anime 1.5s infinite alternate;
+    @apply transition-all;
+}
+
+@keyframes picture-anime {
+    from{
+        transform: translateY(-8px);
+    }
+    to{
+        transform: translateY(8px)
+    }
+}
+
+.sticky-bar{
+    @apply fixed z-[5] top-0 left-0 w-full mt-0 border-b border-on_light_border ;
+    animation: fadeInDown 0.7s ease-in-out forwards;
+}
+.dark .sticky-bar{
+    @apply  border-on_dark_border;
+}
+@keyframes fadeInDown {
+    from{
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.home-cover{
+    @apply dark:bg-on_dark_body_bg bg-on_light_body_bg  relative overflow-hidden
+    before:content-[""] before:w-[500px] before:h-full before:bg-cover before:bg-no-repeat before:absolute before:top-0 
+    before:-left-20 before:bg-shadow transition-colors
+    after:content-[""] after:w-full after:h-full after:top-0 after:bg-[100%] after:left-0 after:bg-no-repeat after:absolute  after:bg-shadow-2;
+}
+.subscribe-form{
+    @apply relative md:w-[400px] gap-4 rounded flex items-center p-[10px] bg-on_light_body_bg dark:bg-on_dark_bg_2 mt-8
+    before:rounded before:content-[""] before:absolute before:top-[-1px] before:left-[-1px]
+    before:right-[-1px] before:bottom-[-1px] before:z-[-1] before:bg-primary-gradient transition-colors;
+}
+
+.social-links{
+    @apply w-[50px] h-[50px] text-white bg-[#708ab0] dark:bg-on_dark_bg_2  
+    flex items-center justify-center text-2xl rounded-full
+     transition-all cursor-pointer hover:bg-gradient-to-r hover:from-blue hover:via-teal
+     hover:to-blue hover:bg-200% hover:via-50% hover:-translate-y-1 duration-300;
+
+}
+/* breadcrumb */
+.breadcrumb-links{
+    @apply inline-flex items-center text-sm dark:text-on_text_gray_2 hover:text-blue transition-colors
+    text-[#667085] dark:hover:text-blue;
 }
