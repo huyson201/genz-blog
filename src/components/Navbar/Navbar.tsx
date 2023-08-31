@@ -7,6 +7,7 @@ import NavLink from '../Common/NavLink/NavLink'
 import { MagnifyingGlassIcon, Bars3Icon } from '@heroicons/react/24/outline'
 import ThemeModeToggle from '../ThemeModeToggle/ThemeModeToggle'
 import Link from 'next/link'
+import Search from '../Search/Search';
 interface Props {
     onRequestOpenNavMobile: () => void
 }
@@ -39,7 +40,7 @@ const Navbar = ({ onRequestOpenNavMobile }: Props) => {
             onScroll={(e) => { }}
             ref={navbarRef}
             className={twMerge(` dark:bg-on_dark_body_bg transition-all bg-on_light_body_bg py-2 sm:py-[15px] mt-[15px]`)}>
-            <Wrapper className='flex items-center justify-between'>
+            <Wrapper className='relative flex items-center justify-between'>
                 <Logo />
                 <div className='lg:flex items-center flex-nowrap space-x-4 font-noto_sans hidden  '>
                     <NavLink href={"/"} className='px-4 text-base transition-all hover:text-on_link_active
@@ -59,10 +60,8 @@ const Navbar = ({ onRequestOpenNavMobile }: Props) => {
                     </NavLink>
                 </div>
 
-                <div className='flex items-center justify-between gap-4'>
-                    <button className='flex items-center text-on_text_gray_2 font-normal'>
-                        <MagnifyingGlassIcon className='w-6 h-6' />
-                    </button>
+                <div className='flex items-center justify-between gap-4 ml-auto lg:ml-0'>
+                    <Search />
                     <ThemeModeToggle />
                     <Link href={"#"}
                         className=' px-4 py-[10px] bg-gradient-to-r from-blue via-teal to-blue 

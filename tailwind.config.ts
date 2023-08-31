@@ -12,7 +12,10 @@ const config: Config = {
       backgroundImage: {
         shadow: "url(../assets/shadow-1.svg)",
         "shadow-2": "url(../assets/shadow-2.svg)",
-        security: "url(../assets/security.svg)",
+        "shadow-3": "url(../assets/shadow-3.svg)",
+        headset: "url(../assets/headset.svg)",
+        marker: "url(../assets/marker.svg)",
+        "paper-plane": "url(../assets/paper-plane.svg)",
         "primary-gradient":
           "linear-gradient(90deg,#0ea5ea,#0bd1d1 51%,#0ea5ea)",
       },

@@ -58,7 +58,7 @@ body {
     @apply dark:bg-on_dark_body_bg bg-on_light_body_bg  relative overflow-hidden
     before:content-[""] before:w-[500px] before:h-full before:bg-cover before:bg-no-repeat before:absolute before:top-0 
     before:-left-20 before:bg-shadow transition-colors
-    after:content-[""] after:w-full after:h-full after:top-0 after:bg-[100%] after:left-0 after:bg-no-repeat after:absolute  after:bg-shadow-2;
+    after:content-[""] after:w-full after:h-full after:top-0 after:left-0 after:bg-no-repeat after:absolute  after:bg-shadow-3;
 }
 .subscribe-form{
     @apply relative md:w-[400px] gap-4 rounded flex items-center p-[10px] bg-on_light_body_bg dark:bg-on_dark_bg_2 mt-8
@@ -83,3 +83,11 @@ body {
     @apply text-center my-6 relative before:absolute before:w-[80%] before:h-[1px] before:bg-[#c2d4ee] dark:before:bg-on_dark_border
     before:top-2/4 before:left-2/4 before:-translate-y-2/4 before:-translate-x-2/4;
 }
+
+/* google map */
+.gmap_canvas {
+    overflow:hidden;
+    background:none!important;
+    width:100%;
+    height:400px;}
+.gmap_iframe {height:400px!important;}
