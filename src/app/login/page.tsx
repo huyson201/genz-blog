@@ -1,17 +1,22 @@
+"use client"
 
-
-import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import googleIcon from '@/assets/google.svg'
 import InputField from '@/components/Input/InputField'
 import PasswordInput from '@/components/Input/PasswordInput'
 import GradientButton from '@/components/Button/GradientButton'
 import LoginRegisterWrapper from '@/components/LoginRegisterWrapper/LoginRegisterWrapper'
 import GoogleButton from '@/components/Button/GoogleButton'
+import { signIn } from 'next-auth/react'
 type Props = {}
 
 const Login = (props: Props) => {
+
+    const handleSignIn = () => {
+        signIn("credentials", {
+            redirect: false
+        })
+    }
     return (
         <LoginRegisterWrapper>
             <h1 className="sm:text-[35px] xs:text-[25] text-[20px] md:text-[45px] font-bold text-center leading-tight tracking-tight gradient-text mb-6 md:mb-12">
@@ -30,7 +35,7 @@ const Login = (props: Props) => {
 
                         <GradientButton type='submit' className='w-full dark:text-on_dark_card_bg dark:hover:text-white hover:text-white outline-none rounded-lg  py-2.5 text-sm font-bold' title='Sign in' />
                         <p className="text-sm  text-on_dark_text_gray">
-                            Don’t have an account yet? <Link href="#" >
+                            Don’t have an account yet? <Link href="/register" >
                                 <span className=" gradient-text">Sign up</span>
                             </Link>
 

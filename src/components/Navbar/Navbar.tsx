@@ -12,6 +12,19 @@ interface Props {
     onRequestOpenNavMobile: () => void
 }
 
+export const navMenu = [
+    {
+        path: "/",
+        name: "Home"
+    },
+    {
+        path: "/about-me",
+        name: "About me"
+    }, {
+        path: "/contact",
+        name: "Contact",
+    }
+]
 
 const Navbar = ({ onRequestOpenNavMobile }: Props) => {
     const navbarRef = React.useRef<HTMLDivElement | null>(null)
@@ -20,7 +33,7 @@ const Navbar = ({ onRequestOpenNavMobile }: Props) => {
 
         const stickyEffect = () => {
             if (!navbarRef.current) return
-            if (window.scrollY > 60) {
+            if (window.scrollY > 70) {
                 if (navbarRef.current.classList.contains("sticky-bar")) return
                 navbarRef.current.classList.add("sticky-bar")
             }
@@ -43,31 +56,25 @@ const Navbar = ({ onRequestOpenNavMobile }: Props) => {
             <Wrapper className='relative flex items-center justify-between'>
                 <Logo />
                 <div className='lg:flex items-center flex-nowrap space-x-4 font-noto_sans hidden  '>
-                    <NavLink href={"/"} className='px-4 text-base transition-all hover:text-on_link_active
-                                                 text-on_text_gray_2 font-normal [&.active]:text-on_link_active
-                                                 dark:text-on_dark_text_gray dark:hover:text-on_link_active'>
-                        Home
-                    </NavLink>
-                    <NavLink href={"#"} className='px-4 text-base transition-all hover:text-on_link_active
-                                                 text-on_text_gray_2 font-normal [&.active]:text-on_link_active
-                                                 dark:text-on_dark_text_gray dark:hover:text-on_link_active'>
-                        About Me
-                    </NavLink>
-                    <NavLink href={"#"} className='px-4 text-base transition-all hover:text-on_link_active
-                                                 text-on_text_gray_2 font-normal [&.active]:text-on_link_active
-                                                 dark:text-on_dark_text_gray dark:hover:text-on_link_active'>
-                        Contact
-                    </NavLink>
+                    {
+                        navMenu.map((items, idex) => (
+                            <NavLink key={items.name} href={items.path} className='px-4 text-base transition-all hover:text-on_link_active
+                            text-on_text_gray_2 font-normal [&.active]:text-on_link_active
+                            dark:text-on_dark_text_gray dark:hover:text-on_link_active'>
+                                {items.name}
+                            </NavLink>
+                        ))
+                    }
                 </div>
 
                 <div className='flex items-center justify-between gap-4 ml-auto lg:ml-0'>
                     <Search />
                     <ThemeModeToggle />
-                    <Link href={"#"}
+                    <Link href={"/login"}
                         className=' px-4 py-[10px] bg-gradient-to-r from-blue via-teal to-blue 
                                 bg-200% rounded-md text-white text-center font-bold text-sm transition-all duration-500
                                 hover:bg-right hidden sm:inline-block'>
-                        Subscribe
+                        Sign in
                     </Link>
                     <button className='flex items-center text-on_dark_text_gray lg:hidden' onClick={onRequestOpenNavMobile}>
                         <Bars3Icon className='w-9 h-9' />

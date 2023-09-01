@@ -1,9 +1,7 @@
 
 
-import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import googleIcon from '@/assets/google.svg'
 import InputField from '@/components/Input/InputField'
 import PasswordInput from '@/components/Input/PasswordInput'
 import GradientButton from '@/components/Button/GradientButton'
@@ -32,7 +30,7 @@ const Register = (props: Props) => {
 
                         <GradientButton type='submit' className='w-full dark:text-on_dark_card_bg dark:hover:text-white hover:text-white  outline-none rounded-lg  py-2.5 text-sm font-bold' title='Create an account' />
                         <p className="text-sm  text-on_dark_text_gray">
-                            Already have an account? <Link href="#" >
+                            Already have an account? <Link href="/login" >
                                 <span className=" gradient-text">Sign in</span>
                             </Link>
 

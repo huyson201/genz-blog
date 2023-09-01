@@ -10,7 +10,7 @@ const Contact = (props: Props) => {
     return (
         <section>
             <Wrapper>
-                <div className='py-6'>
+                <div className='py-6 mb-40'>
                     <h1 className='mt-6 text-[30px] sm:text-[34px] md:text-[44px] lg:text-[64px] font-extrabold text-center '>
                         <span className='bg-primary-gradient bg-clip-text text-transparent bg-left bg-200%'>Contact Us</span>
                     </h1>

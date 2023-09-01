@@ -3,12 +3,14 @@
 import React, { forwardRef } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-interface Props extends React.InputHTMLAttributes<HTMLInputElement> { }
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+    wrapperClass?: string
+}
 
 
 
-const InputField = forwardRef<HTMLInputElement, Props>(({ className, ...props }, ref) => (
-    <div>
+const InputField = forwardRef<HTMLInputElement, Props>(({ className, wrapperClass, ...props }, ref) => (
+    <div className={wrapperClass} >
         <input
             {...props}
             ref={ref}

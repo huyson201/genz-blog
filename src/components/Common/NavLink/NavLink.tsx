@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useMemo } from 'react'
 import Link, { LinkProps } from 'next/link'
 import { usePathname } from "next/navigation";
 import { twMerge } from 'tailwind-merge'
@@ -11,9 +11,16 @@ interface Props extends LinkProps {
 
 const NavLink = ({ className, href, children, ...props }: Props) => {
     const pathName = usePathname()
-    const isActive = pathName.startsWith(href.toString())
+    const isActive = useMemo(() => {
+        if (pathName !== "/" && href !== "/") {
+            return pathName.startsWith(href.toString())
+        }
+
+        return pathName === href
+    }, [pathName])
+
     return (
-        <Link href={href} className={twMerge(className, isActive && "active")} {...props}>
+        <Link href={href} className={twMerge(className, isActive && "active", pathName)} {...props}>
             {children}
         </Link>
     )

@@ -10,7 +10,7 @@ type Props = {}
 
 const Footer = (props: Props) => {
     return (
-        <footer className='py-10'>
+        <footer className='pb-12 relative z-[1]'>
             <Wrapper>
                 <div className='bg-on_light_card_bg dark:bg-on_dark_card_bg border border-[#c2d4ee] dark:border-on_dark_border rounded-[32px] md:rounded-[50px] py-12 px-4 
                  md:px-24 lg:px-32 transition-colors'>

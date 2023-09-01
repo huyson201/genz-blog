@@ -15,6 +15,7 @@ const config: Config = {
         "shadow-3": "url(../assets/shadow-3.svg)",
         headset: "url(../assets/headset.svg)",
         marker: "url(../assets/marker.svg)",
+        security: "url(../assets/security.svg)",
         "paper-plane": "url(../assets/paper-plane.svg)",
         "primary-gradient":
           "linear-gradient(90deg,#0ea5ea,#0bd1d1 51%,#0ea5ea)",
