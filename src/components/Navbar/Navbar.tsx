@@ -8,6 +8,7 @@ import { MagnifyingGlassIcon, Bars3Icon } from '@heroicons/react/24/outline'
 import ThemeModeToggle from '../ThemeModeToggle/ThemeModeToggle'
 import Link from 'next/link'
 import Search from '../Search/Search';
+import { BsPencilSquare } from 'react-icons/bs';
 interface Props {
     onRequestOpenNavMobile: () => void
 }
@@ -69,6 +70,9 @@ const Navbar = ({ onRequestOpenNavMobile }: Props) => {
 
                 <div className='flex items-center justify-between gap-4 ml-auto lg:ml-0'>
                     <Search />
+                    <Link href={"/publish/post"} className='text-2xl text-on_text_gray_2'>
+                        <BsPencilSquare />
+                    </Link>
                     <ThemeModeToggle />
                     <Link href={"/login"}
                         className=' px-4 py-[10px] bg-gradient-to-r from-blue via-teal to-blue 

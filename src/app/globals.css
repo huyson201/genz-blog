@@ -91,3 +91,56 @@ body {
     width:100%;
     height:400px;}
 .gmap_iframe {height:400px!important;}
+
+
+/* editor */
+.editor-custom .editor-toolbar.fullscreen{
+    @apply h-[110px] xs:h-20 lg:h-[50px];
+}
+
+.editor-custom .EasyMDEContainer .CodeMirror-fullscreen{
+    @apply top-[110px] xs:top-[80px] lg:top-[50px];
+}
+.editor-custom .editor-preview-side{
+    @apply top-[110px] xs:top-[80px] lg:top-[50px];
+}
+
+.dark .editor-custom .editor-toolbar.fullscreen{
+    @apply bg-on_dark_body_bg text-white;
+}
+.dark .editor-custom .EasyMDEContainer .CodeMirror-fullscreen{
+    @apply bg-on_dark_card_bg text-white;
+}
+
+.dark .editor-custom .editor-toolbar{
+    @apply border-t border-l border-r border-on_dark_border;
+}
+
+.dark .EasyMDEContainer .CodeMirror{
+    @apply border-on_dark_border;
+}
+
+.dark .CodeMirror{
+    @apply bg-on_dark_card_bg text-white;
+}
+
+.dark .CodeMirror-cursor{
+    @apply border-white;
+}
+
+.dark .CodeMirror-gutters{
+    @apply bg-on_dark_body_bg border-on_dark_border;
+}
+
+.dark .CodeMirror-linenumber{
+    @apply text-on_text_gray_2;
+}
+
+.dark .editor-toolbar button.active,
+.dark .editor-toolbar button:hover{
+    @apply bg-on_dark_bg_2 border-on_text_gray_2;
+}
+
+.dark .editor-preview{
+    @apply bg-on_dark_card_bg text-white border-on_dark_border;
+}

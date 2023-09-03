@@ -31,7 +31,7 @@ const Logo = ({ className }: Props) => {
     if (!mounted) return null
     return (
         <Link href={"/"} className={twMerge(className)} >
-            <Image src={logo} width={116} height={36} alt='logo' />
+            <Image src={logo} width={116} height={36} alt='logo' placeholder='blur' blurDataURL={logo} />
         </Link>
     )
 }
