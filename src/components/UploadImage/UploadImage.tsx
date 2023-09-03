@@ -5,6 +5,7 @@ import React, { Fragment, useState } from 'react'
 import { FaCloudUploadAlt } from 'react-icons/fa'
 import { IoClose } from 'react-icons/io5'
 import { twMerge } from 'tailwind-merge'
+import DNDUploadFile from './DNDUploadFile'
 
 interface Props {
     open: boolean,
@@ -13,50 +14,10 @@ interface Props {
 }
 
 const UploadImage = ({ open, onRequestClose, onSelectImage }: Props) => {
-    const fileRef = React.useRef<HTMLInputElement>(null)
-    const [isDrag, setIsDrag] = React.useState(false)
     const [images, setImages] = React.useState<File[]>([])
 
-    const handleClickArea = React.useCallback(() => {
-        if (!fileRef.current) return
-        fileRef.current.click()
-    }, [])
-
-    const handleDragOver = React.useCallback((e: React.DragEvent) => {
-        e.preventDefault()
-        e.stopPropagation()
-        setIsDrag(true)
-
-    }, [])
-
-    const handleDragLeave = React.useCallback((e: React.DragEvent) => {
-        e.preventDefault()
-        e.stopPropagation()
-        setIsDrag(false)
-    }, [])
-
-    const handleDrop = React.useCallback((e: React.DragEvent<HTMLDivElement>) => {
-        e.preventDefault()
-        e.stopPropagation()
-        setIsDrag(false)
-        const files = e.dataTransfer.files
-        handleImage(files)
-    }, [])
-
-    const handleOnchange = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        const files = e.currentTarget.files
-        if (!files) return
-        handleImage(files)
-    }, [])
-
-    const handleImage = React.useCallback((files: FileList) => {
-        const images: File[] = []
-        Array.from(files).forEach(file => {
-            if (file.type.split("/")[0] === "image") {
-                images.push(file)
-            }
-        })
-        setImages(images)
+    const handleUploadSuccess = React.useCallback((files: File[]) => {
+        setImages(files)
     }, [])
 
     return (
@@ -95,40 +56,7 @@ const UploadImage = ({ open, onRequestClose, onSelectImage }: Props) => {
                                         <IoClose />
                                     </button>
                                 </Dialog.Title>
-                                <div
-                                    className={twMerge(`
-                                    cursor-pointer mt-4 w-full min-h-[160px] border-dashed border
-                                    border-on_dark_border flex items-center justify-center transition-all hover:bg-gray-100
-                                     [&.dragging]:border-solid [&.dragging]:opacity-60
-                                    `, isDrag ? "dragging" : "")}
-                                    onClick={handleClickArea}
-                                    onDragOver={handleDragOver}
-                                    onDragLeave={handleDragLeave}
-                                    onDrop={handleDrop}>
-                                    <div className={twMerge('text-5xl text-on_text_gray_2 text-center px-3', images.length > 0 && "hidden")}>
-                                        <FaCloudUploadAlt className="inline-block" />
-                                        <div className='text-base'>Drag and drop an image here or click to upload file</div>
-                                    </div>
-                                    <input ref={fileRef} type="file" className='hidden' accept='image/*' multiple onChange={handleOnchange} />
-
-                                    {
-                                        images.length > 0 && (
-                                            <div className='w-full h-full flex flex-wrap gap-3 px-3'>
-
-                                                {
-                                                    images.map((img, index) => {
-                                                        const url = URL.createObjectURL(img)
-                                                        return (
-                                                            <div key={index} className='max-w-[20%] w-full'>
-                                                                <Image src={url} alt='img' width={60} height={80} />
-                                                            </div>
-                                                        )
-                                                    })
-                                                }
-                                            </div>
-                                        )
-                                    }
-                                </div>
+                                <DNDUploadFile onUploadSuccess={handleUploadSuccess} />
 
                                 <div className='mt-6'>
                                     <div className='text-on_text_gray_2'>Your Pictures</div>

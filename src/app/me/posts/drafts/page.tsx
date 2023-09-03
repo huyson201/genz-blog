@@ -1,9 +1,10 @@
+
 import PostRow from '@/components/PostRow/PostRow'
 import React from 'react'
 
 type Props = {}
 
-const Post = (props: Props) => {
+const Drafts = (props: Props) => {
     return (
         <div>
             <PostRow type='draft' />
@@ -14,4 +15,4 @@ const Post = (props: Props) => {
     )
 }
 
-export default Post
+export default Drafts

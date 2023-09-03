@@ -14,7 +14,7 @@ const MeLayout = ({ children }: Props) => {
     return (
         <section className='mb-12 pt-6 pb-12'>
             <Wrapper>
-                <div className='flex'>
+                <div className='flex relative'>
                     <SidebarNav />
                     <div className='flex-1 md:pl-6'>
                         <ManagerHead />

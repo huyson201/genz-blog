@@ -8,7 +8,7 @@ type Props = {}
 
 const Breadcrumb = (props: Props) => {
     return (
-        <div className="flex pt-8 pb-5 border-b border-b-[#c2d4ee] dark:border-b-on_dark_border" aria-label="Breadcrumb">
+        <div className="flex" aria-label="Breadcrumb">
             <ol className="inline-flex items-center gap-x-1 md:gap-x-3 flex-wrap gap-y-1">
                 <li className="inline-flex items-center">
                     <Link href="#"

@@ -1,11 +1,14 @@
 
 import React from 'react'
 import { BsArrowRightShort, BsArrowLeftShort } from 'react-icons/bs'
-type Props = {}
+import { twMerge } from 'tailwind-merge'
+interface Props {
+    className?: string
+}
 
-const Pagination = (props: Props) => {
+const Pagination = ({ className }: Props) => {
     return (
-        <div className='mt-8' >
+        <div className={twMerge(className)} >
             <ul className="inline-flex space-x-1 text-sm">
                 <li>
                     <a href="#" className="flex items-center justify-center rounded-full w-10 h-10 ml-0 leading-tight 

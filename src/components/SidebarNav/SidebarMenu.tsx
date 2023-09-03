@@ -32,8 +32,8 @@ const SidebarMenu = (props: Props) => {
 
                         <Disclosure.Panel>
                             <ul className="py-2 space-y-2">
-                                <SidebarNavItem className='pl-11' iconSize='text-sm' textSize='text-xs' title='Drafts' href='#' icon={<FaLock />} />
-                                <SidebarNavItem className='pl-11' iconSize='text-sm' textSize='text-xs' title='Public' href='#' icon={<FaEarthAsia />} />
+                                <SidebarNavItem className='pl-11' iconSize='text-sm' textSize='text-xs' title='Drafts' href='/me/posts/drafts' icon={<FaLock />} />
+                                <SidebarNavItem className='pl-11' iconSize='text-sm' textSize='text-xs' title='Public' href='/me/posts/public' icon={<FaEarthAsia />} />
                             </ul>
                         </Disclosure.Panel>
                     </>

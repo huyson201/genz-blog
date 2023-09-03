@@ -59,7 +59,7 @@ const Navbar = ({ onRequestOpenNavMobile }: Props) => {
                 <div className='lg:flex items-center flex-nowrap space-x-4 font-noto_sans hidden  '>
                     {
                         navMenu.map((items, idex) => (
-                            <NavLink key={items.name} href={items.path} className='px-4 text-base transition-all hover:text-on_link_active
+                            <NavLink exact key={items.name} href={items.path} className='px-4 text-base transition-all hover:text-on_link_active
                             text-on_text_gray_2 font-normal [&.active]:text-on_link_active
                             dark:text-on_dark_text_gray dark:hover:text-on_link_active'>
                                 {items.name}

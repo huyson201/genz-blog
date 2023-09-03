@@ -2,6 +2,7 @@ import Link from 'next/link'
 
 import React from 'react'
 import { twMerge } from 'tailwind-merge'
+import NavLink from '../Common/NavLink/NavLink'
 
 type Props = {
     icon: React.ReactNode,
@@ -15,10 +16,11 @@ type Props = {
 const SidebarNavItem = ({ icon, title, href, className, textSize, iconSize = "text-2xl" }: Props) => {
     return (
         <li>
-            <Link
+            <NavLink
+                exact
                 href={href}
                 className={twMerge(`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100
-                dark:hover:bg-gray-700 group`, className, textSize)}>
+                dark:hover:bg-gray-700 group dark:[&.active]:bg-gray-700 [&.active]:bg-gray-100`, className, textSize)}>
                 <span
                     className={twMerge(`flex-shrink-0  text-gray-500 transition duration-75
                     dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white`, iconSize)}>
@@ -32,7 +34,7 @@ const SidebarNavItem = ({ icon, title, href, className, textSize, iconSize = "te
                     </span>
                 </span>
 
-            </Link>
+            </NavLink>
         </li>
     )
 }

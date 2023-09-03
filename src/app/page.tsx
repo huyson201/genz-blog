@@ -72,7 +72,7 @@ export default function Home() {
                 </div>
 
                 {/* pagination */}
-                <Pagination />
+                <Pagination className='mt-8' />
               </div>
 
               {/* sidebar  */}

@@ -7,16 +7,14 @@ import { twMerge } from 'tailwind-merge'
 interface Props extends LinkProps {
     children: any,
     className?: string
+    exact?: boolean
 }
 
-const NavLink = ({ className, href, children, ...props }: Props) => {
+const NavLink = ({ className, exact, href, children, ...props }: Props) => {
     const pathName = usePathname()
     const isActive = useMemo(() => {
-        if (pathName !== "/" && href !== "/") {
-            return pathName.startsWith(href.toString())
-        }
-
-        return pathName === href
+        if (!pathName) return false
+        return exact ? pathName === href : pathName.startsWith(href.toString());
     }, [pathName])
 
     return (
