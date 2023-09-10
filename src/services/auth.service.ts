@@ -1,3 +1,4 @@
+import { RegisterData } from "@/types/type";
 import { apiConfig } from "./Api";
 
 const authService = {

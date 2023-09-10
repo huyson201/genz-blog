@@ -28,11 +28,6 @@ const Footer = (props: Props) => {
                             <h4 className='text-on_light_text_white dark:text-on_dark_text_white my-10 sm:mt-0  sm:mb-8 text-[18px] transition-colors'>Newsletter</h4>
                             <p className='text-sm text-[#708ab0] dark:text-on_dark_text_gray mb-6 transition-colors'>Sign up to be first to receive the latest stories inspiring us, case studies, and industry news.</p>
                             <form action={"#"} className='space-y-4'>
-                                <div className='flex gap-2 items-center py-2 border-b  border-on_dark_text_gray  dark:text-white text-black
-                             text-sm  transition-colors'>
-                                    <FaRegUser className="text-on_dark_text_gray" />
-                                    <input className='bg-transparent outline-none w-full placeholder-[#7f92b0]' type="text" placeholder='Your name' />
-                                </div>
                                 <div className='flex gap-2 items-center py-2 border-b border-on_dark_text_gray  dark:text-white
                              text-sm text-black transition-colors '>
                                     <IoMailOutline className="text-base text-on_dark_text_gray" />

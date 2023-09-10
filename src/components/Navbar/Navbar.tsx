@@ -73,12 +73,7 @@ const Navbar = ({ onRequestOpenNavMobile }: Props) => {
 
                 <div className='flex items-center justify-between gap-4 ml-auto lg:ml-0'>
                     <Search />
-                    <Link href={"/publish/post"} className='text-2xl text-on_text_gray_2'>
-                        <BsPencilSquare />
-                    </Link>
-                    <ThemeModeToggle />
                     <Account />
-
                     <button className='flex items-center text-on_dark_text_gray lg:hidden' onClick={onRequestOpenNavMobile}>
                         <Bars3Icon className='w-9 h-9' />
                     </button>

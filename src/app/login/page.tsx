@@ -13,6 +13,8 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import ErrorFeedback from '@/components/ErrorFeedback/ErrorFeedback'
 import toast from 'react-hot-toast'
+import { useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 type Props = {}
 
@@ -24,6 +26,10 @@ const validateSchema = yup.object({
 const Login = (props: Props) => {
     const [error, setError] = React.useState('')
     const [loading, setLoading] = React.useState(false)
+    const searchParams = useSearchParams()
+    const callbackUrl = searchParams.get("callbackUrl")
+    const router = useRouter()
+
     const { handleSubmit, register, formState: { errors } } = useForm({
         resolver: yupResolver(validateSchema),
         reValidateMode: 'onBlur',
@@ -34,8 +40,12 @@ const Login = (props: Props) => {
         signIn("credentials", {
             email: data.email,
             password: data.password,
-            redirect: false
+            redirect: false,
         }).then((res) => {
+            if (res && res.ok) {
+                return router.push(`${callbackUrl !== null ? callbackUrl : "/"}`)
+            }
+
             if (!res?.ok && res?.error) {
                 setError(res.error)
                 return

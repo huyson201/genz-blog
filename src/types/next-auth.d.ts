@@ -1,5 +1,6 @@
 import { JWT } from "next-auth/jwt";
 import NextAuth from "next-auth";
+import { Auth, BackendToken } from "./type";
 
 declare module "next-auth" {
   interface Session {

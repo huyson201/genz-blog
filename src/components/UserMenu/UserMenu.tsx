@@ -5,6 +5,8 @@ import { twMerge } from 'tailwind-merge';
 import Image from 'next/image';
 import authService from '@/services/auth.service';
 import { signOut } from 'next-auth/react'
+import { Auth, BackendToken } from '@/types/type';
+import { useRouter } from 'next/navigation';
 
 interface Props {
     auth: Auth,
@@ -12,10 +14,15 @@ interface Props {
 }
 
 export default function UserMenu({ auth, tokens }: Props) {
+    const router = useRouter()
     const handleLogout = async () => {
         const res = await authService.logout(tokens.access_token)
         if (res.ok) {
-            signOut()
+            signOut({
+                redirect: false
+            }).then(res => {
+                router.push(`/login`)
+            })
         }
     }
     return (
