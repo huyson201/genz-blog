@@ -1,21 +1,7 @@
 import { NextAuthOptions, DefaultSession } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { AdapterUser } from "next-auth/adapters";
-
-declare module "next-auth" {
-  export interface User {
-    accessToken: string;
-    refreshToken: string;
-  }
-  export interface AdapterUser {
-    accessToken: string;
-    refreshToken: string;
-  }
-
-  export interface Session extends DefaultSession {
-    user?: User;
-  }
-}
+import authService from "@/services/auth.service";
+import {} from "next-auth/jwt";
 
 export const options: NextAuthOptions = {
   providers: [
@@ -26,7 +12,20 @@ export const options: NextAuthOptions = {
         password: { label: "password", type: "password" },
       },
       async authorize(credentials, req) {
-        return null;
+        if (!credentials?.email || !credentials.password)
+          throw new Error("Email or password invalid!");
+
+        const res = await authService.loginWithCredential(
+          credentials.email,
+          credentials.password
+        );
+        const data = await res.json();
+
+        if (res.ok) {
+          return data;
+        }
+
+        throw new Error(data.message);
       },
     }),
   ],
@@ -35,7 +34,7 @@ export const options: NextAuthOptions = {
   },
   callbacks: {
     async jwt({ token, user, account }) {
-      if (account && user) {
+      if (user) {
         return {
           ...token,
           ...user,
@@ -45,12 +44,15 @@ export const options: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      // session.user.accessToken = token.accessToken;
-      // session.user.refreshToken = token.refreshToken;
-      // session.user.accessTokenExpires = token.accessTokenExpires;
-
+      console.log(token);
+      const { backendTokens, ...user } = token;
+      session.user = user as Auth;
+      session.backendTokens = backendTokens;
       return session;
     },
+  },
+  pages: {
+    signIn: "/login",
   },
   debug: process.env.NODE_ENV === "development",
 };

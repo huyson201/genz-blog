@@ -4,8 +4,8 @@ import { Inter, Noto_Sans } from 'next/font/google'
 import { twMerge } from 'tailwind-merge'
 import Provider from '@/components/Provider/Provider'
 import Footer from '@/components/Common/Footer/Footer'
-import MobileNavbar from '@/components/Navbar/MobileNavbar/MobileNavbar'
 import NavbarWrapper from '@/components/Navbar/NavbarWrapper/NavbarWrapper'
+import { Toaster } from 'react-hot-toast'
 import './globals.css'
 
 const inter = Inter({
@@ -37,6 +37,11 @@ export default function RootLayout({
           </header>
           {children}
           <Footer />
+          <div>
+            <Toaster
+              position="top-center"
+              reverseOrder={false} />
+          </div>
         </Provider>
       </body>
     </html>

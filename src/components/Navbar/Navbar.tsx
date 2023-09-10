@@ -4,11 +4,14 @@ import { twMerge } from 'tailwind-merge'
 import Wrapper from '../Common/Wrapper/Wrapper'
 import Logo from '../Logo/Logo'
 import NavLink from '../Common/NavLink/NavLink'
-import { MagnifyingGlassIcon, Bars3Icon } from '@heroicons/react/24/outline'
+import { Bars3Icon } from '@heroicons/react/24/outline'
 import ThemeModeToggle from '../ThemeModeToggle/ThemeModeToggle'
 import Link from 'next/link'
 import Search from '../Search/Search';
 import { BsPencilSquare } from 'react-icons/bs';
+import { useSession } from "next-auth/react"
+import UserMenu from '../UserMenu/UserMenu';
+import Account from '../Account/Account';
 interface Props {
     onRequestOpenNavMobile: () => void
 }
@@ -74,12 +77,8 @@ const Navbar = ({ onRequestOpenNavMobile }: Props) => {
                         <BsPencilSquare />
                     </Link>
                     <ThemeModeToggle />
-                    <Link href={"/login"}
-                        className=' px-4 py-[10px] bg-gradient-to-r from-blue via-teal to-blue 
-                                bg-200% rounded-md text-white text-center font-bold text-sm transition-all duration-500
-                                hover:bg-right hidden sm:inline-block'>
-                        Sign in
-                    </Link>
+                    <Account />
+
                     <button className='flex items-center text-on_dark_text_gray lg:hidden' onClick={onRequestOpenNavMobile}>
                         <Bars3Icon className='w-9 h-9' />
                     </button>
