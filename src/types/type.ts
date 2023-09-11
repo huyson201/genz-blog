@@ -2,6 +2,10 @@ export enum Role {
   Admin = 0,
   User = 1,
 }
+export enum SaveOptions {
+  JUST_ME,
+  PUBLIC,
+}
 export interface BackendToken {
   access_token: string;
   refresh_token: string;
