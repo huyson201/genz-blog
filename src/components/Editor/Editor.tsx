@@ -30,9 +30,9 @@ const Editor = (props: Props) => {
             insertText: {
                 horizontalRule: ["", "\n\n-----\n\n"],
                 link: ["[", "](https://)"],
-                table: ["", "\n\n| Column 1 | Column 2 | Column 3 |\n| -------- | -------- | -------- |\n| Text     | Text      | Text     |\n\n"]
+                table: ["", "\n| Column 1 | Column 2 | Column 3 |\n| -------- | -------- | -------- |\n| Text     | Text      | Text     |\n\n"]
             },
-            toolbar: ["undo", "redo", "|", "bold", "italic", "heading", "strikethrough", "|",
+            toolbar: ["undo", "redo", "|", "bold", "italic", "strikethrough", "heading", "|",
                 AlignLeftBtn, AlignCenterBtn, AlignRightBtn, AlignJustifyBtn, "|",
                 "code", "quote", "unordered-list", "ordered-list", "clean-block", "|",
                 "link", ImageButton, "table", "horizontal-rule", "|",
@@ -70,6 +70,7 @@ const Editor = (props: Props) => {
                 value={value}
                 className='editor-custom'
                 onChange={onChange}
+                placeholder=''
                 getCodemirrorInstance={getCmInstanceCallback} />
             <UploadImage open={openDialog} onRequestClose={handleCloseDialog} onSelectImage={handleSelectImage} />
 

@@ -1,17 +1,42 @@
 import { SaveOptions } from '@/types/type'
 import { Popover, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { BiSolidLockAlt } from 'react-icons/bi'
 import { FaEarthAsia } from 'react-icons/fa6'
 
 interface Props {
     onSelect?: (select: SaveOptions) => void,
-    onSave?: () => void
+    onSave?: () => void,
+    canSave?: boolean
 }
 
-export default function SaveOption() {
+export default function SaveOption({ canSave, onSave }: Props) {
     const [selectedOpt, setSelectedOpt] = React.useState<SaveOptions>(SaveOptions.JUST_ME)
+
+    const handleSave = () => {
+        console.log("save")
+        //check if can't save
+        if (!canSave) return
+        if (onSave) onSave()
+    }
+
+    useEffect(() => {
+        const handleKeyPress = (e: KeyboardEvent) => {
+            e.preventDefault(); // Prevent the default browser save action
+
+            // Check if Ctrl (or Cmd) and S keys are pressed
+            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                handleSave(); // Call your save function
+            }
+        };
+        document.addEventListener('keydown', handleKeyPress);
+
+        // Clean up the listener when the component unmounts
+        return () => {
+            document.removeEventListener('keydown', handleKeyPress);
+        };
+    }, [])
 
 
     return (
@@ -39,44 +64,51 @@ export default function SaveOption() {
                         leaveFrom="opacity-100 translate-y-0"
                         leaveTo="opacity-0 translate-y-1"
                     >
-                        <Popover.Panel className="absolute right-0 z-10 mt-3 w-screen max-w-[320px]  transform pl-6 sm:pl-0">
+                        <Popover.Panel className="absolute right-0 z-[3] mt-3 w-screen max-w-[320px]  transform pl-6 sm:pl-0">
                             <div className="overflow-hidden rounded-md shadow-lg ring-1 border dark:border-on_dark_border ring-black ring-opacity-5">
-                                <div className='bg-white dark:bg-on_dark_card_bg p-2 text-sm text-on_light_text_gray dark:text-on_dark_text_gray '>
-                                    <div className='text-base font-bold'>Publish your post</div>
-                                    <div className='mt-1'>Display:</div>
-                                    <div className='space-y-1 mt-2 pb-2 border-b dark:border-b-on_dark_border'>
-                                        <div className="flex items-center">
-                                            <input
-                                                id="display-radio-1"
-                                                type="radio"
-                                                name="display"
-                                                onClick={() => setSelectedOpt(SaveOptions.PUBLIC)}
-                                                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600   dark:bg-gray-700 dark:border-gray-600" />
-                                            <label
-                                                htmlFor="display-radio-1"
-                                                className="ml-2 text-sm cursor-pointer  outline-none text-on_light_text_gray dark:text-on_dark_text_gray">Public</label>
+
+                                {
+                                    !canSave ? <TestDesc /> : (
+                                        <div className='bg-white dark:bg-on_dark_card_bg p-2 text-sm text-on_light_text_gray dark:text-on_dark_text_gray '>
+                                            <div className='text-base font-bold'>Publish your post</div>
+                                            <div className='mt-1'>Display:</div>
+                                            <div className='space-y-1 mt-2 pb-2 border-b dark:border-b-on_dark_border'>
+                                                <div className="flex items-center">
+                                                    <input
+                                                        id="display-radio-1"
+                                                        type="radio"
+                                                        name="display"
+                                                        onClick={() => setSelectedOpt(SaveOptions.PUBLIC)}
+                                                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600   dark:bg-gray-700 dark:border-gray-600" />
+                                                    <label
+                                                        htmlFor="display-radio-1"
+                                                        className="ml-2 text-sm cursor-pointer  outline-none text-on_light_text_gray dark:text-on_dark_text_gray">Public</label>
+                                                </div>
+                                                <div className="flex items-center">
+                                                    <input
+                                                        defaultChecked
+                                                        onClick={() => setSelectedOpt(SaveOptions.JUST_ME)}
+                                                        id="display-radio-2"
+                                                        type="radio"
+                                                        name="display"
+                                                        className="w-4 h-4 outline-none text-blue bg-gray-100 border-gray-300  dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600" />
+                                                    <label htmlFor="display-radio-2" className="ml-2 text-sm cursor-pointer  text-on_light_text_gray dark:text-on_dark_text_gray">Just me</label>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                {
+                                                    selectedOpt === SaveOptions.JUST_ME ? <JustMeOptInfo /> : <PublicOptInfo />
+                                                }
+                                            </div>
+                                            <button
+                                                onClick={handleSave}
+                                                className='bg-primary-gradient text-white bg-200% hover:bg-right transition-all rounded-sm px-3 py-1'>
+                                                Save
+                                            </button>
                                         </div>
-                                        <div className="flex items-center">
-                                            <input
-                                                defaultChecked
-                                                onClick={() => setSelectedOpt(SaveOptions.JUST_ME)}
-                                                id="display-radio-2"
-                                                type="radio"
-                                                name="display"
-                                                className="w-4 h-4 outline-none text-blue bg-gray-100 border-gray-300  dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600" />
-                                            <label htmlFor="display-radio-2" className="ml-2 text-sm cursor-pointer  text-on_light_text_gray dark:text-on_dark_text_gray">Just me</label>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        {
-                                            selectedOpt === SaveOptions.JUST_ME ? <JustMeOptInfo /> : <PublicOptInfo />
-                                        }
-                                    </div>
-                                    <button
-                                        className='bg-primary-gradient text-white bg-200% hover:bg-right transition-all rounded-sm px-3 py-1'>
-                                        Save
-                                    </button>
-                                </div>
+
+                                    )
+                                }
                             </div>
                         </Popover.Panel>
                     </Transition>
@@ -100,6 +132,14 @@ const PublicOptInfo = () => {
         <div className='text-xs py-2'>
             <span><FaEarthAsia className="inline-block text-xs mr-1 mb-0.5" /></span>
             Everyone can see your post.
+        </div>
+    )
+}
+
+const TestDesc = () => {
+    return (
+        <div className='bg-white dark:bg-on_dark_card_bg p-2 text-sm text-on_light_text_gray dark:text-on_dark_text_gray '>
+            Add a title, select at least one tag, and start writing something to publish.
         </div>
     )
 }

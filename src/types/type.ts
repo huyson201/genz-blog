@@ -3,8 +3,8 @@ export enum Role {
   User = 1,
 }
 export enum SaveOptions {
-  JUST_ME,
-  PUBLIC,
+  JUST_ME = "draft",
+  PUBLIC = "public",
 }
 export interface BackendToken {
   access_token: string;

@@ -25,7 +25,7 @@ const Footer = (props: Props) => {
                         </div>
 
                         <div>
-                            <h4 className='text-on_light_text_white dark:text-on_dark_text_white my-10 sm:mt-0  sm:mb-8 text-[18px] transition-colors'>Newsletter</h4>
+                            <h4 className='text-on_light_text_white dark:text-on_dark_text_white mb-2  sm:my-10 sm:mt-0  sm:mb-8 text-[18px] transition-colors'>Newsletter</h4>
                             <p className='text-sm text-[#708ab0] dark:text-on_dark_text_gray mb-6 transition-colors'>Sign up to be first to receive the latest stories inspiring us, case studies, and industry news.</p>
                             <form action={"#"} className='space-y-4'>
                                 <div className='flex gap-2 items-center py-2 border-b border-on_dark_text_gray  dark:text-white
