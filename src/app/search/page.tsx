@@ -1,5 +1,5 @@
 
-import BlogRow from '@/components/BlogRow/BlogRow'
+import BlogRow from '@/components/BlogList/BlogRow/BlogRow'
 import Breadcrumb from '@/components/Breadcrumb/Breadcrumb'
 import Wrapper from '@/components/Common/Wrapper/Wrapper'
 import Pagination from '@/components/Pagination/Pagination'
@@ -24,14 +24,14 @@ const SearchPage = (props: Props) => {
                             <Breadcrumb />
                         </div>
                     </div>
-                    <div className='pt-12 pb-6'>
+                    {/* <div className='pt-12 pb-6'>
                         {
                             Array(6).fill(1).map((_, index) => {
                                 return <BlogRow key={index} />
                             })
                         }
                     </div>
-                    <Pagination className='mb-24' />
+                    <Pagination className='mb-24' /> */}
                 </div>
             </Wrapper>
         </section>

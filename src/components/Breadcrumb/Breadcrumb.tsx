@@ -24,14 +24,14 @@ const Breadcrumb = (props: Props) => {
                 <li>
                     <div className="flex items-center">
                         <Link href="#" className="breadcrumb-links mr-1 md:mr-2">
-                            Blog
+                            Blogs
                         </Link>
                         <FaAngleRight className="text-on_dark_text_gray" />
                     </div>
                 </li>
                 <li aria-current="page">
                     <div className="flex items-center">
-                        <span className="text-sm text-on_dark_text_gray">Digital Design That Will Help You Start Your Business</span>
+                        <span className="text-sm text-left text-on_dark_text_gray">Digital Design That Will Help You Start Your Business</span>
                     </div>
                 </li>
             </ol>

@@ -1,5 +1,6 @@
-import { RegisterData } from "@/types/type";
+import { Post, RegisterData } from "@/types/type";
 import { apiConfig } from "./Api";
+import CustomError from "@/CustomError";
 
 const authService = {
   loginWithCredential: async (email: string, password: string) => {
@@ -11,13 +12,22 @@ const authService = {
       body: JSON.stringify({ email, password }),
     });
   },
-  register: (data: RegisterData) => {
+  register: (url: string, { arg }: { arg: RegisterData }) => {
+    console.log(arg);
     return fetch(`${apiConfig.baseUrl}/auth/register`, {
       headers: {
         ...apiConfig.headers,
       },
-      method: "post",
-      body: JSON.stringify(data),
+      method: "POST",
+      body: JSON.stringify(arg),
+    }).then(async (res) => {
+      const data = await res.json();
+      if (res.ok) return data;
+      throw new CustomError(
+        res.status || 500,
+        data.message || "Server internal error!",
+        data
+      );
     });
   },
   refreshToken: (refresh_token: string) => {
@@ -25,7 +35,7 @@ const authService = {
       headers: {
         ...apiConfig.headers,
       },
-      method: "post",
+      method: "POST",
       body: JSON.stringify({ refresh_token }),
     });
   },
@@ -37,6 +47,22 @@ const authService = {
       },
       method: "Post",
     });
+  },
+  getPostById: async (id: string, token: string): Promise<Post> => {
+    const res = await fetch(`${apiConfig.baseUrl}/auth/posts/${id}`, {
+      headers: {
+        ...apiConfig.headers,
+        authorization: `Bearer ${token}`,
+      },
+      method: "Get",
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new CustomError(res.status, data.message, data);
+    }
+    return data;
   },
 };
 

@@ -37,11 +37,11 @@ body {
 }
 
 .sticky-bar{
-    @apply fixed z-[5] top-0 left-0 w-full mt-0 border-b border-on_light_border ;
+    @apply fixed z-[5] top-0 left-0 w-full mt-0 border-b border-b-on_light_border ;
     animation: fadeInDown 0.7s ease-in-out forwards;
 }
 .dark .sticky-bar{
-    @apply  border-on_dark_border;
+    @apply border-b border-b-on_dark_border;
 }
 @keyframes fadeInDown {
     from{
@@ -54,6 +54,7 @@ body {
     }
 }
 
+/* home page */
 .home-cover{
     @apply dark:bg-on_dark_body_bg bg-on_light_body_bg  relative overflow-hidden
     before:content-[""] before:w-[500px] before:h-full before:bg-cover before:bg-no-repeat before:absolute before:top-0 
@@ -73,6 +74,14 @@ body {
      hover:to-blue hover:bg-200% hover:via-50% hover:-translate-y-1 duration-300;
 
 }
+
+.section-title{
+    @apply gradient-text font-bold pb-[10px] relative inline-block
+     after:absolute after:w-[110%]  after:h-0.5 
+    mb-6 after:bg-primary-gradient
+    after:bottom-0 after:left-0;
+}
+
 /* breadcrumb */
 .breadcrumb-links{
     @apply inline-flex items-center text-sm dark:text-on_text_gray_2 hover:text-blue transition-colors

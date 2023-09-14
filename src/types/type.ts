@@ -6,6 +6,8 @@ export enum SaveOptions {
   JUST_ME = "draft",
   PUBLIC = "public",
 }
+
+export type Display = SaveOptions;
 export interface BackendToken {
   access_token: string;
   refresh_token: string;
@@ -35,4 +37,39 @@ export interface Auth {
   viewHistory: [];
   createdAt: string;
   updatedAt: string;
+}
+
+export interface HashTag {
+  _id: string;
+  name: string;
+  slug: string;
+}
+export interface Post {
+  _id: string;
+  author: Auth | string;
+  title: string;
+  hashtags: HashTag[];
+  description: string;
+  content: string;
+  display: Display;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface PostFormData
+  extends Omit<
+    Post,
+    "hashtags" | "_id" | "author" | "createdAt" | "updatedAt"
+  > {
+  hashtags: string[];
+}
+
+export interface PaginateResponse<T> {
+  totalDocs: number;
+  totalPages: number;
+  page: number;
+  limit: number;
+  prevPage: number | null;
+  nextPage: number | null;
+  docs: T[];
 }

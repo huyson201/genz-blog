@@ -9,14 +9,15 @@ import UploadImage from '../UploadImage/UploadImage';
 
 const SimpleMdeReact = dynamic(() => import("react-simplemde-editor").then(mod => mod.default), { ssr: false })
 
-type Props = {}
+interface Props {
+    onChangeData?: (value: string) => void,
+    defaultValue?: string
+}
 
-
-
-const Editor = (props: Props) => {
-    const [value, setValue] = useState('')
+const Editor = ({ onChangeData, defaultValue = "" }: Props) => {
     const [openDialog, setOpenDialog] = useState(false)
     const [cm, setCm] = useState<CodeMirror.Editor | null>(null);
+    const [value, setValue] = useState(defaultValue)
 
     const options: SimpleMDE.Options = useMemo(() => {
         ImageButton.onAction = () => {
@@ -47,8 +48,9 @@ const Editor = (props: Props) => {
     }, []);
 
     const onChange = React.useCallback((value: string) => {
-        setValue(value);
-    }, []);
+        setValue(value)
+        onChangeData && onChangeData(value)
+    }, [onChangeData]);
 
     const handleCloseDialog = React.useCallback(() => {
         setOpenDialog(false);
@@ -59,7 +61,6 @@ const Editor = (props: Props) => {
         cm.replaceSelection(`\n ![alt](${url})`);
         setOpenDialog(false)
     }, [cm]);
-
 
 
     return (

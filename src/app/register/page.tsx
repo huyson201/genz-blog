@@ -1,5 +1,5 @@
 "use client"
-
+import useSWRMutation from 'swr/mutation'
 import Link from 'next/link'
 import React from 'react'
 import InputField from '@/components/Input/InputField'
@@ -14,6 +14,7 @@ import ErrorFeedback from '@/components/ErrorFeedback/ErrorFeedback'
 import authService from '@/services/auth.service'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-hot-toast'
+import CustomError from '@/CustomError'
 const validateSchema = yup.object({
     name: yup.string().required(),
     email: yup.string().email().required(),
@@ -24,6 +25,7 @@ const validateSchema = yup.object({
 type Props = {}
 
 const Register = (props: Props) => {
+    const { trigger, isMutating, error: fetchError } = useSWRMutation('/auth/register', authService.register)
     const router = useRouter()
     const [error, setError] = React.useState('')
     const [loading, setLoading] = React.useState(false)
@@ -33,34 +35,24 @@ const Register = (props: Props) => {
     })
     const submit = handleSubmit(async (data) => {
         setError('')
-        setLoading(true)
         try {
-            const res = await authService.register(data)
-            const result = await res.json()
-            if (res.ok) {
-                toast.success('Successfully registered!')
-                return router.push("/login")
-            }
-
-            if (result && result.message) {
-                setError(result.message)
-            }
-
+            const res = await trigger(data)
+            toast.success('Successfully registered!')
+            return router.push("/login")
         } catch (error) {
-            console.log(error)
-            toast.error('Something error, please come back late!', {
-                className: "toast"
-            })
+            if (error instanceof CustomError) {
+                setError(error.message)
+                return
+            }
 
-        } finally {
-            setLoading(false)
+            toast.error('Something error, please come back late!')
         }
-
     })
+
 
     return (
         <LoginRegisterWrapper>
-            <h1 className="sm:text-[35px] xs:text-[25] text-[20px] md:text-[45px] font-bold text-center leading-tight tracking-tight gradient-text mb-6 md:mb-12">
+            <h1 className="sm:text-[35px] text-[25px] md:text-[45px] font-bold text-center leading-tight tracking-tight gradient-text mb-6 md:mb-12">
                 Register
             </h1>
             <div className='max-w-[400px] w-full mx-auto relative'>
@@ -78,7 +70,7 @@ const Register = (props: Props) => {
                             <Link href="#" className="text-sm text-on_light_text_white text-primary-600 hover:underline dark:text-on_dark_text_white">Forgot password?</Link>
                         </div>
 
-                        <GradientButton loading={loading} disabled={loading} type='submit' className='w-full dark:text-on_dark_card_bg dark:hover:text-white hover:text-white  outline-none rounded-lg  py-2.5 text-sm font-bold' title='Create an account' />
+                        <GradientButton loading={isMutating} disabled={isMutating} type='submit' className='w-full dark:text-on_dark_card_bg dark:hover:text-white hover:text-white  outline-none rounded-lg  py-2.5 text-sm font-bold' title='Create an account' />
                         <p className="text-sm  text-on_dark_text_gray">
                             Already have an account? <Link href="/login" >
                                 <span className=" gradient-text">Sign in</span>

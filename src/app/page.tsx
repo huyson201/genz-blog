@@ -4,11 +4,16 @@ import Image from 'next/image'
 import ProfileImg from '@/assets/profile.jpg'
 import Link from 'next/link'
 import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa6'
-import BlogSection from '@/components/BlogSection/BlogSection'
+import BlogSectionList from '@/components/BlogSection/BlogSectionList'
 import LastCommentSection from '@/components/LastCommentSection/LastCommentSection'
 import Pagination from '@/components/Pagination/Pagination'
+import postService from '@/services/post.service'
+import { Suspense } from "react";
 
-export default function Home() {
+export default async function Home() {
+  const posts = postService.getPosts({ page: 1 })
+
+
   return (
     <main>
       {/* home cover */}
@@ -57,22 +62,15 @@ export default function Home() {
         <Wrapper>
           <div className='py-12 xl:px-16'>
             <div>
-              <h2 className='gradient-text text-[45px] font-bold'>Recent posts</h2>
+              <h2 className='gradient-text text-[25px] md:text-[35px] lg:text-[45px] font-bold'>Recent posts</h2>
               <p className='dark:text-on_dark_text_gray text-[18px] text-[#708ab0] transition-colors'>Don&#39;t miss the latest trends</p>
             </div>
             <div className='mt-12 md:space-x-6 md:flex space-y-12 md:space-y-0'>
               {/* blogs list */}
               <div className='md:w-2/3'>
-                <div className='lg:flex lg:flex-wrap lg:gap-6 space-y-6 lg:space-y-0'>
-                  {
-                    Array(10).fill(0).map((_, index) => {
-                      return <BlogSection key={`blog-${index}`} />
-                    })
-                  }
-                </div>
-
-                {/* pagination */}
-                <Pagination className='mt-8' />
+                <Suspense fallback={<div>Loading...</div>}>
+                  <BlogSectionList postPromise={posts} />
+                </Suspense>
               </div>
 
               {/* sidebar  */}
