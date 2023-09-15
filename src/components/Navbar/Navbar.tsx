@@ -22,9 +22,18 @@ export const navMenu = [
         name: "Home"
     },
     {
+        path: "/blogs",
+        name: "Blogs"
+    },
+    {
+        path: "/tags",
+        name: "Tags"
+    },
+    {
         path: "/about-me",
         name: "About me"
-    }, {
+    },
+    {
         path: "/contact",
         name: "Contact",
     }

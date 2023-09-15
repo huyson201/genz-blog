@@ -18,8 +18,8 @@ const Blogs = ({ searchParams: { page = 1 } }: Props) => {
             <Wrapper>
                 <div className='lg:px-24'>
                     <div className='text-center space-y-4 py-6 border-b border-b-[#c2d4ee] dark:border-b-on_dark_border'>
-                        <h1 className='inline-block text-center mt-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl bg-primary-gradient text-transparent 
-                                bg-200% bg-clip-text font-extrabold leading-[1.3]'>
+                        <h1 className='inline-block text-center mt-6 text-[30px] sm:text-[36px] md:text-[48px] lg:text-[64px] bg-primary-gradient text-transparent 
+                                bg-200% bg-clip-text font-extrabold '>
                             Blogs
                         </h1>
                         <div className='flex justify-center'>

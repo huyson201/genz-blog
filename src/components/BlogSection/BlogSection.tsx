@@ -23,7 +23,7 @@ const BlogSection = ({ post }: Props) => {
                 </span>
             </div>
             <h3 >
-                <Link href="#" className='hover:text-blue dark:hover:text-blue mb-4 text-xl font-bold 
+                <Link href={`/blogs/${slugify(post.title)}-${post._id}`} className='hover:text-blue dark:hover:text-blue mb-4 text-xl font-bold 
                              tracking-tight text-on_light_text_white dark:text-[#e6f0ff] transition-colors'>
                     {post.title}
                 </Link>

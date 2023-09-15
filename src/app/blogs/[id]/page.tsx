@@ -32,7 +32,7 @@ const BlogDetail = async ({ params }: Props) => {
             <Wrapper>
                 <div className='xl:px-16 pt-12'>
                     <div className='pb-6 border-b dark:border-b-on_dark_border border-b-[#c2d4ee]'>
-                        <Breadcrumb />
+                        <Breadcrumb replaceLastText={post.title} />
                     </div>
                     <div className='pt-12'>
                         <div>

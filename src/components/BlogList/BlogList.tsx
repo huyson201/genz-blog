@@ -20,7 +20,7 @@ const BlogList = async ({ data }: Props) => {
                     })
                 }
             </div>
-            <Pagination className='mb-24' currentPage={result.page} totalPage={result.totalPages} />
+            {result.totalPages > 1 && <Pagination className='mb-24' currentPage={result.page} totalPage={result.totalPages} />}
         </>
     )
 }
