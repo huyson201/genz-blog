@@ -78,6 +78,28 @@ const postService = {
     }
     return data;
   },
+
+  search: async (
+    key: string,
+    { page = 1, limit = 10 }: { page?: number; limit?: number }
+  ): Promise<PaginateResponse<Post>> => {
+    const queryString = queryStringify({ q: key, page, limit });
+    const res = await fetch(
+      `${apiConfig.baseUrl}/posts/search?${queryString}`,
+      {
+        headers: {
+          ...apiConfig.headers,
+        },
+        method: "Get",
+      }
+    );
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new CustomError(res.status, data.message, data);
+    }
+    return data;
+  },
 };
 
 export default postService;

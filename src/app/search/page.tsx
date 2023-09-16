@@ -1,41 +1,44 @@
-
+import BlogList from '@/components/BlogList/BlogList'
 import BlogRow from '@/components/BlogList/BlogRow/BlogRow'
 import Breadcrumb from '@/components/Breadcrumb/Breadcrumb'
-import Wrapper from '@/components/Common/Wrapper/Wrapper'
 import Pagination from '@/components/Pagination/Pagination'
+import postService from '@/services/post.service'
+import { notFound } from 'next/navigation'
 import React from 'react'
 
-type Props = {}
+type Props = {
+    searchParams: {
+        page: number,
+        q?: string,
+    }
+}
 
-const SearchPage = (props: Props) => {
-    return (
-        <section>
-            <Wrapper>
-                <div className='lg:px-24'>
-                    <div className='text-center space-y-4 py-6 border-b border-b-[#c2d4ee] dark:border-b-on_dark_border'>
-                        <h1 className='inline-block text-center mt-12 text-6xl bg-primary-gradient text-transparent 
-                                    bg-200% bg-clip-text font-extrabold'>
-                            Search results
-                        </h1>
-                        <div className='text-on_dark_text_gray text-sm sm:text-base'>
-                            Results for &quot;Hello&quot; key word
-                        </div>
-                        <div className='flex justify-center'>
-                            <Breadcrumb />
-                        </div>
-                    </div>
-                    {/* <div className='pt-12 pb-6'>
-                        {
-                            Array(6).fill(1).map((_, index) => {
-                                return <BlogRow key={index} />
-                            })
-                        }
-                    </div>
-                    <Pagination className='mb-24' /> */}
+const SearchPage = async ({ searchParams }: Props) => {
+    if (!searchParams.q || searchParams.q === "") {
+        notFound()
+    }
+    const { page = 1 } = searchParams
+    const key = searchParams.q
+
+    try {
+        const data = await postService.search(key, { page })
+        // console.log(data)
+        return (
+            <>
+                <div className='text-center text-on_dark_text_gray text-sm sm:text-base my-4'>
+                    We found {data.totalDocs} results for &quot;{key}&quot; key word
                 </div>
-            </Wrapper>
-        </section>
-    )
+                <div className='flex justify-center pb-6  border-b border-b-[#c2d4ee] dark:border-b-on_dark_border'>
+                    <Breadcrumb />
+                </div>
+                <BlogList data={data} currentPage={page} />
+            </>
+        )
+    } catch (error) {
+        throw error
+    }
+
+
 }
 
 export default SearchPage
