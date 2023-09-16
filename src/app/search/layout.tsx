@@ -13,7 +13,7 @@ const SearchLayout = (props: Props) => {
         <section className='mb-24'>
             <Wrapper>
                 <div className='lg:px-24 space-y-4 text-center'>
-                    <h1 className='inline-block text-center mt-12 text-6xl bg-primary-gradient text-transparent 
+                    <h1 className='inline-block text-center mt-12 text-[30px] sm:text-[36px] md:text-[48px] lg:text-[64px] bg-primary-gradient text-transparent 
                                     bg-200% bg-clip-text font-extrabold'>
                         Search results
                     </h1>

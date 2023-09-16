@@ -20,23 +20,18 @@ const SearchPage = async ({ searchParams }: Props) => {
     const { page = 1 } = searchParams
     const key = searchParams.q
 
-    try {
-        const data = await postService.search(key, { page })
-        // console.log(data)
-        return (
-            <>
-                <div className='text-center text-on_dark_text_gray text-sm sm:text-base my-4'>
-                    We found {data.totalDocs} results for &quot;{key}&quot; key word
-                </div>
-                <div className='flex justify-center pb-6  border-b border-b-[#c2d4ee] dark:border-b-on_dark_border'>
-                    <Breadcrumb />
-                </div>
-                <BlogList data={data} currentPage={page} />
-            </>
-        )
-    } catch (error) {
-        throw error
-    }
+    const data = await postService.search(key, { page })
+    return (
+        <>
+            <div className='text-center text-on_dark_text_gray text-sm sm:text-base my-4'>
+                We found {data.totalDocs} results for &quot;{key}&quot; key word
+            </div>
+            <div className='flex justify-center pb-6  border-b border-b-[#c2d4ee] dark:border-b-on_dark_border'>
+                <Breadcrumb />
+            </div>
+            <BlogList data={data} currentPage={page} />
+        </>
+    )
 
 
 }

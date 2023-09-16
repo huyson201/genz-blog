@@ -18,7 +18,7 @@ const Pagination = ({ className, totalPage, currentPage }: Props) => {
                 {
                     data && data.prev !== null && (
                         <li>
-                            <Link href={`?page=${data.prev}`} className="flex items-center justify-center rounded-full w-10 h-10 ml-0 leading-tight 
+                            <Link href={{ query: { page: data.prev } }} className="flex items-center justify-center rounded-full w-10 h-10 ml-0 leading-tight 
                                             dark:bg-on_dark_bg_2 bg-[#7f92b0] font-bold text-base text-white  hover:bg-blue dark:hover:bg-blue transition-all
                                             hover:scale-105 duration-500 ">
                                 <BsArrowLeftShort className={"text-xl"} />
@@ -29,7 +29,7 @@ const Pagination = ({ className, totalPage, currentPage }: Props) => {
                 {
                     data && data.leftRange.map(page => (
                         <li key={`page-${page}`}>
-                            <Link href={`?page=${page}`}
+                            <Link href={{ query: { page } }}
                                 className={twMerge(`flex items-center justify-center rounded-full w-10 h-10 leading-tight 
                                 dark:bg-on_dark_bg_2 bg-[#7f92b0] font-bold text-base text-white  hover:bg-blue dark:hover:bg-blue transition-all
                                 hover:scale-105 duration-500 [&.active]:bg-blue `, currentPage === page && 'active')}>
@@ -43,7 +43,7 @@ const Pagination = ({ className, totalPage, currentPage }: Props) => {
                     data && data.showDot && (
                         <li>
                             <span className="flex items-center justify-center rounded-full w-10 h-10 leading-tight 
-                                            dark:bg-on_dark_bg_2 bg-[#7f92b0] font-bold text-base text-white  hover:bg-blue dark:hover:bg-blue transition-all
+                                            dark:bg-on_dark_bg_2 bg-[#7f92b0] font-bold text-base text-white  transition-all
                                             hover:scale-105 duration-500 ">...</span>
                         </li>
                     )
@@ -52,7 +52,7 @@ const Pagination = ({ className, totalPage, currentPage }: Props) => {
                 {
                     data && data.rightRange.map(page => (
                         <li key={`page-${page}`}>
-                            <Link href={`?page=${page}`}
+                            <Link href={{ query: { page } }}
                                 className={twMerge(`flex items-center justify-center rounded-full w-10 h-10 leading-tight 
                                 dark:bg-on_dark_bg_2 bg-[#7f92b0] font-bold text-base text-white  hover:bg-blue dark:hover:bg-blue transition-all
                                 hover:scale-105 duration-500 [&.active]:bg-blue `, currentPage === page && 'active')}>
@@ -66,7 +66,7 @@ const Pagination = ({ className, totalPage, currentPage }: Props) => {
                 {
                     data && data.next !== null && (
                         <li>
-                            <Link href={`?page=${data.next}`} className="flex items-center justify-center rounded-full w-10 h-10 leading-tight 
+                            <Link href={{ query: { page: data.next } }} className="flex items-center justify-center rounded-full w-10 h-10 leading-tight 
                                                 dark:bg-on_dark_bg_2 bg-[#7f92b0] font-bold text-base text-white  hover:bg-blue dark:hover:bg-blue transition-all
                                                 hover:scale-105 duration-500">
                                 <BsArrowRightShort className="text-xl" />

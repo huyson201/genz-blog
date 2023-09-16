@@ -21,12 +21,9 @@ interface Props {
 const BlogDetail = async ({ params }: Props) => {
     const arrayString = params.id.split("-")
     const postId = arrayString[arrayString.length - 1]
-    let post: Post
-    try {
-        post = await postService.getPostById(postId)
-    } catch (error) {
-        notFound()
-    }
+    const post = await postService.getPostById(postId)
+    if (!post) return notFound();
+
     return (
         <section className='mb-24'>
             <Wrapper>

@@ -5,12 +5,7 @@ import Wrapper from '../Common/Wrapper/Wrapper'
 import Logo from '../Logo/Logo'
 import NavLink from '../Common/NavLink/NavLink'
 import { Bars3Icon } from '@heroicons/react/24/outline'
-import ThemeModeToggle from '../ThemeModeToggle/ThemeModeToggle'
-import Link from 'next/link'
 import Search from '../Search/Search';
-import { BsPencilSquare } from 'react-icons/bs';
-import { useSession } from "next-auth/react"
-import UserMenu from '../UserMenu/UserMenu';
 import Account from '../Account/Account';
 interface Props {
     onRequestOpenNavMobile: () => void
@@ -71,7 +66,7 @@ const Navbar = ({ onRequestOpenNavMobile }: Props) => {
                 <div className='lg:flex items-center flex-nowrap space-x-4 font-noto_sans hidden  '>
                     {
                         navMenu.map((items, idex) => (
-                            <NavLink exact key={items.name} href={items.path} className='px-4 text-base transition-all hover:text-on_link_active
+                            <NavLink exact={items.path === '/'} key={items.name} href={items.path} className='px-4 text-base transition-all hover:text-on_link_active
                             text-on_text_gray_2 font-normal [&.active]:text-on_link_active
                             dark:text-on_dark_text_gray dark:hover:text-on_link_active'>
                                 {items.name}
