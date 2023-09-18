@@ -1,20 +1,25 @@
 
 "use client"
+import authService from '@/services/auth.service'
+import { useSession } from 'next-auth/react'
 import Image from 'next/image'
-import React from 'react'
-import { FaCloudUploadAlt } from 'react-icons/fa'
+import React, { MouseEvent, useEffect, useMemo, useState } from 'react'
+import { BiSolidErrorCircle } from 'react-icons/bi'
+import { BsCheckCircleFill } from 'react-icons/bs'
+import { FaCloudUploadAlt, FaTimes } from 'react-icons/fa'
 import { twMerge } from 'tailwind-merge'
 
 interface Props {
-    onUploadSuccess?: (data: File[]) => void,
-    darkMode?: boolean
+    onUploadSuccess?: () => void,
 }
 
-const DNDUploadFile = ({ darkMode, onUploadSuccess }: Props) => {
+const DNDUploadFile = ({ onUploadSuccess }: Props) => {
     const fileRef = React.useRef<HTMLInputElement>(null)
     const [isDrag, setIsDrag] = React.useState(false)
-    const [images, setImages] = React.useState<File[]>([])
+    const [images, setImages] = React.useState<{ file: File, state: "uploading" | "success" | "fail", id: number }[]>([])
     const [isUploading, setIsUploading] = React.useState(false)
+    const { data: session } = useSession()
+
     const handleClickArea = () => {
         if (!fileRef.current) return
         fileRef.current.click()
@@ -33,18 +38,6 @@ const DNDUploadFile = ({ darkMode, onUploadSuccess }: Props) => {
         setIsDrag(false)
     }
 
-    const handleImage = (files: FileList) => {
-        setIsUploading(true)
-        const images: File[] = []
-        Array.from(files).forEach(file => {
-            if (file.type.split("/")[0] === "image") {
-                images.push(file)
-            }
-        })
-        setImages(images)
-        onUploadSuccess?.(images)
-        setIsUploading(false)
-    }
 
     const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault()
@@ -57,46 +50,106 @@ const DNDUploadFile = ({ darkMode, onUploadSuccess }: Props) => {
     const handleOnchange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.currentTarget.files
         if (!files) return
+        setIsUploading(true)
         handleImage(files)
+    }
+
+    const handleImage = async (files: FileList) => {
+        if (!session) return
+        setIsUploading(true)
+        const arrImages = Array.from(files)
+        setImages(arrImages.map((file, index) => ({ file: file, state: "uploading", id: index })))
+        for (let i = 0; i <= arrImages.length - 1; i++) {
+            try {
+                const res = await authService.uploadImage(arrImages[i], session.backendTokens.access_token)
+                removeImg(i)
+
+            } catch (error) {
+                setImages(prev => {
+                    prev[i].state = "fail"
+                    return [...prev]
+                })
+            }
+        }
+        onUploadSuccess?.()
+        setIsUploading(false)
+
+    }
+
+    const removeImg = (id: number) => {
+        setImages(prev => {
+            const index = prev.findIndex(value => value.id === id)
+            prev.splice(index, 1)
+            return [...prev]
+        })
     }
     return (
         <div
-            className={twMerge(`
-            cursor-pointer mt-4 w-full min-h-[160px] border-dashed border
-            border-on_dark_border flex items-center justify-center transition-all 
-            [&.dragging]:border-solid [&.dragging]:opacity-60
-            `, isDrag ? "dragging" : "", darkMode ? "hover:bg-gray-950/20" : "hover:bg-gray-100")}
-
+            className={twMerge(`dnd-upload-wrapper dark:hover:bg-gray-950/20 hover:bg-gray-100`, isDrag ? "dragging" : "")}
             onClick={handleClickArea}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}>
-            <div className={twMerge('text-5xl text-on_text_gray_2 text-center px-3', isUploading && "hidden")}>
+            <div className={twMerge('text-5xl text-on_text_gray_2 text-center px-3 [&.uploading]:hidden', isUploading && "uploading")}>
                 <FaCloudUploadAlt className="inline-block" />
                 <div className='text-base'>Drag and drop an image here or click to upload file</div>
             </div>
-            <input ref={fileRef} type="file" className='hidden' accept='image/*' multiple onChange={handleOnchange} />
+            <input ref={fileRef} type="file" className='hidden' accept='.jpeg, .jpg, .jpe, .png' multiple onChange={handleOnchange} />
 
-            {/* {
+            {
                 images.length > 0 && (
                     <div className='w-full h-full flex flex-wrap gap-3 px-3'>
-
                         {
-                            images.map((img, index) => {
-                                const url = URL.createObjectURL(img)
+                            images.map((value, index) => {
                                 return (
-                                    <div key={index} className='max-w-[20%] w-full'>
-                                        <Image src={url} alt='img' width={60} height={80} />
-                                    </div>
+                                    <UploadImagePreview onRemove={() => removeImg(value.id)} file={value.file} key={index} state={value.state} />
                                 )
                             })
                         }
                     </div>
                 )
-            } */}
+            }
 
         </div>
     )
 }
 
 export default DNDUploadFile
+
+interface UploadImagePreviewProps {
+    state: "uploading" | "success" | "fail",
+    file: File,
+    onUploadSuccess?: (data: any) => void,
+    onRemove?: () => void
+}
+const UploadImagePreview = ({ state, file, onRemove }: UploadImagePreviewProps) => {
+    const [src, setSrc] = useState<string>()
+    useEffect(() => {
+        const url = URL.createObjectURL(file)
+        setSrc(url)
+        return () => URL.revokeObjectURL(url)
+    }, [file])
+
+    const handleRemove = (e: MouseEvent) => {
+        e.preventDefault()
+        e.stopPropagation()
+        onRemove?.()
+    }
+    return (
+        <div className={twMerge('relative w-20 group', state)}>
+            <div className='absolute inset-0 bg-white/60 dark:bg-black/20 flex items-center justify-center'>
+                {/* <BsCheckCircleFill /> */}
+                <span className='dark:text-white text-black text-xs hidden group-[&.uploading]:inline-block'>
+                    uploading...
+                </span>
+                <span className={twMerge('hidden group-[&.fail]:inline-block text-red-500')}>
+                    <BiSolidErrorCircle />
+                </span>
+            </div>
+            <button onClick={handleRemove} className='hidden group-[&.fail]:inline-block absolute top-2 right-2 text-red-500 text-xl z-[2]'><FaTimes /></button>
+            {
+                src && <Image src={src} alt='img' className='w-full object-cover' width={80} height={80} />
+            }
+        </div>
+    )
+}

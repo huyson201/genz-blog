@@ -73,3 +73,19 @@ export interface PaginateResponse<T> {
   nextPage: number | null;
   docs: T[];
 }
+
+export interface ImageType {
+  createdAt: string;
+  format: string;
+  height: number;
+  original_filename: string;
+  public_id: string;
+  resource_type: string;
+  secure_url: string;
+  type: string;
+  updatedAt: string;
+  url: string;
+  user: string;
+  width: number;
+  _id: string;
+}

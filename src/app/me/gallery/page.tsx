@@ -1,16 +1,14 @@
-
-
-import DNDUploadFile from '@/components/UploadImage/DNDUploadFile'
+import Gallery from '@/components/Page/Gallery'
 import React from 'react'
 
 type Props = {}
 
-const Gallery = (props: Props) => {
+const GalleryPage = (props: Props) => {
     return (
         <div className='w-full'>
-            <DNDUploadFile darkMode />
+            <Gallery />
         </div>
     )
 }
 
-export default Gallery
+export default GalleryPage

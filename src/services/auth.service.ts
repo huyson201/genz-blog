@@ -1,4 +1,4 @@
-import { Post, RegisterData } from "@/types/type";
+import { ImageType, Post, RegisterData } from "@/types/type";
 import { apiConfig } from "./Api";
 import CustomError from "@/CustomError";
 
@@ -72,6 +72,57 @@ const authService = {
       method: "post",
       body: JSON.stringify({ idToken }),
     });
+  },
+  uploadImage: async (img: File, token: string): Promise<ImageType> => {
+    const form = new FormData();
+    form.set("image", img);
+    const res = await fetch(`${apiConfig.baseUrl}/file`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+      method: "Post",
+      body: form,
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new CustomError(res.status, data.message, data);
+    }
+    return data;
+  },
+  gallery: async (token: string): Promise<ImageType[]> => {
+    const res = await fetch(`${apiConfig.baseUrl}/auth/gallery`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+      method: "Get",
+      cache: "no-store",
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new CustomError(res.status, data.message, data);
+    }
+    return data;
+  },
+  deleteImage: async (publicId: string, token: string) => {
+    const res = await fetch(`${apiConfig.baseUrl}/file`, {
+      headers: {
+        ...apiConfig.headers,
+        authorization: `Bearer ${token}`,
+      },
+      method: "Delete",
+      body: JSON.stringify({ publicId }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new CustomError(res.status, data.message, data);
+    }
+    return data;
   },
 };
 

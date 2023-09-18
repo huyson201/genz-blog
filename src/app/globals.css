@@ -99,7 +99,12 @@ body {
     height:400px;}
 .gmap_iframe {height:400px!important;}
 
-
+/* dnd upload file */
+.dnd-upload-wrapper{
+    @apply  cursor-pointer mt-4 w-full min-h-[160px] border-dashed border
+    border-on_dark_border flex items-center justify-center transition-all 
+    [&.dragging]:border-solid [&.dragging]:opacity-60;
+}
 /* editor */
 .editor-custom .editor-toolbar.fullscreen{
     @apply h-[110px] xs:h-20 lg:h-[50px];
