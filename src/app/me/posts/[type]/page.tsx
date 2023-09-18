@@ -2,9 +2,18 @@
 import PostRow from '@/components/PostRow/PostRow'
 import React from 'react'
 
-type Props = {}
+type Props = {
+    params: {
+        type: string
+    }
+}
+export async function generateStaticParams() {
 
-const Drafts = (props: Props) => {
+    return [{ type: "public" }, { type: "drafts" }]
+}
+
+const PostListPage = ({ params }: Props) => {
+    const { type } = params
     return (
         <div>
             <PostRow type='draft' />
@@ -15,4 +24,4 @@ const Drafts = (props: Props) => {
     )
 }
 
-export default Drafts
+export default PostListPage

@@ -17,7 +17,8 @@ type Props = {
 
 const TagSlug = async ({ params: { slug }, searchParams: { page = 1 } }: Props) => {
     const res = tagService.getPostsBySlug(slug, { page })
-    if (!res) return notFound()
+    const tagInfo = await tagService.getTagBySlug(slug)
+
 
     return (
         <section className='mb-24'>
@@ -25,10 +26,10 @@ const TagSlug = async ({ params: { slug }, searchParams: { page = 1 } }: Props) 
                 <div className='lg:px-24 space-y-4 '>
                     <h1 className='leading-[1.3] inline-block text-center mt-6 text-[30px] sm:text-[36px] md:text-[48px] lg:text-[64px] bg-primary-gradient text-transparent 
                                 bg-200% bg-clip-text font-extrabold'>
-                        Tags
+                        {tagInfo.name}
                     </h1>
                     <div className=' pb-6  border-b border-b-[#c2d4ee] dark:border-b-on_dark_border'>
-                        <Breadcrumb />
+                        <Breadcrumb replaceLastText={tagInfo.name} />
                     </div>
                     <Suspense fallback={<div>loading...</div>}>
                         <BlogList data={res} currentPage={page} />

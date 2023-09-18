@@ -9,9 +9,11 @@ import Link from 'next/link'
 import { FaFacebookF, FaPinterest, FaTwitter } from 'react-icons/fa6'
 import TagList from '@/components/TagList/TagList'
 import { notFound } from 'next/navigation'
-import { Auth, Post } from '@/types/type'
+import { Auth } from '@/types/type'
 import postService from '@/services/post.service'
-import { formatDate } from '@/utils'
+import { calcBlogReadingTime, formatDate } from '@/utils'
+import MarkdownArea from '@/components/MarkdownArea/MarkdownArea'
+import CommentInput from '@/components/Input/CommentInput'
 interface Props {
     params: {
         id: string
@@ -23,7 +25,6 @@ const BlogDetail = async ({ params }: Props) => {
     const postId = arrayString[arrayString.length - 1]
     const post = await postService.getPostById(postId)
     if (!post) return notFound();
-
     return (
         <section className='mb-24'>
             <Wrapper>
@@ -43,7 +44,7 @@ const BlogDetail = async ({ params }: Props) => {
                                     <div className='font-bold text-on_light_text_gray dark:text-on_text_gray_2'>{(post.author as Auth).name}</div>
                                     <div>
                                         <span className='text-sm text-on_light_text_gray mr-6 dark:text-on_text_gray_2'>{formatDate(post.createdAt || "", "D MMMM YYYY")}</span>
-                                        <span className='text-sm text-on_light_text_gray dark:text-on_text_gray_2'>3 mins to read</span>
+                                        <span className='text-sm text-on_light_text_gray dark:text-on_text_gray_2'>{calcBlogReadingTime(post.content, 200)} mins to read</span>
                                     </div>
                                 </div>
                             </div>
@@ -55,15 +56,12 @@ const BlogDetail = async ({ params }: Props) => {
                             </div>
                             <div className='flex mt-12 flex-col lg:flex-row '>
                                 <div className='lg:w-3/4 lg:px-3  '>
-                                    <div className='pb-12  border-b border-b-[#c2d4ee] dark:border-b-on_dark_border text-base text-[#708ab0] dark:text-on_dark_text_gray'>
-                                        {/* The fancy moon going in little artist painting. Thirty days of lavender in the dreamy light inside. Other perfect oh plants, for and again. I’ve honey feeling. Caring dreamland projects noteworthy than minimal, their it oh pretty feeling may. Include pink be.
-                                        Tortor placerat bibendum consequat sapien, facilisi facilisi pellentesque morbi. Id conse ctetur ut vitae a massa a. Lacus ut bibendum sollicitudin fusce sociis mi. Dictum volutpat praesent ornare accumsan elit venenatis. Congue sodales nunc quis ultricies odio porta. Egestas mauris placerat leo phasellu s ut sit.
-                                        <h2 className='my-8 text-3xl font-bold text-on_light_text_white dark:text-on_dark_text_white'>
-                                            Use your headings
-                                        </h2>
-                                        Thirty there & time wear across days, make inside on these you. Can young a really, roses blog small of song their dreamy life pretty? Because really duo living to noteworthy bloom bell. Transform clean daydreaming cute twenty process rooms cool. White white dreamy dramatically place everything although. Place out apartment afternoon whimsical kinder, little romantic joy we flowers handmade. Thirty she a studio of she whimsical projects, afternoon effect going an floated maybe. */}
-                                        {post.content}
+                                    <div className='pb-12  border-b border-b-[#c2d4ee] dark:border-b-on_dark_border'>
+                                        <MarkdownArea>
+                                            {post.content}
+                                        </MarkdownArea>
                                     </div>
+                                    <CommentInput />
                                 </div>
                                 <div className='lg:w-1/4 lg:px-3 mt-12 lg:mt-0'>
                                     <div className='pl-10 border-l border-l-[#c2d4ee] dark:border-l-on_dark_border flex py-8 items-center gap-3'>

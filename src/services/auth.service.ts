@@ -64,6 +64,15 @@ const authService = {
     }
     return data;
   },
+  googleLogin: async (idToken: string) => {
+    return fetch(`${apiConfig.baseUrl}/auth/login/google`, {
+      headers: {
+        ...apiConfig.headers,
+      },
+      method: "post",
+      body: JSON.stringify({ idToken }),
+    });
+  },
 };
 
 export default authService;

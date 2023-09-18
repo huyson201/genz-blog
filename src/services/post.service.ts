@@ -15,6 +15,7 @@ const postService = {
       },
       method: "Post",
       body: JSON.stringify(arg.post),
+      cache: "no-store",
     });
     const data = await res.json();
     if (!res.ok) {
@@ -48,6 +49,7 @@ const postService = {
         ...apiConfig.headers,
       },
       method: "Get",
+      cache: "no-store",
     });
 
     const data = await res.json();
@@ -70,6 +72,7 @@ const postService = {
         ...apiConfig.headers,
       },
       method: "Get",
+      cache: "no-store",
     });
 
     const data = await res.json();

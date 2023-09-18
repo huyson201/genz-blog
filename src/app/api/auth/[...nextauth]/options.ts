@@ -2,6 +2,7 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import authService from "@/services/auth.service";
 import { Auth } from "@/types/type";
+import GoogleProvider from "next-auth/providers/google";
 import CustomError from "@/CustomError";
 
 export const options: NextAuthOptions = {
@@ -14,7 +15,7 @@ export const options: NextAuthOptions = {
       },
       async authorize(credentials, req) {
         if (!credentials?.email || !credentials.password)
-          throw new Error("Email or password invalid!");
+          throw new CustomError(400, "Email or password invalid!");
 
         const res = await authService.loginWithCredential(
           credentials.email,
@@ -28,12 +29,26 @@ export const options: NextAuthOptions = {
         throw new CustomError(res.status, data.message, data);
       },
     }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_SECRET || "",
+    }),
   ],
   session: {
     strategy: "jwt",
   },
   callbacks: {
     async jwt({ token, user, account }) {
+      if (account && account.provider === "google") {
+        const id_token = account.id_token;
+        const res = await authService.googleLogin(id_token || "");
+        const data = await res.json();
+        return {
+          ...token,
+          ...data,
+        };
+      }
+
       if (user) {
         return {
           ...token,
@@ -47,7 +62,6 @@ export const options: NextAuthOptions = {
         token.backendTokens.refresh_token
       );
       const data = await res.json();
-      console.log(data);
       return {
         ...token,
         backendTokens: data,

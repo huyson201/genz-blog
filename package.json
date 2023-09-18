@@ -21,23 +21,30 @@
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.19",
     "framer-motion": "^10.16.1",
+    "markdown-to-jsx": "^7.3.2",
     "moment": "^2.29.4",
     "next": "13.4.19",
     "next-auth": "^4.23.1",
     "next-themes": "^0.2.1",
     "postcss": "8.4.28",
     "react": "18.2.0",
+    "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.46.1",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.10.1",
     "react-loader-spinner": "^5.4.5",
     "react-simplemde-editor": "^5.2.0",
+    "react-syntax-highlighter": "^15.5.0",
     "swr": "^2.2.2",
     "tailwind-merge": "^1.14.0",
     "tailwindcss": "3.3.3",
     "typescript": "5.1.6",
     "yarn": "^1.22.19",
     "yup": "^1.2.0"
+  },
+  "devDependencies": {
+    "@types/react-copy-to-clipboard": "^5.0.4",
+    "@types/react-syntax-highlighter": "^15.5.7"
   }
 }

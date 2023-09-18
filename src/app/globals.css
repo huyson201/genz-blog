@@ -37,12 +37,10 @@ body {
 }
 
 .sticky-bar{
-    @apply fixed z-[5] top-0 left-0 w-full mt-0 border-b border-b-on_light_border ;
+    @apply fixed z-[5] top-0 left-0 w-full mt-0 border-b border-b-on_light_border dark:border-b-on_dark_border;
     animation: fadeInDown 0.7s ease-in-out forwards;
 }
-.dark .sticky-bar{
-    @apply border-b border-b-on_dark_border;
-}
+
 @keyframes fadeInDown {
     from{
         opacity: 0;
@@ -111,8 +109,13 @@ body {
     @apply top-[110px] xs:top-[80px] lg:top-[50px];
 }
 .editor-custom .editor-preview-side{
-    @apply top-[110px] xs:top-[80px] lg:top-[50px];
+    @apply top-[110px] xs:top-[80px] lg:top-[50px] z-[4];
 }
+
+.editor-custom .EasyMDEContainer .CodeMirror-fullscreen ~ .editor-preview-side{
+    @apply z-[9];
+}
+
 
 .dark .editor-custom .editor-toolbar.fullscreen{
     @apply bg-on_dark_body_bg text-white;
@@ -152,4 +155,17 @@ body {
 
 .dark .editor-preview{
     @apply bg-on_dark_card_bg text-white border-on_dark_border;
+}
+
+.editor-custom .editor-preview pre{
+    @apply mb-0 bg-transparent;
+}
+
+/* code block */
+.highlight-wrapper pre::-webkit-scrollbar{
+    height: 4px;
+}
+
+.highlight-wrapper pre::-webkit-scrollbar-thumb{
+    @apply rounded-[50px] bg-gray-500;
 }

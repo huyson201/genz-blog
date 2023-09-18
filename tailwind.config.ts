@@ -44,6 +44,8 @@ const config: Config = {
         on_light_text_white: "#344161",
         on_dark_text_hover: "#0EA5F6",
         on_light_text_hover: "#0EA5F6",
+        on_dark_placeholder: "#6c757d",
+        on_light_placeholder: "#7e9cc7",
       },
       backgroundSize: {
         "200%": "200%",

@@ -12,9 +12,10 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import ErrorFeedback from '@/components/ErrorFeedback/ErrorFeedback'
 import authService from '@/services/auth.service'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { toast } from 'react-hot-toast'
 import CustomError from '@/CustomError'
+import { signIn } from 'next-auth/react'
 const validateSchema = yup.object({
     name: yup.string().required(),
     email: yup.string().email().required(),
@@ -26,6 +27,8 @@ type Props = {}
 
 const Register = (props: Props) => {
     const { trigger, isMutating, error: fetchError } = useSWRMutation('/auth/register', authService.register)
+    const searchParams = useSearchParams()
+    const callbackUrl = searchParams.get("callbackUrl")
     const router = useRouter()
     const [error, setError] = React.useState('')
     const [loading, setLoading] = React.useState(false)
@@ -85,7 +88,7 @@ const Register = (props: Props) => {
                         Or, sign up with your email
                     </span>
                 </div>
-                <GoogleButton title='Sign up with google' />
+                <GoogleButton onClick={() => { signIn("google", { callbackUrl: callbackUrl || "/" }); }} type='button' title='Sign up with google' />
             </div>
         </LoginRegisterWrapper>
     )

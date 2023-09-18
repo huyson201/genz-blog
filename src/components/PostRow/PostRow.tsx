@@ -20,27 +20,27 @@ const PostRow = ({ type }: Props) => {
                         Demo post
                     </Link>
 
-                    <div className='space-x-3 w-full sm:w-auto'>
+                    <div className=' w-full sm:w-auto'>
                         <Link href={"#"}
-                            className='inline-block text-sm 
+                            className='inline-block text-sm mr-3
                          text-on_light_text_gray dark:text-on_dark_text_gray  dark:hover:text-blue hover:text-blue
                              transition-all'>
                             #Javascript
                         </Link>
                         <Link href={"#"}
-                            className='inline-block text-sm 
+                            className='inline-block text-sm mr-3
                          text-on_light_text_gray dark:text-on_dark_text_gray  dark:hover:text-blue hover:text-blue
                              transition-all'>
                             #Nestjs
                         </Link>
                         <Link href={"#"}
-                            className='inline-block text-sm 
+                            className='inline-block text-sm mr-3
                          text-on_light_text_gray dark:text-on_dark_text_gray  dark:hover:text-blue hover:text-blue
                              transition-all'>
                             #Javascript
                         </Link>
                         <Link href={"#"}
-                            className='inline-block text-sm 
+                            className='inline-block text-sm mr-3
                          text-on_light_text_gray dark:text-on_dark_text_gray  dark:hover:text-blue hover:text-blue
                              transition-all'>
                             #Nestjs

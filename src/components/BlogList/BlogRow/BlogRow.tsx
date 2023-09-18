@@ -6,7 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { HiOutlineClock } from 'react-icons/hi2'
 import { Auth, Post } from '@/types/type'
-import { formatDate } from '@/utils'
+import { calcBlogReadingTime, formatDate } from '@/utils'
 import { slugify } from '@/utils/slugify'
 import { FiArrowRight } from 'react-icons/fi'
 interface Props {
@@ -30,7 +30,7 @@ const BlogRow = ({ post }: Props) => {
                 <Link href={`/blogs/${slugify(post.title)}-${post._id}`} className='md:text-xl lg:text-2xl font-bold text-on_light_text_white dark:text-on_dark_text_white transition-colors dark:hover:text-blue hover:text-on_link_active'>
                     <h3> {post.title}</h3>
                 </Link>
-                <p className='text-sm text-[#708ab0] dark:text-on_dark_text_gray'>
+                <p className='text-sm text-[#708ab0] dark:text-on_dark_text_gray line-clamp-3'>
                     {post.description}
                 </p>
                 <div className='space-x-2'>
@@ -46,7 +46,7 @@ const BlogRow = ({ post }: Props) => {
                 <div className='flex items-center justify-between'>
                     <div className='text-on_light_text_gray text-sm dark:text-[#66768f] flex items-center justify-end'>
                         <HiOutlineClock className="mr-2 text-xl" />
-                        3 mins read
+                        {calcBlogReadingTime(post.content, 200)} mins read
                     </div>
 
                     <div>

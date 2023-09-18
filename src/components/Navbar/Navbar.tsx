@@ -41,11 +41,11 @@ const Navbar = ({ onRequestOpenNavMobile }: Props) => {
 
         const stickyEffect = () => {
             if (!navbarRef.current) return
-            if (window.scrollY > 70) {
+            if (window.scrollY > 100) {
                 if (navbarRef.current.classList.contains("sticky-bar")) return
                 navbarRef.current.classList.add("sticky-bar")
             }
-            else {
+            if (window.scrollY < 80) {
                 navbarRef.current.classList.remove("sticky-bar")
             }
         }
@@ -60,7 +60,7 @@ const Navbar = ({ onRequestOpenNavMobile }: Props) => {
         <nav
             onScroll={(e) => { }}
             ref={navbarRef}
-            className={twMerge(` dark:bg-on_dark_body_bg transition-all bg-on_light_body_bg py-2 sm:py-[15px] mt-[15px]`)}>
+            className={twMerge(`dark:bg-on_dark_body_bg transition-all bg-on_light_body_bg py-2 sm:py-[15px] mt-[15px]`)}>
             <Wrapper className='relative flex items-center justify-between'>
                 <Logo />
                 <div className='lg:flex items-center flex-nowrap space-x-4 font-noto_sans hidden  '>

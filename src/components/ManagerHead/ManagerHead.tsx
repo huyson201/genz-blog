@@ -12,7 +12,7 @@ type Props = {}
 const headTitle = {
     "gallery": "Your Pictures",
     "drafts": "Drafts",
-    "public": "Public posts"
+    "public": "Public Posts"
 }
 const ManagerHead = (props: Props) => {
     const [open, setOpen] = useState(false)

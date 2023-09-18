@@ -51,6 +51,20 @@ const tagService = {
     }
     return data;
   },
+
+  getTagBySlug: async (slug: string): Promise<HashTag> => {
+    const res = await fetch(`${apiConfig.baseUrl}/tags/${slug}`, {
+      headers: {
+        ...apiConfig.headers,
+      },
+      method: "Get",
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      throw new CustomError(res.status, data.message, data);
+    }
+    return data;
+  },
 };
 
 export default tagService;

@@ -15,25 +15,25 @@ const DNDUploadFile = ({ darkMode, onUploadSuccess }: Props) => {
     const [isDrag, setIsDrag] = React.useState(false)
     const [images, setImages] = React.useState<File[]>([])
     const [isUploading, setIsUploading] = React.useState(false)
-    const handleClickArea = React.useCallback(() => {
+    const handleClickArea = () => {
         if (!fileRef.current) return
         fileRef.current.click()
-    }, [])
+    }
 
-    const handleDragOver = React.useCallback((e: React.DragEvent) => {
+    const handleDragOver = (e: React.DragEvent) => {
         e.preventDefault()
         e.stopPropagation()
         setIsDrag(true)
 
-    }, [])
+    }
 
-    const handleDragLeave = React.useCallback((e: React.DragEvent) => {
+    const handleDragLeave = (e: React.DragEvent) => {
         e.preventDefault()
         e.stopPropagation()
         setIsDrag(false)
-    }, [])
+    }
 
-    const handleImage = React.useCallback((files: FileList) => {
+    const handleImage = (files: FileList) => {
         setIsUploading(true)
         const images: File[] = []
         Array.from(files).forEach(file => {
@@ -42,23 +42,23 @@ const DNDUploadFile = ({ darkMode, onUploadSuccess }: Props) => {
             }
         })
         setImages(images)
-        if (onUploadSuccess) onUploadSuccess(images)
+        onUploadSuccess?.(images)
         setIsUploading(false)
-    }, [])
+    }
 
-    const handleDrop = React.useCallback((e: React.DragEvent<HTMLDivElement>) => {
+    const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault()
         e.stopPropagation()
         setIsDrag(false)
         const files = e.dataTransfer.files
         handleImage(files)
-    }, [])
+    }
 
-    const handleOnchange = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleOnchange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.currentTarget.files
         if (!files) return
         handleImage(files)
-    }, [])
+    }
     return (
         <div
             className={twMerge(`

@@ -86,7 +86,7 @@ const Login = (props: Props) => {
                         Or, sign in with your email
                     </span>
                 </div>
-                <GoogleButton title='Sign in with google' />
+                <GoogleButton onClick={() => { signIn("google", { callbackUrl: callbackUrl || "/" }); }} type='button' title='Sign in with google' />
             </div>
         </LoginRegisterWrapper>
     )

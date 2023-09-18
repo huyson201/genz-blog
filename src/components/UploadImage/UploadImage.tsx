@@ -32,10 +32,10 @@ const UploadImage = ({ open, onRequestClose, onSelectImage }: Props) => {
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                 >
-                    <div className="fixed inset-0 bg-black/30" />
+                    <div className="fixed inset-0 z-10 bg-black/30" />
                 </Transition.Child>
 
-                <div className="fixed inset-0 overflow-y-auto">
+                <div className="fixed inset-0 overflow-y-auto z-10">
                     <div className="flex min-h-full items-center justify-center p-6 text-center">
                         <Transition.Child
                             as={Fragment}
