@@ -5,9 +5,9 @@ type Props = {
   children: any
 }
 
-const Paragraph = ({ children }: Props) => {
+const Paragraph = ({ children, ...props }: Props) => {
   return (
-    <p className='whitespace-pre-wrap'>{children}</p>
+    <p className='whitespace-pre-wrap mt-2'>{children}</p>
   )
 }
 

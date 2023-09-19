@@ -1,4 +1,4 @@
-
+"use client"
 import { Dialog, Transition } from '@headlessui/react'
 import Image from 'next/image'
 import React, { Fragment, useState } from 'react'
@@ -6,6 +6,9 @@ import { FaCloudUploadAlt } from 'react-icons/fa'
 import { IoClose } from 'react-icons/io5'
 import { twMerge } from 'tailwind-merge'
 import DNDUploadFile from './DNDUploadFile'
+import ImageList from '../ImageList/ImageList'
+import { useSession } from 'next-auth/react'
+import { useSWRConfig } from 'swr'
 
 interface Props {
     open: boolean,
@@ -14,11 +17,16 @@ interface Props {
 }
 
 const UploadImage = ({ open, onRequestClose, onSelectImage }: Props) => {
-    const [images, setImages] = React.useState<File[]>([])
+    const { mutate } = useSWRConfig()
+    const { data: session } = useSession()
+    const handleUploadSuccess = () => {
+        if (!session) return
+        mutate(["/auth/gallery", session.backendTokens.access_token])
+    }
 
-    const handleUploadSuccess = React.useCallback((files: File[]) => {
-        setImages(files)
-    }, [])
+    const handleSelect = (url: string) => {
+        onSelectImage?.(url)
+    }
 
     return (
         <Transition appear show={open} as={Fragment}>
@@ -60,26 +68,9 @@ const UploadImage = ({ open, onRequestClose, onSelectImage }: Props) => {
 
                                 <div className='mt-6'>
                                     <div className='text-on_text_gray_2'>Your Pictures</div>
-                                    {
-                                        images.length > 0 && (
-                                            <div className='w-full  flex flex-wrap gap-3 px-3'>
-
-                                                {
-                                                    images.map((img, index) => {
-                                                        const url = URL.createObjectURL(img)
-                                                        return (
-                                                            <div key={index} className='max-w-[20%] w-full' onClick={() => {
-                                                                console.log("select img")
-                                                                onSelectImage && onSelectImage(url)
-                                                            }}>
-                                                                <Image src={url} alt='img' width={60} height={80} />
-                                                            </div>
-                                                        )
-                                                    })
-                                                }
-                                            </div>
-                                        )
-                                    }
+                                    <div>
+                                        <ImageList showBlankSelect onSelectImage={handleSelect} />
+                                    </div>
 
                                 </div>
                                 <div className='mt-6 text-right'>

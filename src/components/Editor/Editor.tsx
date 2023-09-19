@@ -20,7 +20,6 @@ const Editor = ({ onChangeData, defaultValue = "" }: Props) => {
     const [openDialog, setOpenDialog] = useState(false)
     const [cm, setCm] = useState<CodeMirror.Editor | null>(null);
     const [value, setValue] = useState(defaultValue)
-
     const options: SimpleMDE.Options = useMemo(() => {
         ImageButton.onAction = () => {
             setOpenDialog(true)

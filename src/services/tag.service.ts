@@ -16,7 +16,7 @@ const tagService = {
         ...apiConfig.headers,
       },
       method: "Get",
-      cache: "no-cache",
+      cache: "no-store",
     });
     const data = await res.json();
     if (!res.ok) {
@@ -42,7 +42,7 @@ const tagService = {
           ...apiConfig.headers,
         },
         method: "Get",
-        cache: "no-cache",
+        cache: "no-store",
       }
     );
     const data = await res.json();
@@ -58,6 +58,7 @@ const tagService = {
         ...apiConfig.headers,
       },
       method: "Get",
+      cache: "no-store",
     });
     const data = await res.json();
     if (!res.ok) {

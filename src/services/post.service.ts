@@ -1,4 +1,4 @@
-import { Display, PaginateResponse, Post, PostFormData } from "@/types/type";
+import { PaginateResponse, Post, PostFormData } from "@/types/type";
 import { apiConfig } from "./Api";
 import CustomError from "@/CustomError";
 import { queryStringify } from "@/utils/queryStringify";

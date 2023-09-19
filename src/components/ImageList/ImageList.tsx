@@ -5,9 +5,12 @@ import React from 'react'
 import useSWR, { useSWRConfig } from 'swr'
 import ImagePreview from './ImagePreview'
 import toast from 'react-hot-toast'
-type Props = {}
+type Props = {
+    onSelectImage?: (url: string) => void,
+    showBlankSelect?: boolean
+}
 
-const ImageList = (props: Props) => {
+const ImageList = ({ showBlankSelect, onSelectImage }: Props) => {
     const { data: session } = useSession()
     const { data, isLoading, mutate } = useSWR(!session ? null : ["/auth/gallery", session.backendTokens.access_token], ([url, token]) => authService.gallery(token))
 
@@ -27,7 +30,13 @@ const ImageList = (props: Props) => {
     }
     return (
         <div className='grid grid-cols-4 gap-3 py-4'>
-            {data && data.map(img => <ImagePreview onRemove={() => handleDelete(img.public_id)} key={img._id} src={img.secure_url} atl={img.original_filename} />)}
+            {showBlankSelect && (<div
+                className='font-bold text-sm cursor-pointer border-[#c2d4ee] border border-dashed
+                                text-black flex justify-center items-center min-h-[60px] dark:border-on_dark_border'
+                onClick={() => onSelectImage?.("")}>
+                Blank
+            </div>)}
+            {data && data.map(img => <ImagePreview onSelect={() => onSelectImage?.(img.secure_url)} onRemove={() => handleDelete(img.public_id)} key={img._id} src={img.secure_url} atl={img.original_filename} />)}
         </div>
     )
 }

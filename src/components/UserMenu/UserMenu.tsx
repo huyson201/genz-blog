@@ -4,10 +4,13 @@ import { Menu, Transition } from '@headlessui/react'
 import { twMerge } from 'tailwind-merge';
 import Image from 'next/image';
 import authService from '@/services/auth.service';
-import { signOut } from 'next-auth/react'
-import { Auth, BackendToken } from '@/types/type';
+import { signOut, useSession } from 'next-auth/react'
+import { Auth, BackendToken, Role } from '@/types/type';
 import { useRouter } from 'next/navigation';
-
+import { RiLogoutCircleRLine } from 'react-icons/ri'
+import { AiTwotoneSetting } from 'react-icons/ai'
+import { BsPencilSquare } from 'react-icons/bs'
+import Link from 'next/link';
 interface Props {
     auth: Auth,
     tokens: BackendToken
@@ -15,6 +18,7 @@ interface Props {
 
 export default function UserMenu({ auth, tokens }: Props) {
     const router = useRouter()
+    const { data: session } = useSession()
     const handleLogout = async () => {
         const res = await authService.logout(tokens.access_token)
         if (res.ok) {
@@ -40,7 +44,7 @@ export default function UserMenu({ auth, tokens }: Props) {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
             >
-                <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md border  border-on_light_border bg-on_light_card_bg dark:bg-on_dark_card_bg dark:border-on_dark_border">
+                <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md border  border-on_light_border_2 bg-on_light_card_bg dark:bg-on_dark_card_bg dark:border-on_dark_border">
                     <div className="py-1">
                         <Menu.Item>
                             {({ active }) => (
@@ -48,13 +52,32 @@ export default function UserMenu({ auth, tokens }: Props) {
                                     href="#"
                                     className={twMerge(
                                         active ? 'text-blue' : 'dark:text-on_dark_text_gray text-on_light_text_gray',
-                                        'block px-4 py-2 text-sm'
+                                        ' px-4 py-2 text-sm flex items-center gap-2'
                                     )}
                                 >
+                                    <AiTwotoneSetting className='text-[18px]' />
                                     Account settings
                                 </a>
                             )}
                         </Menu.Item>
+                        {
+                            session && session.user.role == Role.Admin && (
+                                <Menu.Item>
+                                    {({ active }) => (
+                                        <Link
+                                            href="/me/posts/drafts"
+                                            className={twMerge(
+                                                active ? 'text-blue' : 'dark:text-on_dark_text_gray text-on_light_text_gray',
+                                                ' px-4 py-2 text-sm flex items-center gap-2'
+                                            )}
+                                        >
+                                            <BsPencilSquare className='text-[18px]' />
+                                            Posts management
+                                        </Link>
+                                    )}
+                                </Menu.Item>
+                            )
+                        }
 
                         <form method="POST" action="#">
                             <Menu.Item>
@@ -63,10 +86,11 @@ export default function UserMenu({ auth, tokens }: Props) {
                                         type="button"
                                         className={twMerge(
                                             active ? 'text-blue' : 'dark:text-on_dark_text_gray text-on_light_text_gray',
-                                            'block px-4 py-2 text-sm'
+                                            ' gap-2 px-4 py-2 text-sm flex items-center '
                                         )}
                                         onClick={handleLogout}
                                     >
+                                        <RiLogoutCircleRLine className='text-[18px]' />
                                         Sign out
                                     </button>
                                 )}

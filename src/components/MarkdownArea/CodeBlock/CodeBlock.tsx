@@ -14,9 +14,7 @@ type Props = {
 }
 
 const CodeBlock = ({ children, className = "" }: Props) => {
-    const { theme } = useTheme()
     const [copied, setCopied] = useState(false)
-    const [mounted, setMounted] = useState(false)
 
     const language = useMemo(() => {
         const lang = className.replace('lang-', '')
@@ -34,27 +32,29 @@ const CodeBlock = ({ children, className = "" }: Props) => {
         return () => clearTimeout(id)
     }, [copied])
 
-    useEffect(() => {
-        setMounted(true)
-    }, [])
-
     const handleCopy = () => {
         setCopied(true)
         toast.success("Copied code to clipboard")
     }
-    if (!mounted) return null
 
     return (
-        <div className='highlight-wrapper overflow-hidden rounded-md relative bg-transparent'>
+        <div className='highlight-wrapper my-4 overflow-hidden rounded-md relative bg-transparent'>
             <CopyToClipboard text={children}
                 onCopy={handleCopy}>
                 <button className='absolute top-2 text-xl text-on_light_text_white dark:text-on_dark_text_white right-2'>
                     {copied ? <FaPaste /> : <IoIosCopy />}
                 </button>
             </CopyToClipboard>
-            <SyntaxHighlighter useInlineStyles customStyle={{ paddingTop: 32 }} showLineNumbers language={language} style={theme === 'dark' ? atomOneDark : atomOneLight}>
-                {children}
-            </SyntaxHighlighter>
+            <div className='hidden dark:block'>
+                <SyntaxHighlighter useInlineStyles customStyle={{ paddingTop: 32 }} showLineNumbers language={language} style={atomOneDark}>
+                    {children}
+                </SyntaxHighlighter>
+            </div>
+            <div className='dark:hidden block'>
+                <SyntaxHighlighter useInlineStyles customStyle={{ paddingTop: 32 }} showLineNumbers language={language} style={atomOneLight}>
+                    {children}
+                </SyntaxHighlighter>
+            </div>
         </div>
     );
 }

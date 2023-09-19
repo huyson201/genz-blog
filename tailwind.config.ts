@@ -36,6 +36,7 @@ const config: Config = {
         on_text_gray_2: "#66768f",
         on_dark_border: "#222f43",
         on_light_border: "#e9eef5",
+        on_light_border_2: "#c2d4ee",
         on_dark_bg_2: "#222f43",
         on_light_bg_2: "#e9eef5",
         on_dark_card_bg: "#131c31",
