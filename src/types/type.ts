@@ -52,8 +52,8 @@ export interface Post {
   description: string;
   content: string;
   display: Display;
-  createdAt?: string;
-  updatedAt?: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface PostFormData

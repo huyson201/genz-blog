@@ -7,3 +7,8 @@ export const formatDate = (stringDate: string, format: DateFormat) => {
   const formattedDate = moment(date).format(format);
   return formattedDate;
 };
+
+export const parserDateTimeAgo = (stringDate: string) => {
+  const date = new Date(stringDate);
+  return moment(date).fromNow(true);
+};

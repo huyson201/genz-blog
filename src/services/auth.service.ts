@@ -1,4 +1,11 @@
-import { ImageType, Post, RegisterData } from "@/types/type";
+import { queryStringify } from "./../utils/queryStringify";
+import {
+  ImageType,
+  PaginateResponse,
+  Post,
+  RegisterData,
+  SaveOptions,
+} from "@/types/type";
 import { apiConfig } from "./Api";
 import CustomError from "@/CustomError";
 
@@ -115,6 +122,45 @@ const authService = {
       },
       method: "Delete",
       body: JSON.stringify({ publicId }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new CustomError(res.status, data.message, data);
+    }
+    return data;
+  },
+  getPosts: async (
+    token: string,
+    {
+      display,
+      page = 1,
+      limit = 10,
+    }: { display: SaveOptions; page?: number; limit?: number }
+  ): Promise<PaginateResponse<Post>> => {
+    const query = queryStringify({ display, page, limit });
+    const res = await fetch(`${apiConfig.baseUrl}/auth/posts?${query}`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+      method: "Get",
+      cache: "no-store",
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new CustomError(res.status, data.message, data);
+    }
+    return data;
+  },
+  deletePost: async (token: string, postId: string) => {
+    const res = await fetch(`${apiConfig.baseUrl}/posts/${postId}`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+      method: "Delete",
     });
 
     const data = await res.json();
