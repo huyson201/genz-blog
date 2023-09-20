@@ -137,9 +137,10 @@ const authService = {
       display,
       page = 1,
       limit = 10,
-    }: { display: SaveOptions; page?: number; limit?: number }
+      q,
+    }: { display: SaveOptions; page?: number; limit?: number; q?: string }
   ): Promise<PaginateResponse<Post>> => {
-    const query = queryStringify({ display, page, limit });
+    const query = queryStringify({ display, page, limit, q });
     const res = await fetch(`${apiConfig.baseUrl}/auth/posts?${query}`, {
       headers: {
         authorization: `Bearer ${token}`,

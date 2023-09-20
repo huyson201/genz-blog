@@ -1,11 +1,5 @@
-"use client"
-import PostRow from '@/components/PostRow/PostRow'
-import authService from '@/services/auth.service'
 import { SaveOptions } from '@/types/type'
-import { useSession } from 'next-auth/react'
-import { notFound } from 'next/navigation'
 import React from 'react'
-import useSWR from 'swr'
 import ListPost from './ListPost'
 
 type Props = {
@@ -13,7 +7,8 @@ type Props = {
         type: string
     },
     searchParams: {
-        page: number
+        page: number,
+        q?: string
     }
 }
 
@@ -21,17 +16,18 @@ const displayOption: Record<string, SaveOptions> = {
     "public": SaveOptions.PUBLIC,
     "drafts": SaveOptions.JUST_ME
 }
+
+
 export async function generateStaticParams() {
     return [{ type: "public" }, { type: "drafts" }]
 }
+export const dynamicParams = false
 
-const PostListPage = ({ params, searchParams: { page = 1 } }: Props) => {
+const PostListPage = ({ params, searchParams: { page = 1, q } }: Props) => {
     const { type } = params
-    if (!["public", "drafts"].includes(type.toLowerCase())) return notFound()
-
     return (
         <div>
-            <ListPost type={displayOption[type]} page={page} />
+            <ListPost type={displayOption[type]} page={page} q={q} />
         </div>
     )
 }

@@ -7,17 +7,19 @@ import { IoIosCopy } from 'react-icons/io'
 import { FaPaste } from 'react-icons/fa'
 import toast from 'react-hot-toast';
 import { programmingLanguages } from './language';
-import { useTheme } from 'next-themes';
-type Props = {
+
+interface Props {
     children: any,
-    className: string
+    className: string,
+    inline?: boolean
 }
 
-const CodeBlock = ({ children, className = "" }: Props) => {
+const CodeBlock = ({ children, className, inline = true, ...props }: Props) => {
     const [copied, setCopied] = useState(false)
-
     const language = useMemo(() => {
-        const lang = className.replace('lang-', '')
+        if (!className) return "text"
+        const lang = className.replace("lang-", "")
+
         const mapLang = programmingLanguages[lang]
         if (mapLang) return mapLang.toLowerCase()
         return lang
@@ -37,6 +39,13 @@ const CodeBlock = ({ children, className = "" }: Props) => {
         toast.success("Copied code to clipboard")
     }
 
+
+    if (inline) {
+        return <code>
+            <span className='bg-[#f1f3f5] dark:bg-gray-800 text-[#cd1d8d]'>{children}</span>
+        </code>
+    }
+
     return (
         <div className='highlight-wrapper my-4 overflow-hidden rounded-md relative bg-transparent'>
             <CopyToClipboard text={children}
@@ -46,12 +55,12 @@ const CodeBlock = ({ children, className = "" }: Props) => {
                 </button>
             </CopyToClipboard>
             <div className='hidden dark:block'>
-                <SyntaxHighlighter useInlineStyles customStyle={{ paddingTop: 32 }} showLineNumbers language={language} style={atomOneDark}>
+                <SyntaxHighlighter useInlineStyles customStyle={{ paddingTop: 32, paddingBottom: 16 }} showLineNumbers language={language} style={atomOneDark}>
                     {children}
                 </SyntaxHighlighter>
             </div>
             <div className='dark:hidden block'>
-                <SyntaxHighlighter useInlineStyles customStyle={{ paddingTop: 32 }} showLineNumbers language={language} style={atomOneLight}>
+                <SyntaxHighlighter useInlineStyles customStyle={{ paddingTop: 32, paddingBottom: 16 }} showLineNumbers language={language} style={atomOneLight}>
                     {children}
                 </SyntaxHighlighter>
             </div>

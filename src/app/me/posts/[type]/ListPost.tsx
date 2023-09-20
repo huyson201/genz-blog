@@ -11,16 +11,19 @@ import useSWR from 'swr'
 
 type Props = {
     type: SaveOptions,
-    page: number
+    page: number,
+    q?: string
 }
 
-const ListPost = ({ type, page }: Props) => {
+const ListPost = ({ type, page, q }: Props) => {
     const { data: session } = useSession()
     const [isOpenDialog, setIsOpenDialog] = useState(false)
     const [delData, setDelData] = useState<Post>()
 
-    const { data, isLoading, mutate, error } = useSWR(!session ? null : ["me/posts", session.backendTokens.access_token, type, page],
-        ([url, token, type, page]) => authService.getPosts(token, { page: page, display: type }))
+    const { data, isLoading, mutate, error } = useSWR(!session ? null : ["me/posts", session.backendTokens.access_token, type, page, q],
+        ([url, token, type, page, q]) => authService.getPosts(token, { page: page, display: type, q }))
+
+    console.log(data)
 
     if (isLoading) {
         return <div className='text-center text-xl'>Loading...</div>
@@ -30,6 +33,7 @@ const ListPost = ({ type, page }: Props) => {
             <div className='text-center text-on_light_text_gray dark:text-on_dark_text_gray'>There&apos;s nothing here</div>
         )
     }
+
 
     const handleDelete = (data: Post) => {
         setIsOpenDialog(true)

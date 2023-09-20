@@ -34,7 +34,6 @@ const Editor = ({ onChangeData, defaultValue = "" }: Props) => {
                 link: ["[", "](https://)"],
                 table: ["", "\n| Column 1 | Column 2 | Column 3 |\n| -------- | -------- | -------- |\n| Text     | Text      | Text     |\n\n"]
             },
-            sideBySideFullscreen: false,
             toolbar: ["undo", "redo", "|", "bold", "italic", "strikethrough", "heading", "|",
                 AlignLeftBtn, AlignCenterBtn, AlignRightBtn, AlignJustifyBtn, "|",
                 "code", "quote", "unordered-list", "ordered-list", "clean-block", "|",

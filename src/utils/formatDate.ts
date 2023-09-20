@@ -10,5 +10,5 @@ export const formatDate = (stringDate: string, format: DateFormat) => {
 
 export const parserDateTimeAgo = (stringDate: string) => {
   const date = new Date(stringDate);
-  return moment(date).fromNow(true);
+  return moment(date).fromNow();
 };

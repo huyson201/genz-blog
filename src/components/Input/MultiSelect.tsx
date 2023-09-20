@@ -47,10 +47,8 @@ const MultiSelect = forwardRef<MultiSelectHandles, Props>(({ className, defaultV
 
 
     useEffect(() => {
-        if (onTagsChange) {
-            onTagsChange(tags)
-        }
-    }, [tags])
+        onTagsChange?.(tags)
+    }, [tags, onTagsChange])
 
 
     const handleKeydown = (e: React.KeyboardEvent<HTMLInputElement>) => {

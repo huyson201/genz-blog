@@ -16,7 +16,7 @@ const MeLayout = ({ children }: Props) => {
             <Wrapper>
                 <div className='flex relative'>
                     <SidebarNav />
-                    <div className='flex-1 md:pl-6'>
+                    <div className='w-full md:w-[calc(100%_-_256px)] md:pl-6'>
                         <ManagerHead />
                         {children}
                     </div>

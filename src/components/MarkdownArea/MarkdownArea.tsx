@@ -6,6 +6,9 @@ import CodeBlock from './CodeBlock/CodeBlock'
 import MarkdownLink from './Link/MarkdownLink'
 import BlockQuote from './BlockQuote/BlockQuote'
 import Paragraph from './Paragraph/Paragraph'
+
+
+
 type Props = {
     children: string
 }
@@ -27,11 +30,23 @@ const MarkdownArea = ({ children }: Props) => {
                         code: { component: CodeBlock },
                         a: { component: MarkdownLink },
                         blockquote: { component: BlockQuote },
-                        p: { component: Paragraph }
+                        p: { component: Paragraph },
+                        pre: {
+                            component: ({ children }) => {
+                                if (React.isValidElement(children)) {
+                                    const props = children.props as { children: string, className: string }
+                                    const newProps = { children: props.children, className: props.className, inline: false }
+                                    return React.cloneElement(children, newProps)
+                                }
+                                return <pre >{children}</pre>
+                            }
+                        }
+
                     }
                 }}>
                 {children}
             </Markdown>
+
         </div>
     )
 }
