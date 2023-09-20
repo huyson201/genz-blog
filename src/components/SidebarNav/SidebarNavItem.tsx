@@ -10,10 +10,11 @@ type Props = {
     href: string,
     className?: string,
     iconSize?: "text-2xl" | 'text-xl' | 'text-base' | 'text-sm',
-    textSize?: "text-sm" | "text-base" | "text-xs"
+    textSize?: "text-sm" | "text-base" | "text-xs",
+    count?: number
 }
 
-const SidebarNavItem = ({ icon, title, href, className, textSize, iconSize = "text-2xl" }: Props) => {
+const SidebarNavItem = ({ icon, title, href, className, count, textSize, iconSize = "text-2xl" }: Props) => {
     return (
         <li>
             <NavLink
@@ -28,10 +29,13 @@ const SidebarNavItem = ({ icon, title, href, className, textSize, iconSize = "te
                 </span>
                 <span className="flex-1 ml-3 text-xs whitespace-nowrap">
                     {title}
-                    <span className={twMerge("ml-1 tracking-widest font-light text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300",
-                        textSize === 'text-xs' ? "text-xs" : "text-sm")}>
-                        {`(3)`}
-                    </span>
+
+                    {
+                        count && <span className={twMerge("ml-1 tracking-widest font-light text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300",
+                            textSize === 'text-xs' ? "text-xs" : "text-sm")}>
+                            {`(${count})`}
+                        </span>
+                    }
                 </span>
 
             </NavLink>

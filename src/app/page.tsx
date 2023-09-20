@@ -6,14 +6,11 @@ import Link from 'next/link'
 import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa6'
 import BlogSectionList from '@/components/BlogSection/BlogSectionList'
 import LastCommentSection from '@/components/LastCommentSection/LastCommentSection'
-import Pagination from '@/components/Pagination/Pagination'
 import postService from '@/services/post.service'
 import { Suspense } from "react";
 
-export default async function Home() {
+export default function Home() {
   const posts = postService.getPosts({ page: 1 })
-
-
   return (
     <main>
       {/* home cover */}

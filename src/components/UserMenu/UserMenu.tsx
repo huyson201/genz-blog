@@ -44,12 +44,12 @@ export default function UserMenu({ auth, tokens }: Props) {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
             >
-                <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md border  border-on_light_border_2 bg-on_light_card_bg dark:bg-on_dark_card_bg dark:border-on_dark_border">
-                    <div className="py-1">
+                <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md  border  border-on_light_border_2 bg-on_light_card_bg dark:bg-on_dark_card_bg dark:border-on_dark_border">
+                    <div className="py-1 divide-y dark:divide-on_dark_border divide-on_light_border_2">
                         <Menu.Item>
                             {({ active }) => (
-                                <a
-                                    href="#"
+                                <Link
+                                    href="/me"
                                     className={twMerge(
                                         active ? 'text-blue' : 'dark:text-on_dark_text_gray text-on_light_text_gray',
                                         ' px-4 py-2 text-sm flex items-center gap-2'
@@ -57,7 +57,7 @@ export default function UserMenu({ auth, tokens }: Props) {
                                 >
                                     <AiTwotoneSetting className='text-[18px]' />
                                     Account settings
-                                </a>
+                                </Link>
                             )}
                         </Menu.Item>
                         {

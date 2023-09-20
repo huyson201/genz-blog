@@ -13,10 +13,11 @@ import { useSWRConfig } from 'swr'
 interface Props {
     open: boolean,
     onSelectImage?: (image: string) => void,
-    onRequestClose: () => void
+    onRequestClose: () => void,
+    showBlankSelect?: boolean
 }
 
-const UploadImage = ({ open, onRequestClose, onSelectImage }: Props) => {
+const UploadImage = ({ open, showBlankSelect, onRequestClose, onSelectImage }: Props) => {
     const { mutate } = useSWRConfig()
     const { data: session } = useSession()
     const handleUploadSuccess = () => {
@@ -69,7 +70,7 @@ const UploadImage = ({ open, onRequestClose, onSelectImage }: Props) => {
                                 <div className='mt-6'>
                                     <div className='text-on_text_gray_2'>Your Pictures</div>
                                     <div>
-                                        <ImageList showBlankSelect onSelectImage={handleSelect} />
+                                        <ImageList showBlankSelect={showBlankSelect !== undefined ? showBlankSelect : true} onSelectImage={handleSelect} />
                                     </div>
 
                                 </div>

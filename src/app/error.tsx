@@ -18,10 +18,10 @@ const error = ({ error, reset }: Props) => {
                 <h1 className='bg-primary-gradient inline-block bg-clip-text bg-200% text-transparent xs:text-[24px] text-[20px] sm:text-[34px] md:text-[44px] font-bold'>{error.message}</h1>
                 <p className='text-base text-[#708ab0] dark:text-on_dark_text_gray'>Please try again or contact support if problem persist.</p>
                 <div className='space-x-4'>
-                    <button onClick={() => reset()} className='px-2 py-1 rounded bg-primary-gradient text-white bg-200% hover:bg-right transition-all'>
+                    <button onClick={() => reset()} className='px-2 py-1.5 rounded bg-primary-gradient text-white bg-200% hover:bg-right transition-all'>
                         Try again
                     </button>
-                    <Link href={"/"} className='px-2 py-1 rounded bg-primary-gradient text-white bg-200% hover:bg-right transition-all'>
+                    <Link href={"/"} className='px-2 py-1.5 rounded bg-primary-gradient text-white bg-200% hover:bg-right transition-all'>
                         Go back home
                     </Link>
                 </div>

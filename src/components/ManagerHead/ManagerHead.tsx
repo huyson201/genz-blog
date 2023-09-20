@@ -6,6 +6,7 @@ import SidebarMenu from '@/components/SidebarNav/SidebarMenu'
 import SidebarNavItem from '@/components/SidebarNav/SidebarNavItem'
 import { BiImage } from 'react-icons/bi'
 import { usePathname } from 'next/navigation'
+import { FaHome } from 'react-icons/fa'
 
 type Props = {}
 
@@ -70,6 +71,7 @@ const ManagerHead = (props: Props) => {
                                     <div className="h-full px-3 py-4 overflow-y-auto border-[#c2d4ee]
                                                       bg-on_light_card_bg dark:bg-on_dark_card_bg border dark:border-on_dark_border rounded">
                                         <ul className="space-y-2 font-medium">
+                                            <SidebarNavItem href='/me' title='Home' icon={<FaHome />} />
                                             <SidebarMenu />
                                             <SidebarNavItem href='#' title='Pictures' icon={<BiImage />} />
                                         </ul>

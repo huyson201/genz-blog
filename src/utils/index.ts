@@ -3,3 +3,4 @@ export * from "./calcBlogReadingTime";
 export * from "./slugify";
 export * from "./queryStringify";
 export * from "./assertPostDataChange";
+export * from "./textFormat";

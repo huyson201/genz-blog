@@ -55,13 +55,13 @@ export const options: NextAuthOptions = {
           ...user,
         };
       }
-
       if (new Date().getTime() < token.backendTokens.expiresIn) return token;
 
       const res = await authService.refreshToken(
         token.backendTokens.refresh_token
       );
       const data = await res.json();
+      console.log(data);
       return {
         ...token,
         backendTokens: data,

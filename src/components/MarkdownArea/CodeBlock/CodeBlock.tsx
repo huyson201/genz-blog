@@ -39,7 +39,6 @@ const CodeBlock = ({ children, className, inline = true, ...props }: Props) => {
         toast.success("Copied code to clipboard")
     }
 
-
     if (inline) {
         return <code>
             <span className='bg-[#f1f3f5] dark:bg-gray-800 text-[#cd1d8d]'>{children}</span>

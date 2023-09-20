@@ -72,7 +72,7 @@ const postService = {
         ...apiConfig.headers,
       },
       method: "Get",
-      cache: "no-store",
+      cache: "no-cache",
     });
 
     const data = await res.json();
