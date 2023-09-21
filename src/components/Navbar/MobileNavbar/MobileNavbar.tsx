@@ -7,6 +7,12 @@ import Logo from '../../Logo/Logo';
 import Link from 'next/link';
 import NavLink from '../../Common/NavLink/NavLink';
 import { navMenu } from '../Navbar';
+import { buttonVariants } from '@/components/Button/Button';
+import { cn } from '@/utils';
+import { signOut, useSession } from 'next-auth/react';
+import { RotatingLines } from 'react-loader-spinner';
+import Image from 'next/image';
+import { Role } from '@/types/type';
 
 interface Props {
     open?: boolean
@@ -14,8 +20,7 @@ interface Props {
 }
 
 const MobileNavbar = ({ open, onRequestClose }: Props) => {
-
-
+    const { data: session, status } = useSession()
     return (
         <Transition.Root show={open} as={Fragment}>
             <Dialog as="div" className="relative z-[6] lg:hidden" onClose={onRequestClose}>
@@ -69,9 +74,77 @@ const MobileNavbar = ({ open, onRequestClose }: Props) => {
 
                             </div>
                             <div className='py-6 border-b border-b-[#d5dfe4] dark:border-b-on_dark_border '>
-                                <Link href={"/login"} className='inline-block bg-primary-gradient bg-200% hover:bg-right transition-all text-white px-4 py-1 font-bold rounded-md' >
-                                    Sign in
-                                </Link>
+
+                                {
+                                    status === "loading" && <div className='flex items-center justify-center gap-2'>
+                                        <RotatingLines
+                                            strokeColor="grey"
+                                            strokeWidth="5"
+                                            animationDuration="0.75"
+                                            width="32"
+                                            visible={true}
+                                        />
+                                        <span className='text-sm dark:text-on_dark_text_gray text-on_light_text_gray'>Loading...</span>
+                                    </div>
+                                }
+                                {
+                                    status === "unauthenticated" && (<Link href={"/login"}
+                                        className={cn(buttonVariants({ className: "inline-block", size: "md" }))} >
+                                        Sign in
+                                    </Link>)
+                                }
+
+                                {
+                                    status === "authenticated" && (
+                                        <div>
+                                            <div className='flex items-center gap-2'>
+                                                <Image className='rounded-full' src={session?.user.avatar_url || ""} alt='avatar' height={40} width={40} />
+                                                <div className='space-y-0.5'>
+                                                    <div className='text-sm font-semibold text-on_light_text_white dark:text-on_dark_text_white'>
+                                                        Hello, {session?.user.name}
+                                                    </div>
+                                                    <div className='text-xs text-[#6c757d]'>{session?.user.email}</div>
+                                                </div>
+                                            </div>
+                                            <div className='grid grid-cols-2 gap-x-4 gap-y-2 mt-4'>
+                                                <Link
+                                                    href={"/me"}
+                                                    className='text-sm block text-on_text_gray_2 hover:text-[#708ab0] dark:text-[#e6f0ff] dark:hover:text-on_dark_text_gray transition-all
+                                                    [&.active]:text-blue font-medium hover:px-1'>
+                                                    Account Setting
+                                                </Link>
+
+                                                {
+                                                    session?.user.role === Role.Admin && (
+                                                        <>
+
+                                                            <Link
+                                                                href={"/me/posts/drafts"}
+                                                                className='text-sm block text-on_text_gray_2 hover:text-[#708ab0] dark:text-[#e6f0ff] dark:hover:text-on_dark_text_gray transition-all
+                                                    [&.active]:text-blue font-medium hover:px-1'>
+                                                                Post Manager
+                                                            </Link>
+                                                            <Link
+                                                                href={"/publish/post"}
+                                                                className='text-sm block text-on_text_gray_2 hover:text-[#708ab0] dark:text-[#e6f0ff] dark:hover:text-on_dark_text_gray transition-all
+                                                    [&.active]:text-blue font-medium hover:px-1'>
+                                                                Add New Post
+                                                            </Link>
+                                                        </>
+                                                    )
+                                                }
+                                                <button
+                                                    onClick={() => signOut()}
+                                                    className='text-sm block text-on_text_gray_2 hover:text-[#708ab0] dark:text-[#e6f0ff] dark:hover:text-on_dark_text_gray transition-all
+                                                    [&.active]:text-blue font-medium hover:px-1 text-left'>
+                                                    Sign Out
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )
+                                }
+
+
                             </div>
                             <div className='text-xs mt-6 text-on_text_gray_2 dark:text-[#e6f0ff]'>
                                 Copyright 2023 &copy; Genz - Personal Blog Template.

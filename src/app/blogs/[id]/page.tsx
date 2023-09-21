@@ -14,6 +14,7 @@ import postService from '@/services/post.service'
 import { calcBlogReadingTime, formatDate } from '@/utils'
 import MarkdownArea from '@/components/MarkdownArea/MarkdownArea'
 import CommentInput from '@/components/Input/CommentInput'
+import CommentList from '@/components/Comment/CommentList'
 interface Props {
     params: {
         id: string
@@ -56,11 +57,14 @@ const BlogDetail = async ({ params }: Props) => {
                             </div>
                             <div className='flex mt-12 flex-col lg:flex-row '>
                                 <div className='lg:w-3/4 lg:px-3  '>
-                                    <div className='pb-12  border-b border-b-[#c2d4ee] dark:border-b-on_dark_border'>
+                                    <div className='pb-12 blog-content border-b border-b-[#c2d4ee] dark:border-b-on_dark_border'>
                                         <MarkdownArea>
                                             {post.content}
                                         </MarkdownArea>
                                     </div>
+                                    <h4 className='text-3xl text-[#7f92b0] font-bold mt-6 dark:text-[#b8cdeb]'>Comments</h4>
+
+                                    <CommentList />
                                     <CommentInput />
                                 </div>
                                 <div className='lg:w-1/4 lg:px-3 mt-12 lg:mt-0'>

@@ -38,7 +38,7 @@ const TypingAnimation = ({ words, className }: Props) => {
             <span ref={wordRef} className={twMerge(className)}>
                 Designer
             </span>
-            <span className='text-[29px] xs:text-[34px] sm:text-[44px] md:text-6xl dark:text-white cursor-animate'>|</span>
+            <span className='text-[29px] xs:text-[34px] sm:text-[44px] md:text-[60px] dark:text-white cursor-animate'>|</span>
         </div>
     );
 

@@ -21,7 +21,7 @@ const PasswordInput = forwardRef<HTMLInputElement, Props>(({ className, ...props
 
                 className={twMerge(`dark:text-[#7f92b0]  rounded-lg  block w-full py-4 pl-4 pr-12
                 dark:bg-on_dark_card_bg border dark:focus:border-on_text_gray_2 
-                transition-all dark:border-on_dark_border outline-none bg-on_light_card_bg border-[#c2d4ee] text-on_light_text_white placeholder-on_dark_text_gray dark:placeholder-gray-500`
+                transition-all dark:border-on_dark_border outline-none bg-on_light_card_bg border-on_light_border_2 text-on_light_text_white placeholder-on_dark_text_gray dark:placeholder-gray-500`
                     , className)}
             />
             <button

@@ -16,7 +16,7 @@ const TagList = ({ tags }: Props) => {
                     <Link href={`/tags/${tag.slug}`} key={tag._id}
                         className='inline-block py-1 px-2 text-sm dark:bg-on_dark_card_bg bg-on_light_card_bg
                          text-[#0b1222] dark:text-white dark:hover:text-blue hover:text-blue
-                        border border-[#c2d4ee] dark:border-on_dark_border  rounded hover:-translate-y-0.5 transition-all'>
+                        border border-on_light_border_2 dark:border-on_dark_border  rounded hover:-translate-y-0.5 transition-all'>
                         # {tag.name}
                     </Link>
                 ))

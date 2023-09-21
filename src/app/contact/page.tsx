@@ -3,6 +3,7 @@
 import Breadcrumb from '@/components/Breadcrumb/Breadcrumb'
 import Wrapper from '@/components/Common/Wrapper/Wrapper'
 import GoogleMap from '@/components/GoogleMap/GoogleMap'
+import GradientText from '@/components/GradientText/GradientText'
 import React from 'react'
 
 type Props = {}
@@ -13,8 +14,10 @@ const Contact = (props: Props) => {
             <Wrapper>
                 <div className='py-6 mb-40'>
                     <Breadcrumb />
-                    <h1 className='mt-6 text-[30px] sm:text-[34px] md:text-[44px] lg:text-[64px] font-extrabold text-center '>
-                        <span className='bg-primary-gradient bg-clip-text text-transparent bg-left bg-200%'>Contact Us</span>
+                    <h1 className='mt-6 text-center '>
+                        <GradientText size={"xl"} className='font-extrabold' >
+                            Contact Us
+                        </GradientText>
                     </h1>
 
                     <p className='mt-6 md:px-24 text-center text-[#708ab0] dark:text-on_dark_text_gray text-base sm:text-xl'>

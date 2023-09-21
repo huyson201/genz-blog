@@ -3,6 +3,8 @@ import { PaginateResponse, Post } from '@/types/type'
 import React from 'react'
 import BlogSection from './BlogSection'
 import Link from 'next/link'
+import { buttonVariants } from '../Button/Button'
+import { cn } from '@/utils'
 
 interface Props {
     postPromise: Promise<PaginateResponse<Post>>
@@ -21,7 +23,11 @@ const BlogSectionList = async ({ postPromise }: Props) => {
 
             {/* pagination */}
             <div className='mt-12 flex items-center justify-center'>
-                <Link href={"/blogs"} className='text-white rounded-md text-sm font-bold bg-primary-gradient bg-200% hover:bg-right transition-all duration-500 w-[60%] text-center py-2'>View more</Link>
+                <Link
+                    href={"/blogs"}
+                    className={cn(buttonVariants({ size: "sm", className: "w-full sm:w-[60%]" }))}>
+                    View more
+                </Link>
             </div>
         </>
     )

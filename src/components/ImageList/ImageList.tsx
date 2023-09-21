@@ -31,7 +31,7 @@ const ImageList = ({ showBlankSelect, onSelectImage }: Props) => {
     return (
         <div className='grid grid-cols-4 gap-3 py-4'>
             {showBlankSelect && (<div
-                className='font-bold text-sm cursor-pointer border-[#c2d4ee] border border-dashed
+                className='font-bold text-sm cursor-pointer border-on_light_border_2 border border-dashed
                                 text-black flex justify-center items-center min-h-[60px] dark:border-on_dark_border'
                 onClick={() => onSelectImage?.("")}>
                 Blank

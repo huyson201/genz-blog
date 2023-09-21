@@ -77,7 +77,7 @@ const UploadImage = ({ open, showBlankSelect, onRequestClose, onSelectImage }: P
                                 <div className='mt-6 text-right'>
                                     <button
                                         onClick={onRequestClose}
-                                        className='inline-block text-black border-[#c2d4ee] border px-2 py-1 text-sm 
+                                        className='inline-block text-black border-on_light_border_2 border px-2 py-1 text-sm 
                                                         hover:bg-blue hover:border-blue rounded hover:text-white transition-all'>
                                         Cancel
                                     </button>

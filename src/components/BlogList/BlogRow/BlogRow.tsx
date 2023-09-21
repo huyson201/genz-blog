@@ -15,7 +15,7 @@ interface Props {
 
 const BlogRow = ({ post }: Props) => {
     return (
-        <div className='flex flex-col md:flex-row py-6 gap-y-6 gap-x-6 border-b border-b-[#c2d4ee] dark:border-on_dark_border'>
+        <div className='flex flex-col md:flex-row py-6 gap-y-6 gap-x-6'>
             <div className='md:min-w-[170px]'>
                 <div className='flex items-center gap-4'>
                     <Image className='rounded-full w-12 h-12' src={(post.author as Auth).avatar_url} width={50} height={50} alt='author' />

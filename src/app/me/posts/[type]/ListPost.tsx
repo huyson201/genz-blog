@@ -23,7 +23,6 @@ const ListPost = ({ type, page, q }: Props) => {
     const { data, isLoading, mutate, error } = useSWR(!session ? null : ["me/posts", session.backendTokens.access_token, type, page, q],
         ([url, token, type, page, q]) => authService.getPosts(token, { page: page, display: type, q }))
 
-    console.log(data)
 
     if (isLoading) {
         return <div className='text-center text-xl'>Loading...</div>

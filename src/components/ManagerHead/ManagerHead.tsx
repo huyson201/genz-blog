@@ -7,6 +7,7 @@ import SidebarNavItem from '@/components/SidebarNav/SidebarNavItem'
 import { BiImage } from 'react-icons/bi'
 import { usePathname } from 'next/navigation'
 import { FaHome } from 'react-icons/fa'
+import SidebarOptions from '../SidebarNav/SidebarOptions'
 
 type Props = {}
 
@@ -68,13 +69,9 @@ const ManagerHead = (props: Props) => {
                         >
                             <Dialog.Panel className="relative bg-on_light_body_bg dark:bg-on_dark_body_bg flex w-full max-w-[256px] overflow-y-auto">
                                 <aside id="default-sidebar" className="w-full h-full" aria-label="Sidebar">
-                                    <div className="h-full px-3 py-4 overflow-y-auto border-[#c2d4ee]
+                                    <div className="h-full px-3 py-4 overflow-y-auto border-on_light_border_2
                                                       bg-on_light_card_bg dark:bg-on_dark_card_bg border dark:border-on_dark_border rounded">
-                                        <ul className="space-y-2 font-medium">
-                                            <SidebarNavItem href='/me' title='Home' icon={<FaHome />} />
-                                            <SidebarMenu />
-                                            <SidebarNavItem href='#' title='Pictures' icon={<BiImage />} />
-                                        </ul>
+                                        <SidebarOptions />
                                     </div>
                                 </aside>
                             </Dialog.Panel>

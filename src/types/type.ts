@@ -89,3 +89,14 @@ export interface ImageType {
   width: number;
   _id: string;
 }
+
+export interface ChangePasswordData {
+  current_password: string;
+  new_password: string;
+  confirm_new_password: string;
+}
+
+export interface UpdateProfileData {
+  avatar_url?: string;
+  name?: string;
+}

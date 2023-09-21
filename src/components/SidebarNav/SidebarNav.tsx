@@ -1,9 +1,7 @@
 
 import React from 'react'
-import { BiImage } from 'react-icons/bi'
-import SidebarNavItem from './SidebarNavItem'
-import SidebarMenu from './SidebarMenu'
-import { FaHome } from 'react-icons/fa'
+import SidebarOptions from './SidebarOptions'
+
 type Props = {}
 
 const SidebarNav = (props: Props) => {
@@ -12,11 +10,7 @@ const SidebarNav = (props: Props) => {
             <aside id="default-sidebar" className="w-full h-full" aria-label="Sidebar">
                 <div className="h-full px-3 py-4 overflow-y-auto shadow dark:shadow-on_dark_border/40
                  bg-on_light_card_bg dark:bg-on_dark_card_bg/20   rounded">
-                    <ul className="space-y-2 font-medium">
-                        <SidebarNavItem href='/me' title='Home' icon={<FaHome />} />
-                        <SidebarMenu />
-                        <SidebarNavItem href='/me/gallery' title='Pictures' icon={<BiImage />} />
-                    </ul>
+                    <SidebarOptions />
                 </div>
             </aside>
         </div>
@@ -24,3 +18,4 @@ const SidebarNav = (props: Props) => {
 }
 
 export default SidebarNav
+

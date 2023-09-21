@@ -2,6 +2,7 @@
 import BlogList from '@/components/BlogList/BlogList'
 import Breadcrumb from '@/components/Breadcrumb/Breadcrumb'
 import Wrapper from '@/components/Common/Wrapper/Wrapper'
+import GradientText from '@/components/GradientText/GradientText'
 import postService from '@/services/post.service'
 import React, { Suspense } from 'react'
 
@@ -17,10 +18,11 @@ const Blogs = async ({ searchParams: { page = 1 } }: Props) => {
         <section className='mb-24'>
             <Wrapper>
                 <div className='lg:px-24'>
-                    <div className='text-center space-y-4 py-6 border-b border-b-[#c2d4ee] dark:border-b-on_dark_border'>
-                        <h1 className='inline-block text-center mt-6 text-[30px] sm:text-[36px] md:text-[48px] lg:text-[64px] bg-primary-gradient text-transparent 
-                            bg-200% bg-clip-text font-extrabold '>
-                            Blogs
+                    <div className='space-y-4 py-6 border-b border-b-[#c2d4ee] dark:border-b-on_dark_border'>
+                        <h1 className='text-center mt-6'>
+                            <GradientText size={"xl"} className='font-extrabold' >
+                                Blogs
+                            </GradientText>
                         </h1>
                         <div className='flex justify-center'>
                             <Breadcrumb />

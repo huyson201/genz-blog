@@ -1,6 +1,7 @@
 
 import Breadcrumb from '@/components/Breadcrumb/Breadcrumb'
 import Wrapper from '@/components/Common/Wrapper/Wrapper'
+import GradientText from '@/components/GradientText/GradientText'
 import Pagination from '@/components/Pagination/Pagination'
 import tagService from '@/services/tag.service'
 import { HashTag, PaginateResponse } from '@/types/type'
@@ -19,10 +20,11 @@ const TagsPage = async ({ searchParams: { page = 1 } }: Props) => {
     return (
         <section className='mb-24'>
             <Wrapper>
-                <div className='lg:px-24 space-y-4 text-center'>
-                    <h1 className='leading-[1.3] inline-block text-center mt-12 text-[30px] sm:text-[36px] md:text-[48px] lg:text-[64px] bg-primary-gradient text-transparent 
-                                    bg-200% bg-clip-text font-extrabold'>
-                        Tags
+                <div className='lg:px-24 space-y-4 '>
+                    <h1 className=' text-center '>
+                        <GradientText size={"xl"} className='font-extrabold' >
+                            Tags
+                        </GradientText>
                     </h1>
                     <Suspense fallback={<div>Loading...</div>}>
                         <TagGrid dataPromise={data} />

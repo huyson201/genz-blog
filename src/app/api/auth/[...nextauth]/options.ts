@@ -5,6 +5,7 @@ import { Auth } from "@/types/type";
 import GoogleProvider from "next-auth/providers/google";
 import CustomError from "@/CustomError";
 
+let isRefreshToken: Promise<Response> | null = null;
 export const options: NextAuthOptions = {
   providers: [
     CredentialsProvider({
@@ -26,6 +27,7 @@ export const options: NextAuthOptions = {
         if (res.ok) {
           return data;
         }
+        console.log(data);
         throw new CustomError(res.status, data.message, data);
       },
     }),
@@ -38,7 +40,15 @@ export const options: NextAuthOptions = {
     strategy: "jwt",
   },
   callbacks: {
-    async jwt({ token, user, account }) {
+    async jwt({ token, user, account, trigger, session }) {
+      if (trigger === "update") {
+        console.log(trigger);
+        return {
+          backendTokens: session.backendTokens,
+          ...session.user,
+        };
+      }
+
       if (account && account.provider === "google") {
         const id_token = account.id_token;
         const res = await authService.googleLogin(id_token || "");
@@ -57,15 +67,21 @@ export const options: NextAuthOptions = {
       }
       if (new Date().getTime() < token.backendTokens.expiresIn) return token;
 
-      const res = await authService.refreshToken(
+      console.log("____refresh_____");
+      isRefreshToken ??= authService.refreshToken(
         token.backendTokens.refresh_token
       );
+      const res = await isRefreshToken;
       const data = await res.json();
       console.log(data);
-      return {
-        ...token,
-        backendTokens: data,
-      };
+      isRefreshToken = null;
+      if (res.ok) {
+        return {
+          ...token,
+          backendTokens: data,
+        };
+      }
+      return token;
     },
     async session({ session, token }) {
       const { backendTokens, ...user } = token;

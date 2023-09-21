@@ -5,12 +5,11 @@ import Image from 'next/image'
 import { twMerge } from 'tailwind-merge'
 
 type Props = {
-    isLast?: boolean
 }
 
-const LastCommentSection = ({ isLast }: Props) => {
+const LastCommentSection = ({ }: Props) => {
     return (
-        <div className={twMerge('pb-6 ', !isLast && 'mb-6 border-b border-[#c2d4ee] dark:border-b-on_dark_border')}>
+        <div className={twMerge('py-6')}>
             <p className='text-sm text-[#708ab0] dark:text-on_dark_text_gray mb-4 transition-colors'>
                 &#34;Gosh jaguar ostrich quail one excited dear hello and bound and the and bland moral misheard roadrunner flapped lynx far that and jeepers giggled far and far&#34;
             </p>

@@ -35,7 +35,7 @@ const BlogSection = ({ post }: Props) => {
                 {
                     post.hashtags.map(tag => (<Link
                         key={tag._id}
-                        href={`/tag/${tag.slug}`}
+                        href={`/tags/${tag.slug}`}
                         className="transition-colors mr-2 dark:bg-on_dark_bg_2 text-xs font-medium 
                                     inline-flex items-center px-2.5 py-1 rounded-lg dark:text-on_dark_text_gray
                                      text-on_light_text_gray hover:text-blue dark:hover:text-blue bg-white/60">

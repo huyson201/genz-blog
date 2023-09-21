@@ -2,10 +2,19 @@
 import Wrapper from '@/components/Common/Wrapper/Wrapper'
 import React from 'react'
 import Profile from './Profile'
+import { getServerSession } from 'next-auth'
+import { options } from '../api/auth/[...nextauth]/options'
+import { RequireAuthException } from '@/lib/exception'
+import authService from '@/services/auth.service'
 
 type Props = {}
 
-const page = (props: Props) => {
+const page = async (props: Props) => {
+    const session = await getServerSession(options)
+    if (!session || !session.backendTokens) throw new RequireAuthException()
+    const profile = await authService.getProfile(session.backendTokens.access_token)
+
+
     return (
         <Wrapper>
             <div className='py-12 lg:px-24'>
@@ -14,7 +23,7 @@ const page = (props: Props) => {
                     <div className='text-sm mt-3 dark:text-on_dark_text_gray text-on_light_text_gray'>
                         Manage your personal information.
                     </div>
-                    <Profile />
+                    <Profile key={(new Date().getTime()).toString()} data={profile} />
                 </div>
             </div>
         </Wrapper>

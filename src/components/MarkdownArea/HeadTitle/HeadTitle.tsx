@@ -1,7 +1,7 @@
 
 export const Head1 = ({ children }: { children: any }) => {
     return (
-        <h1 className=' text-4xl font-bold text-on_light_text_white dark:text-on_dark_text_white'>
+        <h1 className=' md:text-4xl xs:text-3xl text-2xl font-bold text-on_light_text_white dark:text-on_dark_text_white'>
             {children}
         </h1>
     )

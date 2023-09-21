@@ -8,6 +8,8 @@ import BlogSectionList from '@/components/BlogSection/BlogSectionList'
 import LastCommentSection from '@/components/LastCommentSection/LastCommentSection'
 import postService from '@/services/post.service'
 import { Suspense } from "react";
+import { Button } from '@/components/Button/Button'
+import GradientText from '@/components/GradientText/GradientText'
 
 export default function Home() {
   const posts = postService.getPosts({ page: 1 })
@@ -28,9 +30,9 @@ export default function Home() {
 
               <form className='subscribe-form'>
                 <input className='w-full text-sm outline-none placeholder-[#7f92b0] text-[#7f92b0] bg-transparent' type="email" placeholder='Type your email address' />
-                <button className='bg-primary-gradient bg-200% text-sm font-bold px-4 py-[10px] rounded-md text-white hover:bg-right transition-all'>
+                <Button size={"md"} >
                   Subscribe
-                </button>
+                </Button>
               </form>
 
               {/* social box */}
@@ -73,16 +75,20 @@ export default function Home() {
               {/* sidebar  */}
               <div className='md:w-1/3'>
                 <div className='dark:border-on_dark_border border-gray-300 border rounded-xl bg-on_light_card_bg dark:bg-on_dark_card_bg p-6 transition-colors'>
-                  <h2 className='text-xl gradient-text font-bold pb-[10px] relative
-                                 after:content-[""] after:absolute after:w-1/3 after:h-0.5 mb-10 after:bg-primary-gradient
+                  <h2 className='pb-[10px] relative after:content-[""] after:absolute after:w-1/3 after:h-0.5 mb-4 after:bg-primary-gradient
                                  after:bottom-0 after:left-0'>
-                    Last Comment
+                    <GradientText className='text-xl font-bold'>
+                      Last Comment
+                    </GradientText>
                   </h2>
-                  {
-                    Array(5).fill(0).map((_, index) => {
-                      return <LastCommentSection key={`cmt-${index}`} isLast={index === 4} />
-                    })
-                  }
+                  <div className='divide-y divide-[#c2d4ee] dark:divide-on_dark_border space-y-6'>
+                    {
+                      Array(5).fill(0).map((_, index) => {
+                        return <LastCommentSection key={`cmt-${index}`} />
+                      })
+                    }
+                  </div>
+
                 </div>
               </div>
             </div>

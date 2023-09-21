@@ -2,12 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-
-@layer componets{
-    .gradient-text{
-        @apply bg-gradient-to-r from-blue via-teal to-teal text-transparent bg-clip-text ;
-    }
+.gradient-text{
+    @apply bg-gradient-to-r from-blue via-teal to-teal text-transparent bg-clip-text ;
 }
+.primary-gradient-btn{
+    @apply bg-200% bg-primary-gradient;
+}
+
+.primary-text{
+    @apply bg-200% text-transparent bg-primary-gradient bg-clip-text;
+}
+
 body {
  @apply font-noto_sans;
 }
@@ -162,6 +167,38 @@ body {
     @apply bg-on_dark_card_bg text-white border-on_dark_border;
 }
 
+.blog-content iframe,
+.editor-preview iframe{
+    @apply w-full aspect-video;
+}
+
+.blog-content ul,
+.editor-preview ul,
+.blog-content ol,
+.editor-preview ol{
+    @apply list-outside pl-4;
+}
+
+.blog-content ul ul,
+.editor-preview ul ul,
+.blog-content ol ol,
+.editor-preview ol ol{
+    @apply list-outside pl-10;
+}
+
+
+.blog-content ul,
+.editor-preview ul{
+    @apply list-disc;
+}
+.blog-content ul ul,
+.editor-preview ul ul{
+    @apply list-[circle]
+}
+.blog-content ol,
+.editor-preview ol{
+    @apply list-decimal;
+}
 .editor-custom .editor-preview pre{
     @apply mb-0 bg-transparent;
 }
@@ -173,4 +210,12 @@ body {
 
 .highlight-wrapper pre::-webkit-scrollbar-thumb{
     @apply rounded-[50px] bg-gray-500;
+}
+
+/* comment */
+.comment-box .comment-box{
+    @apply mt-6 ml-10 md:ml-0;
+}
+.comment-box .comment-box .comment-head{
+   @apply md:ml-10;
 }

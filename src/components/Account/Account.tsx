@@ -7,11 +7,14 @@ import useCallbackUrl from '@/hooks/useCallbackUrl'
 import { BsPencilSquare } from 'react-icons/bs'
 import ThemeModeToggle from '../ThemeModeToggle/ThemeModeToggle'
 import { Role } from '@/types/type'
+import { cn } from '@/utils'
+import { buttonVariants } from '../Button/Button'
+import { RotatingLines } from 'react-loader-spinner'
 
 type Props = {}
 
 const Account = (props: Props) => {
-    const { data: session } = useSession()
+    const { data: session, status } = useSession()
     const callbackUrl = useCallbackUrl()
     return (
         <>
@@ -22,15 +25,23 @@ const Account = (props: Props) => {
             )}
             <ThemeModeToggle />
             {
-                session && session.user ? <UserMenu auth={session.user} tokens={session.backendTokens} /> : (
+                status === "authenticated" && <UserMenu auth={session.user} tokens={session.backendTokens} />
+            }
+            {
+                status === "unauthenticated" && (
                     <Link href={`/login${callbackUrl !== null ? `?callbackUrl=${callbackUrl}` : ""}`}
-                        className=' px-4 py-[10px] bg-gradient-to-r from-blue via-teal to-blue 
-                                    bg-200% rounded-md text-white text-center font-bold text-sm transition-all duration-500
-                                    hover:bg-right hidden sm:inline-block'>
+                        className={cn(buttonVariants({ className: "hidden sm:inline-block", size: "xs" }))}>
                         Sign in
                     </Link>
                 )
             }
+            <RotatingLines
+                strokeColor="grey"
+                strokeWidth="5"
+                animationDuration="0.75"
+                width="30"
+                visible={status === "loading"}
+            />
         </>
     )
 }

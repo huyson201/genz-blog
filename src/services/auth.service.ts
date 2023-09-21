@@ -1,3 +1,4 @@
+import { Auth, ChangePasswordData, UpdateProfileData } from "./../types/type";
 import { queryStringify } from "./../utils/queryStringify";
 import {
   ImageType,
@@ -164,6 +165,57 @@ const authService = {
       method: "Delete",
     });
 
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new CustomError(res.status, data.message, data);
+    }
+    return data;
+  },
+  changePassword: async (token: string, dataChange: ChangePasswordData) => {
+    const res = await fetch(`${apiConfig.baseUrl}/auth/change-password`, {
+      headers: {
+        ...apiConfig.headers,
+        authorization: `Bearer ${token}`,
+      },
+      method: "PATCH",
+      body: JSON.stringify(dataChange),
+    });
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new CustomError(res.status, data.message, data);
+    }
+    return data;
+  },
+  updateProfile: async (
+    token: string,
+    dataChange: UpdateProfileData
+  ): Promise<Auth> => {
+    const res = await fetch(`${apiConfig.baseUrl}/auth/profile`, {
+      headers: {
+        ...apiConfig.headers,
+        authorization: `Bearer ${token}`,
+      },
+      method: "PATCH",
+      body: JSON.stringify(dataChange),
+    });
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new CustomError(res.status, data.message, data);
+    }
+    return data;
+  },
+  getProfile: async (token: string): Promise<Auth> => {
+    const res = await fetch(`${apiConfig.baseUrl}/auth/profile`, {
+      headers: {
+        ...apiConfig.headers,
+        authorization: `Bearer ${token}`,
+      },
+      method: "Get",
+      next: { revalidate: 0 },
+    });
     const data = await res.json();
 
     if (!res.ok) {

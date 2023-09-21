@@ -4,7 +4,6 @@ import Link from 'next/link'
 import React from 'react'
 import InputField from '@/components/Input/InputField'
 import PasswordInput from '@/components/Input/PasswordInput'
-import GradientButton from '@/components/Button/GradientButton'
 import LoginRegisterWrapper from '@/components/LoginRegisterWrapper/LoginRegisterWrapper'
 import GoogleButton from '@/components/Button/GoogleButton'
 import * as yup from 'yup'
@@ -16,6 +15,9 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { toast } from 'react-hot-toast'
 import CustomError from '@/CustomError'
 import { signIn } from 'next-auth/react'
+import { Button } from '@/components/Button/Button'
+import { ColorRing } from 'react-loader-spinner'
+import GradientText from '@/components/GradientText/GradientText'
 const validateSchema = yup.object({
     name: yup.string().required(),
     email: yup.string().email().required(),
@@ -55,11 +57,13 @@ const Register = (props: Props) => {
 
     return (
         <LoginRegisterWrapper>
-            <h1 className="sm:text-[35px] text-[25px] md:text-[45px] font-bold text-center leading-tight tracking-tight gradient-text mb-6 md:mb-12">
-                Register
+            <h1 className="text-center mb-6 md:mb-12">
+                <GradientText size={"sm"} className='font-bold leading-tight tracking-tight'>
+                    Register
+                </GradientText>
             </h1>
             <div className='max-w-[400px] w-full mx-auto relative'>
-                <div className="w-full md:space-y-6 sm:p-8 p-8  rounded-xl  border md:mt-0 sm:max-w-md bg-on_light_card_bg border-[#c2d4ee] dark:bg-on_dark_card_bg dark:border-on_dark_border">
+                <div className="w-full md:space-y-6 sm:p-8 p-8  rounded-xl  border md:mt-0 sm:max-w-md bg-on_light_card_bg border-on_light_border_2 dark:bg-on_dark_card_bg dark:border-on_dark_border">
                     {(errors.name || errors.confirm_password || errors.email || errors.password || error !== '') && <ErrorFeedback message={errors.email?.message || errors.password?.message || errors.name?.message || errors.confirm_password?.message || error} />}
 
                     <form className="space-y-4 md:space-y-6" action="#" onSubmit={submit}>
@@ -73,10 +77,23 @@ const Register = (props: Props) => {
                             <Link href="#" className="text-sm text-on_light_text_white text-primary-600 hover:underline dark:text-on_dark_text_white">Forgot password?</Link>
                         </div>
 
-                        <GradientButton loading={isMutating} disabled={isMutating} type='submit' className='w-full dark:text-on_dark_card_bg dark:hover:text-white hover:text-white  outline-none rounded-lg  py-2.5 text-sm font-bold' title='Create an account' />
+                        <Button
+                            className='w-full flex items-center justify-center rounded-lg h-10'
+                            disable={isMutating ? "disabled" : "none"}
+                            disabled={isMutating}
+                            type='submit'>
+                            {
+                                loading ? <ColorRing
+                                    height="30"
+                                    width="30"
+                                    colors={['#fff', '#fff', '#fff', '#fff', '#fff']}
+                                /> : "Create an account"
+                            }
+                        </Button>
+
                         <p className="text-sm  text-on_dark_text_gray">
                             Already have an account? <Link href="/login" >
-                                <span className=" gradient-text">Sign in</span>
+                                <GradientText>Sign in</GradientText>
                             </Link>
 
                         </p>
