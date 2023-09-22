@@ -71,10 +71,9 @@ body {
 }
 
 .social-links{
-    @apply w-[50px] h-[50px] text-white bg-[#708ab0] dark:bg-on_dark_bg_2  
-    flex items-center justify-center text-2xl rounded-full
-     transition-all cursor-pointer hover:bg-gradient-to-r hover:from-blue hover:via-teal
-     hover:to-blue hover:bg-200% hover:via-50% hover:-translate-y-1 duration-300;
+    @apply text-white bg-[#708ab0] dark:bg-on_dark_bg_2  
+    flex items-center justify-center  rounded-full
+     transition-all cursor-pointer hover:bg-primary-gradient hover:bg-200% hover:via-50% hover:-translate-y-1 duration-300;
 
 }
 

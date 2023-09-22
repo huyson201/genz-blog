@@ -13,6 +13,7 @@ import { signOut, useSession } from 'next-auth/react';
 import { RotatingLines } from 'react-loader-spinner';
 import Image from 'next/image';
 import { Role } from '@/types/type';
+import useCallbackUrl from '@/hooks/useCallbackUrl';
 
 interface Props {
     open?: boolean
@@ -21,6 +22,7 @@ interface Props {
 
 const MobileNavbar = ({ open, onRequestClose }: Props) => {
     const { data: session, status } = useSession()
+    const callbackUrl = useCallbackUrl()
     return (
         <Transition.Root show={open} as={Fragment}>
             <Dialog as="div" className="relative z-[6] lg:hidden" onClose={onRequestClose}>
@@ -88,7 +90,7 @@ const MobileNavbar = ({ open, onRequestClose }: Props) => {
                                     </div>
                                 }
                                 {
-                                    status === "unauthenticated" && (<Link href={"/login"}
+                                    status === "unauthenticated" && (<Link href={{ pathname: "/login", query: { callbackUrl } }}
                                         className={cn(buttonVariants({ className: "inline-block", size: "md" }))} >
                                         Sign in
                                     </Link>)

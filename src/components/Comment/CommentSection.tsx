@@ -38,6 +38,7 @@ const CommentSection = ({ postId }: Props) => {
             <CommentList comments={data} />
             {hasMore && <div className='mt-12 flex justify-center'>
                 <Button
+                    className='w-[60%] mb-6'
                     size={'sm'}
                     onClick={() => {
                         if (hasMore) {

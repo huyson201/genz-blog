@@ -10,6 +10,7 @@ import postService from '@/services/post.service'
 import { Suspense } from "react";
 import { Button } from '@/components/Button/Button'
 import GradientText from '@/components/GradientText/GradientText'
+import SocialCircle from '@/components/SocialCircle/SocialCircle'
 
 export default function Home() {
   const posts = postService.getPosts({ page: 1 })
@@ -18,7 +19,7 @@ export default function Home() {
       {/* home cover */}
       <section className='home-cover'>
         <Wrapper className='relative z-[2]'>
-          <div className='flex py-24 xl:px-16 justify-between'>
+          <div className='flex py-24 xl:px-16'>
             <div className='w-full lg:w-2/4'>
               <span className='dark:text-on_dark_text_gray font-bold text-[#7e9cc7] text-sm transition-colors'>Hello Everyone!</span>
               <h1 className='text-on_light_text_white dark:text-white text-[29px] xs:text-[34px] sm:text-[44px] md:text-[64px] font-extrabold transition-colors'>I&lsquo;m</h1>
@@ -37,15 +38,16 @@ export default function Home() {
 
               {/* social box */}
               <div className='flex items-center gap-4 mt-8'>
-                <Link href={"#"} className='social-links'>
+                <SocialCircle href={"#"} size={"sm"}>
                   <FaFacebookF />
-                </Link>
-                <Link href={"#"} className='social-links'>
+                </SocialCircle>
+                <SocialCircle href={"#"} size={"sm"}>
                   <FaInstagram />
-                </Link>
-                <Link href={"#"} className='social-links'>
+                </SocialCircle>
+                <SocialCircle href={"#"} size={"sm"}>
                   <FaTwitter />
-                </Link>
+                </SocialCircle>
+
               </div>
             </div>
 
