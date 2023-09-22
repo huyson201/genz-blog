@@ -15,6 +15,7 @@ import { calcBlogReadingTime, formatDate } from '@/utils'
 import MarkdownArea from '@/components/MarkdownArea/MarkdownArea'
 import CommentInput from '@/components/Input/CommentInput'
 import CommentList from '@/components/Comment/CommentList'
+import CommentSection from '@/components/Comment/CommentSection'
 interface Props {
     params: {
         id: string
@@ -62,10 +63,7 @@ const BlogDetail = async ({ params }: Props) => {
                                             {post.content}
                                         </MarkdownArea>
                                     </div>
-                                    <h4 className='text-3xl text-[#7f92b0] font-bold mt-6 dark:text-[#b8cdeb]'>Comments</h4>
-
-                                    <CommentList />
-                                    <CommentInput />
+                                    <CommentSection postId={postId} />
                                 </div>
                                 <div className='lg:w-1/4 lg:px-3 mt-12 lg:mt-0'>
                                     <div className='pl-10 border-l border-l-[#c2d4ee] dark:border-l-on_dark_border flex py-8 items-center gap-3'>

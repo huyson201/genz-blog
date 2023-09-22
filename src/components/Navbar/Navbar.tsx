@@ -38,7 +38,6 @@ const Navbar = ({ onRequestOpenNavMobile }: Props) => {
     const navbarRef = React.useRef<HTMLDivElement | null>(null)
 
     useEffect(() => {
-
         const stickyEffect = () => {
             if (!navbarRef.current) return
             if (window.scrollY > 100) {

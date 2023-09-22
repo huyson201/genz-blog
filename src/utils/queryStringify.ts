@@ -1,4 +1,5 @@
 export const queryStringify = (data: Record<string, any>) => {
+  // delete undefine value
   Object.keys(data).forEach((key) => {
     if (data[key] === undefined || data[key] === null) {
       delete data[key];

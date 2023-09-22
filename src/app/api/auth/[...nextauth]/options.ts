@@ -42,14 +42,13 @@ export const options: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user, account, trigger, session }) {
       if (trigger === "update") {
-        console.log(trigger);
         return {
           backendTokens: session.backendTokens,
           ...session.user,
         };
       }
 
-      if (account && account.provider === "google") {
+      if (user && account && account.provider === "google") {
         const id_token = account.id_token;
         const res = await authService.googleLogin(id_token || "");
         const data = await res.json();
@@ -65,28 +64,40 @@ export const options: NextAuthOptions = {
           ...user,
         };
       }
-      if (new Date().getTime() < token.backendTokens.expiresIn) return token;
+      console.log(new Date().getTime());
+      console.log(token.backendTokens.expiresIn);
 
+      if (new Date().getTime() < token.backendTokens.expiresIn) return token;
       console.log("____refresh_____");
-      isRefreshToken ??= authService.refreshToken(
-        token.backendTokens.refresh_token
-      );
-      const res = await isRefreshToken;
-      const data = await res.json();
-      console.log(data);
-      isRefreshToken = null;
-      if (res.ok) {
-        return {
-          ...token,
-          backendTokens: data,
-        };
+
+      try {
+        const { error, data } = await authService.refreshToken(
+          token.backendTokens.refresh_token
+        );
+
+        console.log(data);
+        console.log(error);
+
+        if (data) {
+          token.backendTokens = data;
+          return token;
+        }
+
+        token.error = error;
+        return token;
+      } catch (error) {
+        throw error;
       }
-      return token;
     },
     async session({ session, token }) {
-      const { backendTokens, ...user } = token;
+      const { backendTokens, error, ...user } = token;
+      if (error) {
+        session.error = String(error) || undefined;
+        return session;
+      }
       session.user = user as Auth;
       session.backendTokens = backendTokens;
+      session.error = undefined;
       return session;
     },
   },

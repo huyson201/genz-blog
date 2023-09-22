@@ -38,14 +38,23 @@ const authService = {
       );
     });
   },
-  refreshToken: (refresh_token: string) => {
-    return fetch(`${apiConfig.baseUrl}/auth/refresh-token`, {
-      headers: {
-        ...apiConfig.headers,
-      },
-      method: "POST",
-      body: JSON.stringify({ refresh_token }),
-    });
+  refreshToken: async (refresh_token: string) => {
+    try {
+      const res = await fetch(`${apiConfig.baseUrl}/auth/refresh-token`, {
+        headers: {
+          ...apiConfig.headers,
+        },
+        method: "POST",
+        body: JSON.stringify({ refresh_token }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        return { error: "RefreshAccessTokenError" };
+      }
+      return { data };
+    } catch (error) {
+      throw error;
+    }
   },
   logout: (token: string) => {
     return fetch(apiConfig.baseUrl + "/auth/logout", {

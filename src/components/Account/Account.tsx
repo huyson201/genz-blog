@@ -1,6 +1,6 @@
 
-import React from 'react'
-import { useSession } from "next-auth/react"
+import React, { useEffect } from 'react'
+import { signIn, signOut, useSession } from "next-auth/react"
 import UserMenu from '../UserMenu/UserMenu'
 import Link from 'next/link'
 import useCallbackUrl from '@/hooks/useCallbackUrl'
@@ -16,6 +16,11 @@ type Props = {}
 const Account = (props: Props) => {
     const { data: session, status } = useSession()
     const callbackUrl = useCallbackUrl()
+    useEffect(() => {
+        if (session?.error === "RefreshAccessTokenError") {
+            signOut()
+        }
+    }, [session?.error])
     return (
         <>
             {session && session.user.role === Role.Admin && (

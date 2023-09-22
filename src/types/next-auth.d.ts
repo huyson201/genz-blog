@@ -6,6 +6,7 @@ declare module "next-auth" {
   interface Session {
     user: Auth;
     backendTokens: BackendToken;
+    error?: string;
   }
 }
 

@@ -100,3 +100,23 @@ export interface UpdateProfileData {
   avatar_url?: string;
   name?: string;
 }
+
+export interface Comment {
+  _id: string;
+
+  post: string;
+
+  author: Auth;
+
+  parent: string;
+
+  slug: string;
+
+  content: string;
+
+  replyCount: number;
+
+  createdAt: string;
+
+  updatedAt: string;
+}

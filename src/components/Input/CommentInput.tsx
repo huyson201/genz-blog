@@ -1,24 +1,44 @@
 "use client"
-import React from 'react'
+import React, { FormEvent } from 'react'
 import { Button } from '../Button/Button'
 
-type Props = {}
+interface Props {
+    onSubmit?: (value: string) => void,
+    showCancelButton?: boolean,
+    onRequestCancel?: () => void
+}
 
-const CommentInput = (props: Props) => {
+const CommentInput = ({ onSubmit, onRequestCancel, showCancelButton }: Props) => {
+    const ref = React.useRef<HTMLTextAreaElement>(null)
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        if (!ref.current) return
+        onSubmit?.(ref.current.value)
+        ref.current.value = ""
+    }
     return (
-        <form action={"#"}>
-            <h4 className='text-3xl text-[#7f92b0] font-bold mt-6 dark:text-[#b8cdeb]'>Leave a comment</h4>
+        <form action={"#"} onSubmit={handleSubmit}>
             <textarea
+                ref={ref}
                 className='w-full mt-6 rounded-xl outline-none border border-on_light_border_2 bg-on_light_card_bg 
                         dark:bg-on_dark_card_bg text-base dark:border-on_dark_border resize-y p-5 text-[#0f172a] dark:text-[#7f92b0]
                         dark:placeholder-on_dark_placeholder placeholder-on_light_placeholder '
-                rows={6}
+                rows={3}
                 placeholder='Write a comment'>
 
             </textarea>
-            <Button className='flex ml-auto mt-1' size={'sm'}>
-                Post Comment
-            </Button>
+            <div className='flex items-center justify-end gap-x-4 mt-2'>
+                {
+                    showCancelButton && <Button onClick={onRequestCancel} variant={'custom'} size={'sm'}
+                        className='border border-on_light_border dark:border-on_dark_border hover:bg-black/40'>
+                        Cancel
+                    </Button>
+                }
+                <Button className='flex' size={'sm'}>
+                    Post Comment
+                </Button>
+            </div>
+
         </form>
     )
 }

@@ -6,7 +6,8 @@ import { cn } from '@/utils'
 const buttonVariants = cva("transition-all outline-none text-center ", {
     variants: {
         variant: {
-            primary: 'primary-gradient-btn font-bold text-white hover:bg-right duration-500'
+            primary: 'primary-gradient-btn font-bold text-white hover:bg-right duration-500',
+            custom: ''
         },
         size: {
             default: "px-4 py-1 rounded text-sm",
