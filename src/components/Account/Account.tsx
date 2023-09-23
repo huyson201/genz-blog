@@ -16,7 +16,6 @@ type Props = {}
 const Account = (props: Props) => {
     const { data: session, status } = useSession()
     const callbackUrl = useCallbackUrl()
-    console.log(session)
 
     useEffect(() => {
         if (session?.error === "RefreshAccessTokenError") {

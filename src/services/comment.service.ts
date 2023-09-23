@@ -88,6 +88,49 @@ const commentService = {
 
     throw new CustomError(res.status, data.message, data);
   },
+  updateComment: async (
+    token: string,
+    commentId: string,
+    content: string
+  ): Promise<Comment> => {
+    const url = `${apiConfig.baseUrl}/comments/${commentId}`;
+    try {
+      const res = await fetch(url, {
+        headers: {
+          ...apiConfig.headers,
+          authorization: `Bearer ${token}`,
+        },
+        method: "PATCH",
+        body: JSON.stringify({ content }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new CustomError(res.status, data.message, data);
+      }
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  deleteComment: async (token: string, commentId: string) => {
+    const url = `${apiConfig.baseUrl}/comments/${commentId}`;
+    try {
+      const res = await fetch(url, {
+        headers: {
+          ...apiConfig.headers,
+          authorization: `Bearer ${token}`,
+        },
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new CustomError(res.status, data.message, data);
+      }
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 export default commentService;

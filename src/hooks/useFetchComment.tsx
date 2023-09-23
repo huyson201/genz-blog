@@ -5,23 +5,11 @@ import { useEffect, useState } from 'react'
 
 
 function useFetchComment(postId: string, page: number) {
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [data, setData] = useState<Comment[]>([])
     const [error, setError] = useState<any>([])
-    const [hasMore, setHasMore] = useState(true)
+    const [hasMore, setHasMore] = useState(false)
 
-    // const removeDuplicate = (data: Comment[]) => {
-    //     const seen = new Set();
-    //     return data.filter(value => {
-    //         const id = value._id
-    //         if (!seen.has(id)) {
-    //             seen.add(id)
-    //             return true
-    //         }
-
-    //         return false
-    //     })
-    // }
     useEffect(() => {
         setLoading(true)
         const abortController = new AbortController()
@@ -29,12 +17,14 @@ function useFetchComment(postId: string, page: number) {
             .then(res => {
                 setData((prevData) => removeDuplicateObj([...prevData, ...res.docs]))
                 setHasMore(res.nextPage !== null)
+                setLoading(false)
             })
             .catch(error => {
                 if (error instanceof DOMException) return
                 setError(error.message)
+                setLoading(false)
             })
-            .finally(() => setLoading(false))
+
 
         return () => abortController.abort()
 

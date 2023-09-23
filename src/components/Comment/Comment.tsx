@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Image from 'next/image'
 import { Comment } from '@/types/type'
 import { formatDate } from '@/utils'
@@ -10,18 +10,24 @@ import commentService from '@/services/comment.service'
 import { removeDuplicateObj } from '@/utils/removeDuplicateObj'
 import { useComment } from '@/contexts/CommentContext'
 import { MdRestoreFromTrash } from 'react-icons/md'
+import toast from 'react-hot-toast'
+import CommentSkeleton from '../Skeleton/CommentSkeleton'
 
 type Props = {
     comment: Comment,
-    canReply?: boolean
+    canReply?: boolean,
+    onUpdate?: (_id: string, content: string) => void,
+    onDelete?: (_id: string) => void
 }
 
-const Comment = ({ comment, canReply }: Props) => {
+const Comment = ({ comment, canReply, onUpdate, onDelete }: Props) => {
     const [showReply, setShowReply] = useState(false)
+    const [loadReply, setLoadReply] = useState(false)
     const [replyComment, setReplyComment] = useState<Comment[]>([])
     const { data: session } = useSession()
     const [errorReply, setErrorReply] = useState("")
     const commentState = useComment()
+    const textareaRef = useRef<HTMLTextAreaElement>(null)
 
 
     const handleSubmit = async (value: string) => {
@@ -37,14 +43,60 @@ const Comment = ({ comment, canReply }: Props) => {
         commentState?.setReply(null)
     }
 
+
     const handleClickShowReply = async () => {
         if (showReply) return
+        setLoadReply(true)
         const res = await commentService.getReplyComments(comment.post, comment._id)
         setReplyComment(prev => removeDuplicateObj([...res]).filter(value => value.parent !== ""))
+        setLoadReply(false)
         if (!showReply) {
             setShowReply(true)
         }
     }
+
+    const handleUpdate = () => {
+        if (!textareaRef.current || textareaRef.current.value === "") return
+        onUpdate?.(comment._id, textareaRef.current.value)
+        commentState?.setUpdate(null)
+
+    }
+    const handleUpdateChild = async (_id: string, content: string) => {
+        if (!session) return
+        const promiseUpdate = commentService.updateComment(session?.backendTokens.access_token, _id, content)
+        try {
+            await toast.promise(promiseUpdate, {
+                error: "Update fail!",
+                success: "Comment updating!",
+                loading: "Successfully update comment!"
+            })
+            const updatedCmtIndex = replyComment.findIndex(comment => comment._id === _id)
+            const cloneData = [...replyComment]
+            cloneData[updatedCmtIndex].content = content
+            console.log("clone data")
+            console.log(cloneData)
+            setReplyComment([...cloneData])
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const deleteCommentChild = async (_id: string) => {
+        if (!session) return
+        const promiseUpdate = commentService.deleteComment(session?.backendTokens.access_token, _id)
+        try {
+            await toast.promise(promiseUpdate, {
+                error: "Delete comment fail!",
+                success: "Comment deleting!",
+                loading: "Successfully delete comment!"
+            })
+            const cloneData = replyComment.filter(comment => comment._id !== _id)
+            setReplyComment(cloneData)
+        } catch (error) {
+            throw error
+        }
+    }
+
     return (
         <div className='comment-box '>
             <div className='flex-col gap-y-4 md:flex-row flex justify-between items-start'>
@@ -66,7 +118,7 @@ const Comment = ({ comment, canReply }: Props) => {
                         {
                             commentState?.updateId === comment._id ? (
                                 <>
-                                    <textarea className='w-full bg-transparent resize-y outline-none border-none' autoFocus defaultValue={comment.content} >
+                                    <textarea className='w-full bg-transparent resize-y outline-none border-none' ref={textareaRef} autoFocus defaultValue={comment.content} >
                                     </textarea>
                                     <div className='space-x-3 flex justify-end'>
                                         <button
@@ -75,6 +127,7 @@ const Comment = ({ comment, canReply }: Props) => {
                                             Cancel
                                         </button>
                                         <button
+                                            onClick={handleUpdate}
                                             className='text-sm text-[#c2d4ee] dark:text-[#94a9c9] hover:text-blue dark:hover:text-blue'>
                                             Save
                                         </button>
@@ -102,6 +155,7 @@ const Comment = ({ comment, canReply }: Props) => {
                                         }
                                         {
                                             comment.author._id === session?.user._id && <button
+                                                onClick={() => onDelete?.(comment._id)}
                                                 className='text-xs flex items-center  text-[#c2d4ee] dark:text-[#94a9c9] hover:text-blue dark:hover:text-blue'>
                                                 <MdRestoreFromTrash className='mr-0.5 text-sm inline-block' />
                                                 Delete
@@ -125,7 +179,10 @@ const Comment = ({ comment, canReply }: Props) => {
                 </div>
             </div>
             {
-                replyComment.length > 0 && replyComment.map(comment => <Comment comment={comment} key={comment._id} />)
+                loadReply && Array(4).fill(1).map((_, index) => <CommentSkeleton key={index} />)
+            }
+            {
+                replyComment.length > 0 && replyComment.map(comment => <Comment onUpdate={handleUpdateChild} onDelete={deleteCommentChild} comment={comment} key={comment._id} />)
             }
 
             {
@@ -137,5 +194,7 @@ const Comment = ({ comment, canReply }: Props) => {
         </div>
     )
 }
+
+
 
 export default Comment
