@@ -1,4 +1,4 @@
-
+"use client"
 import React, { useEffect } from 'react'
 import { signIn, signOut, useSession } from "next-auth/react"
 import UserMenu from '../UserMenu/UserMenu'
@@ -16,7 +16,10 @@ type Props = {}
 const Account = (props: Props) => {
     const { data: session, status } = useSession()
     const callbackUrl = useCallbackUrl()
+    console.log(session)
+
     useEffect(() => {
+
         if (session?.error === "RefreshAccessTokenError") {
             signOut()
         }
@@ -40,13 +43,15 @@ const Account = (props: Props) => {
                     </Link>
                 )
             }
-            <RotatingLines
-                strokeColor="grey"
-                strokeWidth="5"
-                animationDuration="0.75"
-                width="30"
-                visible={status === "loading"}
-            />
+            <span className='hidden md:inline-block'>
+                <RotatingLines
+                    strokeColor="grey"
+                    strokeWidth="5"
+                    animationDuration="0.75"
+                    width="30"
+                    visible={status === "loading"}
+                />
+            </span>
         </>
     )
 }

@@ -5,7 +5,7 @@ import { Auth } from "@/types/type";
 import GoogleProvider from "next-auth/providers/google";
 import CustomError from "@/CustomError";
 
-let isRefreshToken: Promise<
+let isRefresh: Promise<
   | {
       error: string;
       data?: undefined;
@@ -15,7 +15,6 @@ let isRefreshToken: Promise<
       error?: undefined;
     }
 > | null = null;
-
 export const options: NextAuthOptions = {
   providers: [
     CredentialsProvider({
@@ -51,13 +50,7 @@ export const options: NextAuthOptions = {
   },
   callbacks: {
     async jwt({ token, user, account, trigger, session }) {
-      console.log(trigger + "_____trigger");
       if (trigger === "update" && session.user) {
-        console.log("update");
-        console.log("-----token---------");
-        console.log(token);
-        console.log("-----user-----");
-        console.log(user);
         token = {
           ...session.user,
           backendTokens: token.backendTokens,
@@ -74,7 +67,6 @@ export const options: NextAuthOptions = {
           ...data,
         };
       }
-
       if (user) {
         return {
           ...token,
@@ -84,38 +76,37 @@ export const options: NextAuthOptions = {
 
       if (new Date().getTime() < token.backendTokens.expiresIn) return token;
 
-      console.log(new Date().getTime());
-      console.log(token.backendTokens.expiresIn);
-
-      console.log("____refresh_____");
-
       try {
-        isRefreshToken ??= authService.refreshToken(
+        isRefresh ??= authService.refreshToken(
           token.backendTokens.refresh_token
         );
 
-        const { data, error } = await isRefreshToken;
+        const { data, error } = await isRefresh;
 
         if (data) {
-          token.backendTokens = data;
-          return token;
+          isRefresh = null;
+          return {
+            ...token,
+            backendTokens: { ...data },
+          };
         }
-
+        console.log(error);
         token.error = error;
+        isRefresh = null;
         return token;
       } catch (error) {
         throw error;
       }
     },
+
     async session({ session, token }) {
-      const { backendTokens, error, ...user } = token;
-      if (error) {
+      if (token) {
+        const { backendTokens, error, ...user } = token;
         session.error = String(error) || undefined;
-        return session;
+        session.user = user as Auth;
+        session.backendTokens = backendTokens;
       }
-      session.user = user as Auth;
-      session.backendTokens = backendTokens;
-      session.error = undefined;
+
       return session;
     },
   },

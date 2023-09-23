@@ -48,9 +48,14 @@ const authService = {
         body: JSON.stringify({ refresh_token }),
       });
       const data = await res.json();
+
+      console.log("____data___");
+      console.log(data);
+
       if (!res.ok) {
         return { error: "RefreshAccessTokenError" };
       }
+
       return { data };
     } catch (error) {
       throw error;
