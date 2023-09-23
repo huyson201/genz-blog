@@ -28,6 +28,7 @@ const ThemeModeToggle = (props: Props) => {
 
     return (
         <Switch
+            title='Theme Mode'
             checked={theme === 'light'}
             onChange={() => theme === "dark" ? setTheme("light") : setTheme("dark")}
             className={`${theme === 'light' ? 'bg-on_dark_body_bg' : 'bg-[#7f92b0]'

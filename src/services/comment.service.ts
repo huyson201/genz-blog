@@ -52,7 +52,6 @@ const commentService = {
 
     throw new CustomError(res.status, data.message, data);
   },
-
   getReplyComments: async (postId: string, parent: string) => {
     const queryParam = queryStringify({ parent });
     const fetchUrl = `${apiConfig.baseUrl}/posts/${postId}/comments?${queryParam}`;
@@ -60,6 +59,25 @@ const commentService = {
       method: "Get",
       headers: {
         ...apiConfig.headers,
+      },
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      return data as Comment[];
+    }
+
+    throw new CustomError(res.status, data.message, data);
+  },
+  getLastComments: async () => {
+    const fetchUrl = `${apiConfig.baseUrl}/comments/last`;
+    const res = await fetch(fetchUrl, {
+      method: "Get",
+      headers: {
+        ...apiConfig.headers,
+      },
+      next: {
+        revalidate: 60 * 5,
       },
     });
 

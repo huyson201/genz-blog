@@ -1,16 +1,19 @@
 
 import React from 'react'
 import LastCommentSection from './LastCommentSection'
-import LastCommentSkeleton from '../Skeleton/LastCommentSkeleton'
+import { Comment } from '@/types/type'
 
-type Props = {}
+type Props = {
+    data: Promise<Comment[]>
+}
 
-const LastCommentList = (props: Props) => {
+const LastCommentList = async ({ data }: Props) => {
+    const comment = await data
     return (
         <div className='divide-y divide-[#c2d4ee] dark:divide-on_dark_border space-y-6'>
             {
-                Array(5).fill(0).map((_, index) => {
-                    return <LastCommentSection key={`cmt-${index}`} />
+                comment.map((cmt, index) => {
+                    return <LastCommentSection data={cmt} key={`cmt-${cmt._id}`} />
                 })
             }
         </div>

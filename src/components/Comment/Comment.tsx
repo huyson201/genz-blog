@@ -51,7 +51,10 @@ const Comment = ({ comment, canReply }: Props) => {
                 <div className='flex items-center gap-x-2 md:flex-1 comment-head'>
                     <Image src={comment.author.avatar_url} alt='avatar' width={40} height={40} className='rounded-full' />
                     <div>
-                        <div className='font-bold text-[#4e658a] dark:text-[#66768f]'>{comment.author.name}</div>
+                        <div className='font-bold text-[#4e658a] dark:text-[#66768f]'>
+                            {comment.author.name}
+                            {comment.author._id === session?.user._id && <span className='inline-block ml-1 font-normal'>(@you)</span>}
+                        </div>
                         <div className='text-[#4e658a] dark:text-[#66768f] text-sm font-normal'>{formatDate(comment.createdAt, "MMMM D, YYYY")}</div>
                     </div>
                 </div>

@@ -19,7 +19,6 @@ const Account = (props: Props) => {
     console.log(session)
 
     useEffect(() => {
-
         if (session?.error === "RefreshAccessTokenError") {
             signOut()
         }

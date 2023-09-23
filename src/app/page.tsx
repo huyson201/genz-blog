@@ -12,9 +12,12 @@ import SocialCircle from '@/components/SocialCircle/SocialCircle'
 import SectionBlogSkeleton from '@/components/Skeleton/SectionBlogSkeleton'
 import LastCommentList from '@/components/LastCommentSection/LastCommentList'
 import LastCommentSkeleton from '@/components/Skeleton/LastCommentSkeleton'
+import commentService from '../services/comment.service'
 
 export default function Home() {
   const posts = postService.getPosts({ page: 1 })
+  const lastComments = commentService.getLastComments()
+
   return (
     <main>
       {/* home cover */}
@@ -101,7 +104,7 @@ export default function Home() {
                         }
                       </div>
                     )}>
-                    <LastCommentList />
+                    <LastCommentList data={lastComments} />
                   </Suspense>
 
                 </div>
