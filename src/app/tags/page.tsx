@@ -3,6 +3,7 @@ import Breadcrumb from '@/components/Breadcrumb/Breadcrumb'
 import Wrapper from '@/components/Common/Wrapper/Wrapper'
 import GradientText from '@/components/GradientText/GradientText'
 import Pagination from '@/components/Pagination/Pagination'
+import TagGridSkeleton from '@/components/Skeleton/TagGridSkeleton'
 import tagService from '@/services/tag.service'
 import { HashTag, PaginateResponse } from '@/types/type'
 import Link from 'next/link'
@@ -26,7 +27,7 @@ const TagsPage = async ({ searchParams: { page = 1 } }: Props) => {
                             Tags
                         </GradientText>
                     </h1>
-                    <Suspense fallback={<div>Loading...</div>}>
+                    <Suspense fallback={<TagGridSkeleton />}>
                         <TagGrid dataPromise={data} />
                     </Suspense>
                 </div>
@@ -41,7 +42,6 @@ interface TagGridProps {
 }
 const TagGrid = async ({ dataPromise }: TagGridProps) => {
     const data = await dataPromise
-
     return (
         <>
             <div className='text-center text-on_dark_text_gray text-sm sm:text-base my-4'>

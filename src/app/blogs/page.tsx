@@ -3,6 +3,7 @@ import BlogList from '@/components/BlogList/BlogList'
 import Breadcrumb from '@/components/Breadcrumb/Breadcrumb'
 import Wrapper from '@/components/Common/Wrapper/Wrapper'
 import GradientText from '@/components/GradientText/GradientText'
+import BlogRowSkeleton from '@/components/Skeleton/BlogRowSkeleton'
 import postService from '@/services/post.service'
 import React, { Suspense } from 'react'
 
@@ -28,7 +29,13 @@ const Blogs = async ({ searchParams: { page = 1 } }: Props) => {
                             <Breadcrumb />
                         </div>
                     </div>
-                    <Suspense fallback={<div>Loading...</div>}>
+                    <Suspense fallback={(
+                        <div className='pt-12 pb-6  divide-y divide-on_light_border_2 dark:divide-on_dark_border'>
+                            {
+                                Array(10).fill(1).map((_, index) => <BlogRowSkeleton key={`row-${index}`} />)
+                            }
+                        </div>
+                    )}>
                         <BlogList data={post} currentPage={page} />
                     </Suspense>
                 </div>

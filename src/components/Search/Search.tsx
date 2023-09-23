@@ -16,7 +16,7 @@ export default function Search() {
     }
     return (
         <Disclosure as="div" className="inline-block text-left">
-            <Disclosure.Button className={`flex items-center justify-center  text-on_text_gray_2 font-normal`}>
+            <Disclosure.Button title='Search' className={`flex items-center justify-center  text-on_text_gray_2 font-normal`}>
                 <HiOutlineMagnifyingGlass className='w-6 h-6' />
             </Disclosure.Button>
 

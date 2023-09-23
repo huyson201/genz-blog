@@ -1,7 +1,6 @@
 "use client"
 import React, { useState } from 'react'
 import Image from 'next/image'
-import Profile from '@/assets/profile.jpg'
 import { Comment } from '@/types/type'
 import { formatDate } from '@/utils'
 import { BsFillReplyFill, BsPencilSquare } from 'react-icons/bs'
@@ -10,7 +9,7 @@ import { useSession } from 'next-auth/react'
 import commentService from '@/services/comment.service'
 import { removeDuplicateObj } from '@/utils/removeDuplicateObj'
 import { useComment } from '@/contexts/CommentContext'
-import { Button } from '../Button/Button'
+import { MdRestoreFromTrash } from 'react-icons/md'
 
 type Props = {
     comment: Comment,
@@ -96,6 +95,13 @@ const Comment = ({ comment, canReply }: Props) => {
                                                 className='text-xs flex items-center  text-[#c2d4ee] dark:text-[#94a9c9] hover:text-blue dark:hover:text-blue'>
                                                 <BsPencilSquare className='mr-0.5 text-sm inline-block' />
                                                 Change
+                                            </button>
+                                        }
+                                        {
+                                            comment.author._id === session?.user._id && <button
+                                                className='text-xs flex items-center  text-[#c2d4ee] dark:text-[#94a9c9] hover:text-blue dark:hover:text-blue'>
+                                                <MdRestoreFromTrash className='mr-0.5 text-sm inline-block' />
+                                                Delete
                                             </button>
                                         }
                                     </div>

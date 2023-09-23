@@ -2,15 +2,16 @@ import Wrapper from '@/components/Common/Wrapper/Wrapper'
 import TypingAnimation from '@/components/TypingAnimation/TypingAnimation'
 import Image from 'next/image'
 import ProfileImg from '@/assets/profile.jpg'
-import Link from 'next/link'
 import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa6'
 import BlogSectionList from '@/components/BlogSection/BlogSectionList'
-import LastCommentSection from '@/components/LastCommentSection/LastCommentSection'
 import postService from '@/services/post.service'
 import { Suspense } from "react";
 import { Button } from '@/components/Button/Button'
 import GradientText from '@/components/GradientText/GradientText'
 import SocialCircle from '@/components/SocialCircle/SocialCircle'
+import SectionBlogSkeleton from '@/components/Skeleton/SectionBlogSkeleton'
+import LastCommentList from '@/components/LastCommentSection/LastCommentList'
+import LastCommentSkeleton from '@/components/Skeleton/LastCommentSkeleton'
 
 export default function Home() {
   const posts = postService.getPosts({ page: 1 })
@@ -69,7 +70,14 @@ export default function Home() {
             <div className='mt-12 md:space-x-6 md:flex space-y-12 md:space-y-0'>
               {/* blogs list */}
               <div className='md:w-2/3'>
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense
+                  fallback={(
+                    <div className='lg:flex lg:flex-wrap lg:gap-6 space-y-6 lg:space-y-0'>
+                      {
+                        Array(8).fill(0).map((_, index) => <SectionBlogSkeleton key={index} />)
+                      }
+                    </div>
+                  )}>
                   <BlogSectionList postPromise={posts} />
                 </Suspense>
               </div>
@@ -83,13 +91,18 @@ export default function Home() {
                       Last Comment
                     </GradientText>
                   </h2>
-                  <div className='divide-y divide-[#c2d4ee] dark:divide-on_dark_border space-y-6'>
-                    {
-                      Array(5).fill(0).map((_, index) => {
-                        return <LastCommentSection key={`cmt-${index}`} />
-                      })
-                    }
-                  </div>
+                  <Suspense
+                    fallback={(
+                      <div className='divide-y divide-[#c2d4ee] dark:divide-on_dark_border space-y-6'>
+                        {
+                          Array(5).fill(0).map((_, index) => {
+                            return <LastCommentSkeleton key={`cmt-${index}`} />
+                          })
+                        }
+                      </div>
+                    )}>
+                    <LastCommentList />
+                  </Suspense>
 
                 </div>
               </div>

@@ -5,7 +5,17 @@ import { Auth } from "@/types/type";
 import GoogleProvider from "next-auth/providers/google";
 import CustomError from "@/CustomError";
 
-let isRefreshToken: Promise<Response> | null = null;
+let isRefreshToken: Promise<
+  | {
+      error: string;
+      data?: undefined;
+    }
+  | {
+      data: any;
+      error?: undefined;
+    }
+> | null = null;
+
 export const options: NextAuthOptions = {
   providers: [
     CredentialsProvider({
@@ -41,19 +51,21 @@ export const options: NextAuthOptions = {
   },
   callbacks: {
     async jwt({ token, user, account, trigger, session }) {
-      if (trigger === "update") {
+      console.log(trigger + "_____trigger");
+      if (trigger === "update" && session.user) {
         console.log("update");
         console.log("-----token---------");
         console.log(token);
         console.log("-----user-----");
         console.log(user);
-        return {
-          backendTokens: token.backendTokens,
+        token = {
           ...session.user,
+          backendTokens: token.backendTokens,
+          error: undefined,
         };
       }
 
-      if (user && account && account.provider === "google") {
+      if (account && account.provider === "google") {
         const id_token = account.id_token;
         const res = await authService.googleLogin(id_token || "");
         const data = await res.json();
@@ -69,19 +81,20 @@ export const options: NextAuthOptions = {
           ...user,
         };
       }
+
+      if (new Date().getTime() < token.backendTokens.expiresIn) return token;
+
       console.log(new Date().getTime());
       console.log(token.backendTokens.expiresIn);
 
-      if (new Date().getTime() < token.backendTokens.expiresIn) return token;
       console.log("____refresh_____");
 
       try {
-        const { error, data } = await authService.refreshToken(
+        isRefreshToken ??= authService.refreshToken(
           token.backendTokens.refresh_token
         );
 
-        console.log(data);
-        console.log(error);
+        const { data, error } = await isRefreshToken;
 
         if (data) {
           token.backendTokens = data;

@@ -24,7 +24,7 @@ const Account = (props: Props) => {
     return (
         <>
             {session && session.user.role === Role.Admin && (
-                <Link href={"/publish/post"} className='text-2xl text-on_text_gray_2'>
+                <Link href={"/publish/post"} className='text-2xl text-on_text_gray_2' title='Add new post'>
                     <BsPencilSquare />
                 </Link>
             )}

@@ -2,6 +2,7 @@
 import ConfirmDialog from '@/components/ConfirmDigalog/ConfirmDialog'
 import Pagination from '@/components/Pagination/Pagination'
 import PostRow from '@/components/PostRow/PostRow'
+import PostRowSkeleton from '@/components/Skeleton/PostRowSkeleton'
 import authService from '@/services/auth.service'
 import { Post, SaveOptions } from '@/types/type'
 import { useSession } from 'next-auth/react'
@@ -25,7 +26,11 @@ const ListPost = ({ type, page, q }: Props) => {
 
 
     if (isLoading) {
-        return <div className='text-center text-xl'>Loading...</div>
+        return <div className='divide-y dark:divide-on_dark_border divide-on_light_border'>
+            {
+                Array(10).fill(1).map((_, index) => <PostRowSkeleton key={index} />)
+            }
+        </div>
     }
     if (!data || data.totalDocs === 0) {
         return (
@@ -61,7 +66,6 @@ const ListPost = ({ type, page, q }: Props) => {
     return (
         <>
             <div className='divide-y dark:divide-on_dark_border divide-on_light_border'>
-
                 {
                     data.docs.map(post => <PostRow onDelete={handleDelete} data={post} key={post._id} />)
                 }

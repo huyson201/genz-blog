@@ -3,6 +3,7 @@ import React from 'react'
 import BlogRow from './BlogRow/BlogRow'
 import Pagination from '../Pagination/Pagination'
 import { PaginateResponse, Post } from '@/types/type'
+import BlogRowSkeleton from '../Skeleton/BlogRowSkeleton'
 
 interface Props {
     data: PaginateResponse<Post> | Promise<PaginateResponse<Post>>,

@@ -5,8 +5,12 @@ import ProfilePicture from '@/assets/profile.jpg'
 import Image from 'next/image'
 import GradientText from '@/components/GradientText/GradientText'
 import SocialCircle from '@/components/SocialCircle/SocialCircle'
-import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa6'
+import { FaFacebookF, FaInstagram, FaLocationDot, FaTwitter } from 'react-icons/fa6'
 import { PiGithubLogoFill } from 'react-icons/pi'
+import { BiSolidUserRectangle } from 'react-icons/bi'
+import { FaUserAlt } from 'react-icons/fa'
+import { BsFillCalendarDayFill, BsFillTelephoneFill } from 'react-icons/bs'
+import { IoMdMail } from 'react-icons/io'
 
 
 type Props = {}
@@ -49,13 +53,73 @@ const page = (props: Props) => {
             </div>
 
             <Wrapper>
-                <div className='py-6 xl:px-16'>
+                <div className='py-12 xl:px-16'>
                     <h2 className='text-center'>
                         <GradientText size={"lg"} className='font-bold'>
                             About
                         </GradientText>
                     </h2>
-                    <h2 className='text-center'>
+                    <div className=' flex items-center justify-center flex-col py-6 '>
+                        <div className='w-full md:w-[400px] space-y-6'>
+                            <div className="flex items-center ">
+                                <div className='w-2/4 text-on_text_gray_2 font-medium gap-1.5 flex items-center'>
+                                    <span className="text-sm w-6 h-6 flex items-center justify-center rounded-full bg-primary-gradient bg-200%
+                                text-white
+                                ">
+                                        <FaUserAlt />
+                                    </span>
+                                    Name:
+                                </div>
+                                <div className='w-2/4 text-on_light_text_gray dark:text-on_dark_text_gray'>Nguyen Doan Huy Son</div>
+                            </div>
+
+                            <div className="flex items-center ">
+                                <div className='w-2/4  text-on_text_gray_2 font-medium gap-1.5 flex items-center'>
+                                    <span className="text-sm w-6 h-6 flex items-center justify-center rounded-full bg-primary-gradient bg-200%
+                                text-white
+                                ">
+                                        <BsFillCalendarDayFill />
+                                    </span>
+                                    Date of Birth:
+                                </div>
+                                <div className='w-2/4 text-on_light_text_gray dark:text-on_dark_text_gray'>15/05/2001</div>
+                            </div>
+                            <div className="flex items-center ">
+                                <div className='w-2/4  text-on_text_gray_2 font-medium gap-1.5 flex items-center'>
+                                    <span className="text-sm w-6 h-6 flex items-center justify-center rounded-full bg-primary-gradient bg-200%
+                                text-white
+                                ">
+                                        <FaLocationDot />
+                                    </span>
+                                    Address:
+                                </div>
+                                <div className='w-2/4 text-on_light_text_gray dark:text-on_dark_text_gray'>Tp. Ho Chi Minh</div>
+                            </div>
+                            <div className="flex items-center ">
+                                <div className='w-2/4  text-on_text_gray_2 font-medium gap-1.5 flex items-center'>
+                                    <span className="text-sm w-6 h-6 flex items-center justify-center rounded-full bg-primary-gradient bg-200%
+                                text-white
+                                ">
+                                        <IoMdMail />
+                                    </span>
+                                    Email:
+                                </div>
+                                <div className='w-2/4 text-on_light_text_gray dark:text-on_dark_text_gray'>sonnguyen201.dev&#8203;@gmail.com</div>
+                            </div>
+                            <div className="flex items-center ">
+                                <div className='w-2/4  text-on_text_gray_2 font-medium gap-1.5 flex items-center'>
+                                    <span className="text-sm w-6 h-6 flex items-center justify-center rounded-full bg-primary-gradient bg-200%
+                                text-white
+                                ">
+                                        <BsFillTelephoneFill />
+                                    </span>
+                                    Phone:
+                                </div>
+                                <div className='w-2/4 text-on_light_text_gray dark:text-on_dark_text_gray'>+84868894648</div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 className='text-center mt-12'>
                         <GradientText size={"lg"} className='font-bold'>
                             My Skills
                         </GradientText>

@@ -5,6 +5,7 @@ import BlogSection from './BlogSection'
 import Link from 'next/link'
 import { buttonVariants } from '../Button/Button'
 import { cn } from '@/utils'
+import SectionBlogSkeleton from '../Skeleton/SectionBlogSkeleton'
 
 interface Props {
     postPromise: Promise<PaginateResponse<Post>>
@@ -14,7 +15,6 @@ const BlogSectionList = async ({ postPromise }: Props) => {
     const res = await postPromise
     return (
         <>
-
             <div className='lg:flex lg:flex-wrap lg:gap-6 space-y-6 lg:space-y-0'>
                 {
                     res.docs.map(post => <BlogSection post={post} key={post._id} />)
