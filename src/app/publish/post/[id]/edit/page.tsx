@@ -1,7 +1,5 @@
-
 import Wrapper from '@/components/Common/Wrapper/Wrapper'
 import EditPost from '@/components/Page/EditPost'
-import { Metadata } from 'next'
 import React from 'react'
 
 interface Props {

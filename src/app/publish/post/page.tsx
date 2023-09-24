@@ -1,4 +1,3 @@
-"use client"
 import Wrapper from '@/components/Common/Wrapper/Wrapper'
 import CreateNewPost from '@/components/Page/CreateNewPost'
 import { Metadata } from 'next'
