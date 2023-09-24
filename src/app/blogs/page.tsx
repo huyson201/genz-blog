@@ -5,12 +5,26 @@ import Wrapper from '@/components/Common/Wrapper/Wrapper'
 import GradientText from '@/components/GradientText/GradientText'
 import BlogRowSkeleton from '@/components/Skeleton/BlogRowSkeleton'
 import postService from '@/services/post.service'
+import { Metadata } from 'next'
 import React, { Suspense } from 'react'
 
 interface Props {
     searchParams: {
         page: number
     }
+}
+
+export const metadata: Metadata = {
+    title: 'Recent Blogs - Gen Z Blogger',
+    description: "Discover the latest blog posts  on Gen Z blogger. Stay informed with our recent articles covering a wide range of topics, from technology to lifestyle.",
+    alternates: {
+        canonical: process.env.WEB_HOST_NAME + "blogs"
+    },
+    openGraph: {
+        title: 'Recent Blogs - Gen Z Blogger',
+        description: "Discover the latest blog posts  on Gen Z blogger. Stay informed with our recent articles covering a wide range of topics, from technology to lifestyle.",
+        images: [`/api/screenshot?url=${process.env.WEB_HOST_NAME}/blogs`]
+    },
 }
 
 const Blogs = async ({ searchParams: { page = 1 } }: Props) => {

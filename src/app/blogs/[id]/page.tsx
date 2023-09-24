@@ -13,12 +13,33 @@ import { Auth } from '@/types/type'
 import postService from '@/services/post.service'
 import { calcBlogReadingTime, formatDate } from '@/utils'
 import MarkdownArea from '@/components/MarkdownArea/MarkdownArea'
-import CommentInput from '@/components/Input/CommentInput'
-import CommentList from '@/components/Comment/CommentList'
 import CommentSection from '@/components/Comment/CommentSection'
 interface Props {
     params: {
         id: string
+    }
+}
+
+export async function generateMetadata({ params }: Props) {
+    const arrayString = params.id.split("-")
+    const postId = arrayString[arrayString.length - 1]
+    const post = await postService.getPostById(postId)
+    const title = `${post.title} - Gen Z Blogger`
+    return {
+        title: title,
+        description: post.description,
+        alternates: {
+            canonical: process.env.WEB_HOST_NAME + "blogs/" + params.id
+        },
+        authors: {
+            name: (post.author as Auth).name,
+        },
+        openGraph: {
+            title: title,
+            description: post.description,
+            images: [`/api/screenshot?url=${process.env.WEB_HOST_NAME}/blogs/${params.id}`]
+        },
+
     }
 }
 

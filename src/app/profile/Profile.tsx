@@ -5,6 +5,7 @@ import UploadImage from '@/components/UploadImage/UploadImage'
 import { RequireAuthException } from '@/lib/exception'
 import authService from '@/services/auth.service'
 import { Auth, UpdateProfileData } from '@/types/type'
+import { Metadata } from 'next'
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -17,12 +18,23 @@ import { twMerge } from 'tailwind-merge'
 type Props = {
     data: Auth
 }
-
+export const metadata: Metadata = {
+    title: 'Profile - Customize Your Information - Gen Z Blogger',
+    description: "Explore and customize your profile on Gen Z Blogger with our user-friendly editing tool. Update your information, add details, and personalize your user profile the way you want.",
+    alternates: {
+        canonical: process.env.WEB_HOST_NAME + "/profile"
+    },
+    openGraph: {
+        title: 'Profile - Customize Your Information - Gen Z Blogger',
+        description: "Explore and customize your profile on Gen Z Blogger with our user-friendly editing tool. Update your information, add details, and personalize your user profile the way you want.",
+    },
+}
 const Profile = ({ data }: Props) => {
     const { data: session, update: sessionUpdate } = useSession()
     const [openBrowser, setBrowser] = useState(false)
     const { trigger, isMutating } = useSWRMutation("/auth/profile", (url: string, { arg }: { arg: { token: string, data: UpdateProfileData } }) => authService.updateProfile(arg.token, arg.data))
     const [error, setError] = useState("")
+    const [previewImg, setPreviewImg] = useState<string>()
     const inputNameRef = useRef<HTMLInputElement>(null)
     const router = useRouter()
 
@@ -39,7 +51,7 @@ const Profile = ({ data }: Props) => {
             const value = inputNameRef.current.value
             const triggerPromise = trigger({
                 token: session.backendTokens.access_token,
-                data: { name: value }
+                data: { name: value, avatar_url: previewImg }
             })
 
             const res = await toast.promise(triggerPromise, {
@@ -57,12 +69,17 @@ const Profile = ({ data }: Props) => {
         }
     }
 
+    const handleSelectImg = (img: string) => {
+        setPreviewImg(img)
+        setBrowser(false)
+    }
+
     return (
         <>
             <form action={"#"} onSubmit={handleSubmit} className='mt-4 space-y-6'>
                 <div className="flex items-center justify-center ">
                     <div className='relative cursor-pointer' onClick={() => setBrowser(true)}>
-                        <Image src={data.avatar_url} alt='avatar' height={72} width={72} className='rounded-full' />
+                        <Image src={previewImg ?? data.avatar_url} alt='avatar' height={72} width={72} className='rounded-full w-[72px] h-[72px]' />
                         <div className='text-xs text-center font-medium absolute bottom-0 w-full left-0 bg-black/60 text-white'>Change</div>
                     </div>
                 </div>
@@ -97,7 +114,7 @@ const Profile = ({ data }: Props) => {
                     </button>
                 </div>
             </form>
-            <UploadImage showBlankSelect={false} open={openBrowser} onRequestClose={() => setBrowser(false)} />
+            <UploadImage onSelectImage={handleSelectImg} showBlankSelect={false} open={openBrowser} onRequestClose={() => setBrowser(false)} />
         </>
     )
 }

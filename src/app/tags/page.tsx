@@ -6,6 +6,7 @@ import Pagination from '@/components/Pagination/Pagination'
 import TagGridSkeleton from '@/components/Skeleton/TagGridSkeleton'
 import tagService from '@/services/tag.service'
 import { HashTag, PaginateResponse } from '@/types/type'
+import { Metadata } from 'next'
 import Link from 'next/link'
 import React, { Suspense } from 'react'
 import { BiSolidTagAlt } from 'react-icons/bi'
@@ -15,7 +16,18 @@ type Props = {
         page?: number
     }
 }
-
+export const metadata: Metadata = {
+    title: 'Hashtags - Explore a Variety of Topics - Gen Z Blogger',
+    description: "Discover a diverse collection of hashtags covering a wide range of topics. Explore and engage with discussions on your favorite subjects using our hashtag directory.",
+    alternates: {
+        canonical: process.env.WEB_HOST_NAME + "tags"
+    },
+    openGraph: {
+        title: 'Hashtags - Explore a Variety of Topics - Gen Z Blogger',
+        description: "Discover a diverse collection of hashtags covering a wide range of topics. Explore and engage with discussions on your favorite subjects using our hashtag directory."
+        , images: [`/api/screenshot?url=${process.env.WEB_HOST_NAME}/tags`]
+    },
+}
 const TagsPage = async ({ searchParams: { page = 1 } }: Props) => {
     const data = tagService.getTags({ page })
     return (

@@ -11,9 +11,22 @@ import { BiSolidUserRectangle } from 'react-icons/bi'
 import { FaUserAlt } from 'react-icons/fa'
 import { BsFillCalendarDayFill, BsFillTelephoneFill } from 'react-icons/bs'
 import { IoMdMail } from 'react-icons/io'
+import { Metadata } from 'next'
 
 
 type Props = {}
+export const metadata: Metadata = {
+    title: 'My Portfolio - Learn About Me and My Work - Gen Z Blogger',
+    description: "Explore my portfolio to get to know me better and discover my work. Learn about my skills, experiences, and projects in web development, design, and more.",
+    alternates: {
+        canonical: process.env.WEB_HOST_NAME + "about-me"
+    },
+    openGraph: {
+        title: 'My Portfolio - Learn About Me and My Work - Gen Z Blogger',
+        description: "Explore my portfolio to get to know me better and discover my work. Learn about my skills, experiences, and projects in web development, design, and more.",
+        images: [`/api/screenshot?url=${process.env.WEB_HOST_NAME}/about-me`]
+    },
+}
 
 const page = (props: Props) => {
     return (
@@ -56,7 +69,7 @@ const page = (props: Props) => {
                 <div className='py-12 xl:px-16'>
                     <h2 className='text-center'>
                         <GradientText size={"lg"} className='font-bold'>
-                            About
+                            About Me
                         </GradientText>
                     </h2>
                     <div className=' flex items-center justify-center flex-col py-6 '>

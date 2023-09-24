@@ -7,9 +7,20 @@ import Image from 'next/image'
 import ProfileIcon from '@/assets/profile-icon.png'
 import PasswordIcon from '@/assets/password.svg'
 import Link from 'next/link'
+import { Metadata } from 'next'
 
 interface Props { }
-
+export const metadata: Metadata = {
+    title: 'Accounts - Manage Your Account - Gen Z Blogger',
+    description: "Manage and secure your personal information on Gen Z Blogger. Customize your information, update your profile, and enhance your online experience with our user-friendly dashboard.",
+    alternates: {
+        canonical: process.env.WEB_HOST_NAME + "/me"
+    },
+    openGraph: {
+        title: 'Accounts - Manage Your Account - Gen Z Blogger',
+        description: "Manage and secure your personal information on Gen Z Blogger. Customize your information, update your profile, and enhance your online experience with our user-friendly dashboard.",
+    },
+}
 const SettingHome = async (props: Props) => {
     const session = await getServerSession(options)
     if (!session) throw new RequireAuthException()

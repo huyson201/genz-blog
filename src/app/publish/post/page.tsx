@@ -1,14 +1,21 @@
 "use client"
 import Wrapper from '@/components/Common/Wrapper/Wrapper'
-import Editor from '@/components/Editor/Editor'
-import InputField from '@/components/Input/InputField'
-import MultiSelect from '@/components/Input/MultiSelect'
 import CreateNewPost from '@/components/Page/CreateNewPost'
-import SaveOption from '@/components/PostForm/SaveOption/SaveOption'
+import { Metadata } from 'next'
 import React from 'react'
 
 type Props = {}
-
+export const metadata: Metadata = {
+    title: 'Create a New Post - Gen Z Blogger',
+    description: "Start writing and create a new post to share your ideas with the world. Express yourself through your content on Gen Z Blogger, your platform for creative expression and meaningful discussions.",
+    alternates: {
+        canonical: process.env.WEB_HOST_NAME + "/publish/post"
+    },
+    openGraph: {
+        title: 'Create a New Post - Gen Z Blogger',
+        description: "Start writing and create a new post to share your ideas with the world. Express yourself through your content on Gen Z Blogger, your platform for creative expression and meaningful discussions.",
+    },
+}
 const CreatePost = (props: Props) => {
     return (
         <section className='pt-6 py-12'>

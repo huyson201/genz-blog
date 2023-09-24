@@ -66,7 +66,6 @@ const CommentSection = ({ postId }: Props) => {
             throw error
         }
     }
-    console.log(loading)
     return (
         <div>
             <h4 className='text-3xl text-[#7f92b0] font-bold mt-6 dark:text-[#b8cdeb]'>Comments</h4>

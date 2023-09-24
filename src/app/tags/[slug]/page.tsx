@@ -16,6 +16,27 @@ type Props = {
     }
 }
 
+export async function generateMetadata({ params }: Props) {
+
+    const tagInfo = await tagService.getTagBySlug(params.slug)
+    const title = `${tagInfo.name} Tag - Explore ${tagInfo.name} Blog Posts - Gen Z Blogger`
+    const desc = `Discover a curated list of blog posts related to the ${tagInfo.name} tag. Find and engage with content related to your interests using our hashtag collection.`
+
+    return {
+        title: title,
+        description: desc,
+        alternates: {
+            canonical: process.env.WEB_HOST_NAME + "/tags/" + params.slug
+        },
+        openGraph: {
+            title: title,
+            description: desc,
+            images: [`/api/screenshot?url=${process.env.WEB_HOST_NAME}/tags/${params.slug}`]
+        },
+
+    }
+}
+
 const TagSlug = async ({ params: { slug }, searchParams: { page = 1 } }: Props) => {
     const tagInfo = await tagService.getTagBySlug(slug)
     if (!tagInfo) return notFound()

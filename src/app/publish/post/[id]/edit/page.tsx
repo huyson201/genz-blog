@@ -1,11 +1,32 @@
 
 import Wrapper from '@/components/Common/Wrapper/Wrapper'
 import EditPost from '@/components/Page/EditPost'
+import { Metadata } from 'next'
 import React from 'react'
 
 interface Props {
     params: {
         id: string
+    }
+}
+
+
+export async function generateMetadata(props: Props) {
+    const title = `Edit Post #${props.params.id} - Modify Your Content - Gen Z Blogger`
+    const desc = `Edit Post #${props.params.id} to make modifications and updates to your content. Customize your work on Gen Z Blogger, your platform for creative expression and storytelling.`
+
+    return {
+        title: title,
+        description: desc,
+        alternates: {
+            canonical: process.env.WEB_HOST_NAME + "/publish/post/" + props.params.id + "/edit"
+        },
+        openGraph: {
+            title: title,
+            description: desc,
+
+        },
+
     }
 }
 

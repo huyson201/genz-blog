@@ -13,13 +13,32 @@ type Props = {
     }
 }
 
+
+export async function generateMetadata(props: Props) {
+    const title = `Search Results for '${props.searchParams.q}' - Find What You're Looking For - Gen Z Blogger`
+    const desc = `Explore search results related to '${props.searchParams.q}' and find exactly what you're looking for. Discover a wide range of content, articles, and resources related to '${props.searchParams.q}' in our search results.`
+
+    return {
+        title: title,
+        description: desc,
+        alternates: {
+            canonical: process.env.WEB_HOST_NAME + "search"
+        },
+        openGraph: {
+            title: title,
+            description: desc,
+            images: [`/api/screenshot?url=${process.env.WEB_HOST_NAME}/search?q=${props.searchParams.q}`]
+        },
+
+    }
+}
+
 const SearchPage = async ({ searchParams }: Props) => {
     if (!searchParams.q || searchParams.q === "") {
         notFound()
     }
     const { page = 1 } = searchParams
     const key = searchParams.q
-
     const data = await postService.search(key, { page })
     return (
         <>

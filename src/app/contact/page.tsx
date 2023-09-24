@@ -4,9 +4,24 @@ import Breadcrumb from '@/components/Breadcrumb/Breadcrumb'
 import Wrapper from '@/components/Common/Wrapper/Wrapper'
 import GoogleMap from '@/components/GoogleMap/GoogleMap'
 import GradientText from '@/components/GradientText/GradientText'
+import { Metadata } from 'next'
 import React from 'react'
 
 type Props = {}
+
+export const metadata: Metadata = {
+    title: 'Contact - Gen Z Blogger',
+    description: "Have questions or feedback? Contact us to get in touch with our team. We're here to assist you. Reach out today!"
+    ,
+    alternates: {
+        canonical: process.env.WEB_HOST_NAME + "contact"
+    },
+    openGraph: {
+        title: 'Contact - Gen Z Blogger',
+        description: "Have questions or feedback? Contact us to get in touch with our team. We're here to assist you. Reach out today!",
+        images: [`/api/screenshot?url=${process.env.WEB_HOST_NAME}/contact`]
+    },
+}
 
 const Contact = (props: Props) => {
     return (

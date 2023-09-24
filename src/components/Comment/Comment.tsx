@@ -38,7 +38,6 @@ const Comment = ({ comment, canReply, onUpdate, onDelete }: Props) => {
             return
         }
 
-        console.log(data)
         setReplyComment(prev => removeDuplicateObj([data, ...prev]))
         commentState?.setReply(null)
     }
@@ -48,7 +47,7 @@ const Comment = ({ comment, canReply, onUpdate, onDelete }: Props) => {
         if (showReply) return
         setLoadReply(true)
         const res = await commentService.getReplyComments(comment.post, comment._id)
-        setReplyComment(prev => removeDuplicateObj([...res]).filter(value => value.parent !== ""))
+        setReplyComment(removeDuplicateObj([...res]).filter(value => value.parent !== ""))
         setLoadReply(false)
         if (!showReply) {
             setShowReply(true)

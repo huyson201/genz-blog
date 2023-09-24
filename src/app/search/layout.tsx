@@ -5,6 +5,7 @@ type Props = {
     children: React.ReactNode
 }
 
+
 const SearchLayout = (props: Props) => {
     return (
         <section className='mb-24'>

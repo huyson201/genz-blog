@@ -76,6 +76,10 @@ export const options: NextAuthOptions = {
 
       if (new Date().getTime() < token.backendTokens.expiresIn) return token;
 
+      console.log("current time: " + new Date().getTime());
+      console.log("token expired: " + token.backendTokens.expiresIn);
+      console.log("___refresh token___");
+
       try {
         isRefresh ??= authService.refreshToken(
           token.backendTokens.refresh_token
@@ -90,7 +94,6 @@ export const options: NextAuthOptions = {
             backendTokens: { ...data },
           };
         }
-        console.log(error);
         token.error = error;
         isRefresh = null;
         return token;
