@@ -19,7 +19,7 @@ export async function generateMetadata(props: Props) {
         title: title,
         description: desc,
         alternates: {
-            canonical: process.env.WEB_HOST_NAME + "/publish/post/" + props.params.id + "/edit"
+            canonical: "/publish/post/" + props.params.id + "/edit"
         },
         openGraph: {
             title: title,

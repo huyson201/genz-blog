@@ -14,6 +14,7 @@ const BlogList = async ({ data }: Props) => {
     if (cloneData instanceof Promise) {
         cloneData = await cloneData
     }
+
     return (
         <>
             <div className='pt-12 pb-6  divide-y divide-on_light_border_2 dark:divide-on_dark_border'>

@@ -18,16 +18,17 @@ export const metadata: Metadata = {
     title: 'Recent Blogs - Gen Z Blogger',
     description: "Discover the latest blog posts  on Gen Z blogger. Stay informed with our recent articles covering a wide range of topics, from technology to lifestyle.",
     alternates: {
-        canonical: process.env.WEB_HOST_NAME + "blogs"
+        canonical: "/blogs"
     },
     openGraph: {
         title: 'Recent Blogs - Gen Z Blogger',
         description: "Discover the latest blog posts  on Gen Z blogger. Stay informed with our recent articles covering a wide range of topics, from technology to lifestyle.",
-        images: [`/api/screenshot?url=${process.env.WEB_HOST_NAME}/blogs`]
+        images: [`/api/screenshot?url=${process.env.VERCEL_URL || `http://localhost:${process.env.PORT || 3000}`}/blogs`]
     },
 }
 
 const Blogs = async ({ searchParams: { page = 1 } }: Props) => {
+    console.log(process.env.VERCEL_URL)
     const post = postService.getPosts({ page })
     return (
         <section className='mb-24'>

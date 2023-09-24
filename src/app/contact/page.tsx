@@ -14,12 +14,12 @@ export const metadata: Metadata = {
     description: "Have questions or feedback? Contact us to get in touch with our team. We're here to assist you. Reach out today!"
     ,
     alternates: {
-        canonical: process.env.WEB_HOST_NAME + "contact"
+        canonical: "/contact"
     },
     openGraph: {
         title: 'Contact - Gen Z Blogger',
         description: "Have questions or feedback? Contact us to get in touch with our team. We're here to assist you. Reach out today!",
-        images: [`/api/screenshot?url=${process.env.WEB_HOST_NAME}/contact`]
+        images: [`/api/screenshot?url=${process.env.VERCEL_URL || `http://localhost:${process.env.PORT || 3000}`}/contact`]
     },
 }
 

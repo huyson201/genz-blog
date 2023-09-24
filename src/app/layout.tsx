@@ -28,7 +28,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Discovering Code and Living Fully - Gen Z Blogger',
     description: 'Explore the world of programming, tech, and life through the eyes of a Gen Z blogger. Get coding tips, life lessons, and more.',
-    images: [`/api/screenshot?url=${process.env.WEB_HOST_NAME}`]
+    images: [`/api/screenshot?url=${process.env.VERCEL_URL || `http://localhost:${process.env.PORT || 3000}`}`],
+    type: 'website',
+    siteName: "Gen Z Blogger"
+
   },
 }
 

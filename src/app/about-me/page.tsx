@@ -19,12 +19,12 @@ export const metadata: Metadata = {
     title: 'My Portfolio - Learn About Me and My Work - Gen Z Blogger',
     description: "Explore my portfolio to get to know me better and discover my work. Learn about my skills, experiences, and projects in web development, design, and more.",
     alternates: {
-        canonical: process.env.WEB_HOST_NAME + "about-me"
+        canonical: "about-me"
     },
     openGraph: {
         title: 'My Portfolio - Learn About Me and My Work - Gen Z Blogger',
         description: "Explore my portfolio to get to know me better and discover my work. Learn about my skills, experiences, and projects in web development, design, and more.",
-        images: [`/api/screenshot?url=${process.env.WEB_HOST_NAME}/about-me`]
+        images: [`/api/screenshot?url=${process.env.VERCEL_URL || `http://localhost:${process.env.PORT || 3000}`}/about-me`]
     },
 }
 

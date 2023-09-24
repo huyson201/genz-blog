@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: 'Accounts - Manage Your Account - Gen Z Blogger',
     description: "Manage and secure your personal information on Gen Z Blogger. Customize your information, update your profile, and enhance your online experience with our user-friendly dashboard.",
     alternates: {
-        canonical: process.env.WEB_HOST_NAME + "/me"
+        canonical: "/me"
     },
     openGraph: {
         title: 'Accounts - Manage Your Account - Gen Z Blogger',

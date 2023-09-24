@@ -26,12 +26,12 @@ export async function generateMetadata({ params }: Props) {
         title: title,
         description: desc,
         alternates: {
-            canonical: process.env.WEB_HOST_NAME + "/tags/" + params.slug
+            canonical: "/tags/" + params.slug
         },
         openGraph: {
             title: title,
             description: desc,
-            images: [`/api/screenshot?url=${process.env.WEB_HOST_NAME}/tags/${params.slug}`]
+            images: [`/api/screenshot?url=${process.env.VERCEL_URL || `http://localhost:${process.env.PORT || 3000}`}/tags/${params.slug}`]
         },
 
     }

@@ -7,12 +7,12 @@ export const metadata: Metadata = {
     title: 'Sign Up - Create Your Account - Gen Z Blogger',
     description: "Register and create your account today. Join our community and get started on your journey. Sign up now for access to exclusive features.",
     alternates: {
-        canonical: process.env.WEB_HOST_NAME + "register"
+        canonical: "/register"
     },
     openGraph: {
         title: 'Sign Up - Create Your Account - Gen Z Blogger',
         description: "Register and create your account today. Join our community and get started on your journey. Sign up now for access to exclusive features.",
-        images: [`/api/screenshot?url=${process.env.WEB_HOST_NAME}/register`]
+        images: [`/api/screenshot?url=${process.env.VERCEL_URL || `http://localhost:${process.env.PORT || 3000}`}/register`]
     },
 }
 

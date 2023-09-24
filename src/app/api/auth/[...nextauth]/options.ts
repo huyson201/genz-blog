@@ -1,7 +1,7 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import authService from "@/services/auth.service";
-import { Auth } from "@/types/type";
+import { Auth, BackendToken } from "@/types/type";
 import GoogleProvider from "next-auth/providers/google";
 import CustomError from "@/CustomError";
 
@@ -15,6 +15,8 @@ let isRefresh: Promise<
       error?: undefined;
     }
 > | null = null;
+let backendTokens: BackendToken | null = null;
+
 export const options: NextAuthOptions = {
   providers: [
     CredentialsProvider({
@@ -76,9 +78,7 @@ export const options: NextAuthOptions = {
 
       if (new Date().getTime() < token.backendTokens.expiresIn) return token;
 
-      console.log("current time: " + new Date().getTime());
-      console.log("token expired: " + token.backendTokens.expiresIn);
-      console.log("___refresh token___");
+      token.backendTokens = backendTokens ? backendTokens : token.backendTokens;
 
       try {
         isRefresh ??= authService.refreshToken(
@@ -89,13 +89,15 @@ export const options: NextAuthOptions = {
 
         if (data) {
           isRefresh = null;
+          backendTokens = data;
           return {
             ...token,
-            backendTokens: { ...data },
+            backendTokens: data,
           };
         }
         token.error = error;
         isRefresh = null;
+        backendTokens = null;
         return token;
       } catch (error) {
         throw error;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 
 interface PaginationData {
     next: number | null,
@@ -10,100 +10,89 @@ interface PaginationData {
 }
 
 
+const Dot = "..."
+
+const usePagination = (totalPage: number, currentPage: number, siblingCount = 1) => {
 
 
-const usePagination = (totalPage: number, currentPage: number) => {
-    const [data, setData] = useState<PaginationData>()
-    useEffect(() => {
-        if (currentPage > totalPage) return
-        let limitLeftRange = 3
-        let limitRightRange = 1
-        let dotCount = 1
-        let showDot = true
-        let totalShow = limitLeftRange + limitRightRange + dotCount
+    const range = (start: number, end: number) => {
+        const length = end - start + 1
+        return Array.from({ length }).map((_, index) => index + start)
+    }
+
+
+    const pageRange = useMemo(() => {
         const nextPage = currentPage < totalPage ? currentPage + 1 : null
         const prevPage = currentPage > 1 ? currentPage - 1 : null;
-        let leftRange: number[] = []
-        let rightRange: number[] = []
-        const rightLimit = totalPage - (currentPage + 1) < limitRightRange ? totalPage - (currentPage + 1) : limitRightRange
 
-        if (totalPage <= totalShow) {
-            if (showDot) {
-                showDot = false
-                totalShow -= dotCount
+        /*
+        * *  currentPage + firstPage + lastPage + 2 dot = 5
+        */
+        const totalPageNumbers = siblingCount * 2 + 5
+
+        // case 1: totalPageNumber >= totalPage => show all page [1....totalPage]  
+        if (totalPageNumbers - 2 >= totalPage) {
+            return {
+                nextPage,
+                prevPage,
+                pages: range(1, totalPage)
             }
 
-            for (let i = 1; i <= totalPage; i++) {
-                leftRange.push(i)
-            }
-            setData({
-                next: nextPage,
-                prev: prevPage,
-                leftRange,
-                rightRange,
-                currentPage,
-                showDot
-            })
-
-            return
         }
 
-        if (currentPage + 1 >= totalPage - 1) {
-            if (showDot === true) {
-                showDot = false
-                limitLeftRange += 1
-            }
-            leftRange.push(1)
-            limitLeftRange -= 1
-            const startIndex = currentPage === totalPage ? currentPage - limitLeftRange : currentPage - (limitLeftRange - 1);
-            const endIndex = currentPage === totalPage ? currentPage : currentPage + 1
+        const firstPageIndex = 1
+        const lastPageIndex = totalPage
 
-            for (let i = startIndex; i <= endIndex; i++) {
-                leftRange.push(i)
-            }
+        // * leftSiblingIndex min = 1, max = currentPage - siblingCount
+        const leftSiblingIndex = Math.max(currentPage - siblingCount, 1)
+        // * rightSiblingIndex max = totalPage, min = currentPage + siblingCount
+        const rightSiblingIndex = Math.min(currentPage + siblingCount, totalPage)
 
 
-        } else if (currentPage < limitLeftRange) {
-            if (!showDot) {
-                showDot = true
-            }
 
-            for (let i = 1; i <= limitLeftRange; i++) {
-                leftRange.push(i)
-            }
-        }
-        else {
-            if (!showDot) {
-                showDot = true
-            }
-            leftRange.push(1)
-            limitLeftRange -= 1
+        // * lastIndex + dot = 2 => totalPage - 2
+        const shouldShowRightDots = rightSiblingIndex < totalPage - 2
 
-            const startIndex = currentPage - (limitLeftRange - 1 - 1)
-            const endIndex = currentPage + 1
-            for (let i = startIndex; i <= endIndex; i++) {
-                leftRange.push(i)
+        // * firstIndex + dot => 1 + 1 = 2
+        const shouldShowLeftDots = leftSiblingIndex > 2
+
+        if (!shouldShowLeftDots && shouldShowRightDots) {
+            let leftItemCount = 3 + 2 * siblingCount;
+            let leftRange = range(1, leftItemCount);
+
+            return {
+                nextPage,
+                prevPage,
+                pages: [...leftRange, Dot, lastPageIndex]
             }
         }
 
+        if (shouldShowLeftDots && !shouldShowRightDots) {
 
-        for (let i = totalPage; i > totalPage - rightLimit; i--) {
-            rightRange.push(i)
+            let rightItemCount = 3 + 2 * siblingCount;
+            let rightRange = range(
+                totalPage - rightItemCount + 1,
+                totalPage
+            );
+            return {
+                nextPage,
+                prevPage,
+                pages: [firstPageIndex, Dot, ...rightRange]
+            }
+
         }
 
-        setData({
-            next: nextPage,
-            prev: prevPage,
-            leftRange,
-            rightRange,
-            currentPage,
-            showDot
-        })
+        let middleRange = range(leftSiblingIndex, rightSiblingIndex);
+        return {
+            nextPage,
+            prevPage,
+            pages: [firstPageIndex, Dot, ...middleRange, Dot, lastPageIndex]
+        }
 
 
+    }, [totalPage, currentPage, siblingCount])
 
-    }, [totalPage, currentPage])
-    return data
+    return pageRange
 }
 
 export default usePagination

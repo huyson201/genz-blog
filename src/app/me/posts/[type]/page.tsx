@@ -36,7 +36,7 @@ export async function generateMetadata({ params: { type } }: Props) {
         title: data.title || "Gen Z Blogger",
         description: data.desc || "",
         alternates: {
-            canonical: process.env.WEB_HOST_NAME + type
+            canonical: `/me/posts/${type}`
         },
         openGraph: {
             title: data.title || "Gen Z Blogger",

@@ -20,12 +20,12 @@ export const metadata: Metadata = {
     title: 'Hashtags - Explore a Variety of Topics - Gen Z Blogger',
     description: "Discover a diverse collection of hashtags covering a wide range of topics. Explore and engage with discussions on your favorite subjects using our hashtag directory.",
     alternates: {
-        canonical: process.env.WEB_HOST_NAME + "tags"
+        canonical: "/tags"
     },
     openGraph: {
         title: 'Hashtags - Explore a Variety of Topics - Gen Z Blogger',
         description: "Discover a diverse collection of hashtags covering a wide range of topics. Explore and engage with discussions on your favorite subjects using our hashtag directory."
-        , images: [`/api/screenshot?url=${process.env.WEB_HOST_NAME}/tags`]
+        , images: [`/api/screenshot?url=${process.env.VERCEL_URL || `http://localhost:${process.env.PORT || 3000}`}/tags`]
     },
 }
 const TagsPage = async ({ searchParams: { page = 1 } }: Props) => {

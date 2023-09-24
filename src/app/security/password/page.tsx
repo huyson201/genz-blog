@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     description: "Protect your account by changing your password securely. Follow our step-by-step guide to update your password and enhance your online security. Gen Z Blogger - Your Trusted Online Security Partner."
     ,
     alternates: {
-        canonical: process.env.WEB_HOST_NAME + "/security/change-password"
+        canonical: "/security/change-password"
     },
     openGraph: {
         title: 'Change Password - Secure Your Account - Gen Z Blogger',

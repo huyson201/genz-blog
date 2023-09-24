@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props) {
         title: title,
         description: post.description,
         alternates: {
-            canonical: process.env.WEB_HOST_NAME + "blogs/" + params.id
+            canonical: "/blogs/" + params.id
         },
         authors: {
             name: (post.author as Auth).name,
@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: Props) {
         openGraph: {
             title: title,
             description: post.description,
-            images: [`/api/screenshot?url=${process.env.WEB_HOST_NAME}/blogs/${params.id}`]
+            images: [`/api/screenshot?url=${process.env.VERCEL_URL || `http://localhost:${process.env.PORT || 3000}`}/blogs/${params.id}`]
         },
 
     }

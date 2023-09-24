@@ -22,12 +22,12 @@ export async function generateMetadata(props: Props) {
         title: title,
         description: desc,
         alternates: {
-            canonical: process.env.WEB_HOST_NAME + "search"
+            canonical: "/search"
         },
         openGraph: {
             title: title,
             description: desc,
-            images: [`/api/screenshot?url=${process.env.WEB_HOST_NAME}/search?q=${props.searchParams.q}`]
+            images: [`/api/screenshot?url=${process.env.VERCEL_URL || `http://localhost:${process.env.PORT || 3000}`}/search?q=${props.searchParams.q}`]
         },
 
     }
