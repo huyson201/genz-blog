@@ -5,7 +5,6 @@ import BlogSection from './BlogSection'
 import Link from 'next/link'
 import { buttonVariants } from '../Button/Button'
 import { cn } from '@/utils'
-import SectionBlogSkeleton from '../Skeleton/SectionBlogSkeleton'
 
 interface Props {
     postPromise: Promise<PaginateResponse<Post>>
@@ -34,3 +33,4 @@ const BlogSectionList = async ({ postPromise }: Props) => {
 }
 
 export default BlogSectionList
+

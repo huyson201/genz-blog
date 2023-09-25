@@ -4,16 +4,18 @@
 import React, { useState } from 'react'
 import Navbar from '../Navbar'
 import MobileNavbar from '../MobileNavbar/MobileNavbar'
+import { MobileNavContextProvider } from '@/contexts/MobileNavContext';
 
 type Props = {}
 
 const NavbarWrapper = (props: Props) => {
     const [showNavMobile, setShowNavMobile] = useState(false)
     return (
-        <>
-            <Navbar onRequestOpenNavMobile={() => setShowNavMobile(true)} />
-            <MobileNavbar open={showNavMobile} onRequestClose={(() => setShowNavMobile(false))} />
-        </>
+        <MobileNavContextProvider>
+            <Navbar />
+            <MobileNavbar />
+        </MobileNavContextProvider>
+
     )
 }
 

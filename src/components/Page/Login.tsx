@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import React from 'react'
-import InputField from '@/components/Input/InputField'
+import Input from '@/components/Input/Input'
 import PasswordInput from '@/components/Input/PasswordInput'
 import LoginRegisterWrapper from '@/components/LoginRegisterWrapper/LoginRegisterWrapper'
 import GoogleButton from '@/components/Button/GoogleButton'
@@ -26,6 +26,7 @@ const validateSchema = yup.object({
 })
 
 const Login = (props: Props) => {
+
     const [error, setError] = React.useState('')
     const [loading, setLoading] = React.useState(false)
     const [isPending, startTransition] = React.useTransition()
@@ -47,7 +48,6 @@ const Login = (props: Props) => {
         }).then((res) => {
             if (res?.error) {
                 setError(res.error)
-                reset()
                 return
             }
             toast.success("Successfully login!")
@@ -66,11 +66,10 @@ const Login = (props: Props) => {
             </h1>
             <div className='max-w-[400px] w-full mx-auto relative'>
                 <div className="w-full md:space-y-6 sm:p-8 p-8  rounded-xl  border md:mt-0 sm:max-w-md bg-on_light_card_bg   dark:bg-on_dark_card_bg dark:border-on_dark_border">
-                    {(errors.email || errors.password || error !== '') && <ErrorFeedback message={errors.email?.message || errors.password?.message || error} />}
+                    {(error !== '') && <ErrorFeedback message={error} />}
                     <form className="space-y-4 md:space-y-6" action="#" onSubmit={submit}>
-                        <InputField type='text' placeholder='name@company.com' {...register("email")} />
-
-                        <PasswordInput placeholder="••••••••" {...register('password')} />
+                        <Input type='text' placeholder='name@company.com' {...register("email")} error={errors.email?.message} valid={errors.email ? "invalid" : "none"} />
+                        <PasswordInput placeholder="••••••••" {...register('password')} error={errors.password?.message} valid={errors.password ? "invalid" : "none"} />
 
                         <div className="flex items-center justify-between">
                             <Link href="#" className="text-sm text-on_light_text_white text-primary-600 hover:underline dark:text-on_dark_text_white">Forgot password?</Link>

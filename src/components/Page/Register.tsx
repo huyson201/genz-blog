@@ -2,7 +2,7 @@
 import useSWRMutation from 'swr/mutation'
 import Link from 'next/link'
 import React from 'react'
-import InputField from '@/components/Input/InputField'
+import Input from '@/components/Input/Input'
 import PasswordInput from '@/components/Input/PasswordInput'
 import LoginRegisterWrapper from '@/components/LoginRegisterWrapper/LoginRegisterWrapper'
 import GoogleButton from '@/components/Button/GoogleButton'
@@ -30,12 +30,11 @@ type Props = {}
 
 
 const Register = (props: Props) => {
-    const { trigger, isMutating, error: fetchError } = useSWRMutation('/auth/register', authService.register)
+    const { trigger, isMutating } = useSWRMutation('/auth/register', authService.register)
     const searchParams = useSearchParams()
     const callbackUrl = searchParams.get("callbackUrl")
     const router = useRouter()
     const [error, setError] = React.useState('')
-    const [loading, setLoading] = React.useState(false)
     const { handleSubmit, register, formState: { errors } } = useForm({
         resolver: yupResolver(validateSchema),
         reValidateMode: 'onBlur',
@@ -52,7 +51,7 @@ const Register = (props: Props) => {
                 return
             }
 
-            toast.error('Something error, please come back late!')
+            throw error
         }
     })
 
@@ -66,14 +65,13 @@ const Register = (props: Props) => {
             </h1>
             <div className='max-w-[400px] w-full mx-auto relative'>
                 <div className="w-full md:space-y-6 sm:p-8 p-8  rounded-xl  border md:mt-0 sm:max-w-md bg-on_light_card_bg border-on_light_border_2 dark:bg-on_dark_card_bg dark:border-on_dark_border">
-                    {(errors.name || errors.confirm_password || errors.email || errors.password || error !== '') && <ErrorFeedback message={errors.email?.message || errors.password?.message || errors.name?.message || errors.confirm_password?.message || error} />}
-
+                    {error !== '' && <ErrorFeedback message={errors.confirm_password?.message || error} />}
                     <form className="space-y-4 md:space-y-6" action="#" onSubmit={submit}>
-                        <InputField key={`full name`} type='text' placeholder='Full name' {...register("name")} />
-                        <InputField key={`email`} type='email' placeholder='name@company.com' {...register("email")} />
+                        <Input key={`full name`} type='text' placeholder='Full name' {...register("name")} error={errors.name?.message} valid={errors.name ? "invalid" : "none"} />
+                        <Input key={`email`} type='text' placeholder='name@company.com' {...register("email")} error={errors.email?.message} valid={errors.email ? "invalid" : "none"} />
 
-                        <PasswordInput key={`password`} placeholder="Password" {...register("password")} />
-                        <PasswordInput key={`confirm password`} placeholder="Confirm password" {...register("confirm_password")} />
+                        <PasswordInput key={`password`} placeholder="Password" {...register("password")} error={errors.password?.message} valid={errors.password ? "invalid" : "none"} />
+                        <PasswordInput key={`confirm password`} placeholder="Confirm password" {...register("confirm_password")} error={errors.confirm_password?.message} valid={errors.confirm_password ? "invalid" : "none"} />
 
                         <div className="flex items-center justify-between">
                             <Link href="#" className="text-sm text-on_light_text_white text-primary-600 hover:underline dark:text-on_dark_text_white">Forgot password?</Link>
@@ -85,7 +83,7 @@ const Register = (props: Props) => {
                             disabled={isMutating}
                             type='submit'>
                             {
-                                loading ? <ColorRing
+                                isMutating ? <ColorRing
                                     height="30"
                                     width="30"
                                     colors={['#fff', '#fff', '#fff', '#fff', '#fff']}

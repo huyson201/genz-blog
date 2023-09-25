@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { twMerge } from 'tailwind-merge';
 type Props = {
     words: string[],
@@ -29,14 +29,14 @@ const TypingAnimation = ({ words, className }: Props) => {
                 isDelete = !isDelete
             }
         }
-        const interval = setInterval(typeEffect, 200); // Adjust the typing speed here
+        const interval = setInterval(typeEffect, 200);
         return () => clearInterval(interval);
     }, [words]);
 
     return (
         <div>
             <span ref={wordRef} className={twMerge(className)}>
-                Designer
+
             </span>
             <span className='text-[29px] xs:text-[34px] sm:text-[44px] md:text-[60px] dark:text-white cursor-animate'>|</span>
         </div>

@@ -1,6 +1,6 @@
 
 "use client";
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { HiX } from 'react-icons/hi'
 import Logo from '../../Logo/Logo';
@@ -14,18 +14,25 @@ import { RotatingLines } from 'react-loader-spinner';
 import Image from 'next/image';
 import { Role } from '@/types/type';
 import useCallbackUrl from '@/hooks/useCallbackUrl';
+import { useMobileNav } from '@/contexts/MobileNavContext';
+import { usePathname } from 'next/navigation';
 
 interface Props {
-    open?: boolean
-    onRequestClose: () => void
 }
 
-const MobileNavbar = ({ open, onRequestClose }: Props) => {
+const MobileNavbar = ({ }: Props) => {
     const { data: session, status } = useSession()
     const callbackUrl = useCallbackUrl()
+    const mobileNav = useMobileNav()
+    const pathname = usePathname()
+    useEffect(() => {
+        if (!mobileNav?.isOpen) return
+        mobileNav?.close()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [pathname])
     return (
-        <Transition.Root show={open} as={Fragment}>
-            <Dialog as="div" className="relative z-[6] lg:hidden" onClose={onRequestClose}>
+        <Transition.Root show={mobileNav?.isOpen} as={Fragment}>
+            <Dialog as="div" className="relative z-[6] lg:hidden" onClose={() => mobileNav?.close()}>
                 <Transition.Child
                     as={Fragment}
                     enter="transition-opacity ease-linear duration-300"
@@ -54,7 +61,7 @@ const MobileNavbar = ({ open, onRequestClose }: Props) => {
                                 <button
                                     type="button"
                                     className="relative -m-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400"
-                                    onClick={onRequestClose}
+                                    onClick={() => mobileNav?.close()}
                                 >
                                     <span className="absolute -inset-0.5" />
                                     <span className="sr-only">Close menu</span>
@@ -66,6 +73,7 @@ const MobileNavbar = ({ open, onRequestClose }: Props) => {
                                 {
                                     navMenu.map(items => (
                                         <NavLink
+                                            exact={items.path === '/'}
                                             key={items.path} href={items.path}
                                             className='block text-on_text_gray_2 hover:text-[#708ab0] dark:text-[#e6f0ff] dark:hover:text-on_dark_text_gray transition-all
                                                         [&.active]:text-blue font-medium hover:px-1'>

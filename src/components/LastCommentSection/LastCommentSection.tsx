@@ -1,4 +1,4 @@
-
+"use client"
 import React from 'react'
 import author from '@/assets/profile.jpg'
 import Image from 'next/image'
@@ -12,7 +12,8 @@ type Props = {
 
 const LastCommentSection = ({ data }: Props) => {
     return (
-        <div className={twMerge('py-6')}>
+        <div className={twMerge('py-6')}
+        >
             <p className='text-sm text-[#708ab0] dark:text-on_dark_text_gray mb-4 transition-colors'>
                 &quot;{data.content}&quot;
             </p>
