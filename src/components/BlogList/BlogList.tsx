@@ -15,6 +15,17 @@ const BlogList = async ({ data }: Props) => {
         cloneData = await cloneData
     }
 
+
+    if (cloneData.totalDocs <= 0) {
+        return (
+            <div className='pt-12 pb-6  divide-y divide-on_light_border_2 dark:divide-on_dark_border'>
+                <div className='text-center text-on_light_text_gray dark:text-on_dark_text_gray'>
+                    There&apos;s nothing here
+                </div>
+            </div>
+        )
+    }
+
     return (
         <>
             <div className='pt-12 pb-6  divide-y divide-on_light_border_2 dark:divide-on_dark_border'>

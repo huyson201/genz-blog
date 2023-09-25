@@ -108,7 +108,7 @@ const MobileNavbar = ({ }: Props) => {
                                     status === "authenticated" && (
                                         <div>
                                             <div className='flex items-center gap-2'>
-                                                <Image className='rounded-full' src={session?.user.avatar_url || ""} alt='avatar' height={40} width={40} />
+                                                <Image className='rounded-full w-10 h-10' src={session?.user.avatar_url || ""} alt='avatar' height={40} width={40} />
                                                 <div className='space-y-0.5'>
                                                     <div className='text-sm font-semibold text-on_light_text_white dark:text-on_dark_text_white'>
                                                         Hello, {session?.user.name}

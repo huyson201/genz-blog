@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: Props) {
 const TagSlug = async ({ params: { slug }, searchParams: { page = 1 } }: Props) => {
     const tagInfo = await tagService.getTagBySlug(slug)
     if (!tagInfo) return notFound()
-    const res = tagService.getPostsBySlug(slug, { page })
+    const res = await tagService.getPostsBySlug(slug, { page })
     return (
         <section className='mb-24'>
             <Wrapper>
@@ -54,15 +54,7 @@ const TagSlug = async ({ params: { slug }, searchParams: { page = 1 } }: Props) 
                     <div className=' pb-6  border-b border-b-[#c2d4ee] dark:border-b-on_dark_border'>
                         <Breadcrumb replaceLastText={tagInfo.name} />
                     </div>
-                    <Suspense fallback={
-                        <div className='pt-12 pb-6  divide-y divide-on_light_border_2 dark:divide-on_dark_border'>
-                            {
-                                Array(10).fill(1).map((_, index) => <BlogRowSkeleton key={`row-${index}`} />)
-                            }
-                        </div>
-                    }>
-                        <BlogList data={res} currentPage={page} />
-                    </Suspense>
+                    <BlogList data={res} currentPage={page} />
                 </div>
             </Wrapper>
         </section>

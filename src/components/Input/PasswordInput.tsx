@@ -24,8 +24,7 @@ const PasswordInput = forwardRef<HTMLInputElement, Props>(({ className, variant,
                     {...props}
                     ref={ref}
                     type={isShow ? "text" : "password"}
-
-                    className={cn(inputVariants({ variant, inputSize, inputWidth, valid }))}
+                    className={cn(inputVariants({ variant, inputSize, inputWidth, valid, className }))}
                 />
                 <button
                     tabIndex={-1}

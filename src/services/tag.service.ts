@@ -58,7 +58,9 @@ const tagService = {
         ...apiConfig.headers,
       },
       method: "Get",
-      cache: "no-store",
+      next: {
+        revalidate: 3600,
+      },
     });
     const data = await res.json();
     if (!res.ok) {

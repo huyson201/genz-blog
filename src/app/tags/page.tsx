@@ -30,8 +30,10 @@ export const metadata: Metadata = {
         url: "/tags"
     },
 }
+export const revalidate = 0
 const TagsPage = async ({ searchParams: { page = 1 } }: Props) => {
-    const data = tagService.getTags({ page })
+    const data = await tagService.getTags({ page })
+    console.log(data.page)
     return (
         <section className='mb-24'>
             <Wrapper>
@@ -41,9 +43,7 @@ const TagsPage = async ({ searchParams: { page = 1 } }: Props) => {
                             Tags
                         </GradientText>
                     </h1>
-                    <Suspense fallback={<TagGridSkeleton />}>
-                        <TagGrid dataPromise={data} />
-                    </Suspense>
+                    <TagGrid data={data} />
                 </div>
             </Wrapper>
         </section>
@@ -52,10 +52,9 @@ const TagsPage = async ({ searchParams: { page = 1 } }: Props) => {
 
 export default TagsPage
 interface TagGridProps {
-    dataPromise: Promise<PaginateResponse<HashTag>>
+    data: PaginateResponse<HashTag>
 }
-const TagGrid = async ({ dataPromise }: TagGridProps) => {
-    const data = await dataPromise
+const TagGrid = async ({ data }: TagGridProps) => {
     return (
         <>
             <div className='text-center text-on_dark_text_gray text-sm sm:text-base my-4'>

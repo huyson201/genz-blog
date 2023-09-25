@@ -12,6 +12,8 @@ import { ChangePasswordData } from '@/types/type'
 import authService from '@/services/auth.service'
 import { useSession } from 'next-auth/react'
 import toast from 'react-hot-toast'
+import { Button, buttonVariants } from '@/components/Button/Button'
+import { cn } from '@/utils'
 const schema = yup.object({
     current_password: yup.string().required().min(6).max(32),
     new_password: yup.string().required().min(6).max(32),
@@ -55,44 +57,42 @@ const ChangePasswordForm = (props: Props) => {
 
 
     return (
-        <form action="#" className='mt-4 space-y-6' onSubmit={submit}>
+        <form action="#" className='mt-4 ' onSubmit={submit}>
             {
-                error && error !== "" && <ErrorFeedback message={error} />
+                error && <ErrorFeedback message={error} className='p-0' />
             }
-            <div>
-                <label htmlFor="#current-pw" className='text-sm dark:text-gray-500 text-[#606266]'>
-                    <span className='text-red-400'>*</span> Current password
-                </label>
-                <PasswordInput {...register("current_password")} id='current-pw' className='py-1 rounded mt-2' />
-                {
-                    errors.current_password && <ErrorFeedback message={errors.current_password.message || ""} />
-                }
-            </div>
-            <div>
-                <label htmlFor="#new-pw" className='text-sm dark:text-gray-500 text-[#606266]'>
-                    <span className='text-red-400'>*</span> New password
-                </label>
-                <PasswordInput {...register("new_password")} id='new-pw' className='py-1 rounded mt-2' />
-                {
-                    errors.new_password && <ErrorFeedback message={errors.new_password.message || ""} />
-                }
-            </div>
-            <div>
-                <label htmlFor="#confirm-pw" className='text-sm dark:text-gray-500 text-[#606266]'>
-                    <span className='text-red-400'>*</span> Re-enter new password
-                </label>
-                <PasswordInput {...register("confirm_new_password")} id='confirm-pw' className='py-1 rounded mt-2' />
-                {
-                    errors.confirm_new_password && <ErrorFeedback message={errors.confirm_new_password.message || ""} />
-                }
-            </div>
-            <div className='flex items-center justify-end gap-3 '>
-                <Link href={"/me"} className='text-sm px-2 py-1.5 rounded border hover:bg-gray-100 dark:hover:bg-on_dark_card_bg border-on_light_border_2 dark:border-on_dark_border transition-all'>
-                    Cancel
-                </Link>
-                <button type='submit' className='text-sm font-semibold rounded bg-primary-gradient text-white bg-200% hover:bg-right transition-all px-2 py-1.5'>
-                    Save Change
-                </button>
+
+            <div className='space-y-6'>
+                <div>
+                    <label htmlFor="#current-pw" className='text-sm dark:text-gray-500 text-[#606266]'>
+                        <span className='text-red-400'>*</span> Current password
+                    </label>
+                    <PasswordInput valid={errors.current_password ? "invalid" : "none"} error={errors.current_password?.message} inputSize={"default"} {...register("current_password")} id='current-pw' className=' mt-2' />
+
+                </div>
+                <div>
+                    <label htmlFor="#new-pw" className='text-sm dark:text-gray-500 text-[#606266]'>
+                        <span className='text-red-400'>*</span> New password
+                    </label>
+                    <PasswordInput valid={errors.new_password ? "invalid" : "none"} error={errors.new_password?.message} inputSize={"default"} {...register("new_password")} id='new-pw' className='mt-2' />
+
+                </div>
+                <div>
+                    <label htmlFor="#confirm-pw" className='text-sm dark:text-gray-500 text-[#606266]'>
+                        <span className='text-red-400'>*</span> Re-enter new password
+                    </label>
+                    <PasswordInput valid={errors.confirm_new_password ? "invalid" : "none"} error={errors.confirm_new_password?.message} inputSize={"default"} {...register("confirm_new_password")} id='confirm-pw' className=' mt-2' />
+
+                </div>
+                <div className='flex items-center justify-end gap-3 '>
+                    <Link href={"/me"} className={cn(buttonVariants({ variant: "outline", size: "sm" }))}>
+                        Cancel
+                    </Link>
+                    <Button type='submit' size={"sm"}>
+                        Save Change
+                    </Button>
+
+                </div>
             </div>
         </form>
     )

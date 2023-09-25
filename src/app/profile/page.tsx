@@ -6,9 +6,21 @@ import { getServerSession } from 'next-auth'
 import { options } from '../api/auth/[...nextauth]/options'
 import { RequireAuthException } from '@/lib/exception'
 import authService from '@/services/auth.service'
+import { Metadata } from 'next'
 
 type Props = {}
 
+export const metadata: Metadata = {
+    title: 'Profile - Customize Your Information - Gen Z Blogger',
+    description: "Explore and customize your profile on Gen Z Blogger with our user-friendly editing tool. Update your information, add details, and personalize your user profile the way you want.",
+    alternates: {
+        canonical: "/profile"
+    },
+    openGraph: {
+        title: 'Profile - Customize Your Information - Gen Z Blogger',
+        description: "Explore and customize your profile on Gen Z Blogger with our user-friendly editing tool. Update your information, add details, and personalize your user profile the way you want.",
+    },
+}
 const page = async (props: Props) => {
     const session = await getServerSession(options)
     if (!session || !session.backendTokens) throw new RequireAuthException()

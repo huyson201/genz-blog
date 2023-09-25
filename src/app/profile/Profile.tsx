@@ -1,57 +1,60 @@
 "use client"
+import { Button, buttonVariants } from '@/components/Button/Button'
 import ErrorFeedback from '@/components/ErrorFeedback/ErrorFeedback'
-import InputField from '@/components/Input/InputField'
+import Input from '@/components/Input/Input'
 import UploadImage from '@/components/UploadImage/UploadImage'
-import { RequireAuthException } from '@/lib/exception'
 import authService from '@/services/auth.service'
 import { Auth, UpdateProfileData } from '@/types/type'
-import { Metadata } from 'next'
+import { cn } from '@/utils'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { FormEvent, useRef, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import useSWRMutation from 'swr/mutation'
 import { twMerge } from 'tailwind-merge'
-
+import * as yup from 'yup'
 type Props = {
     data: Auth
 }
-export const metadata: Metadata = {
-    title: 'Profile - Customize Your Information - Gen Z Blogger',
-    description: "Explore and customize your profile on Gen Z Blogger with our user-friendly editing tool. Update your information, add details, and personalize your user profile the way you want.",
-    alternates: {
-        canonical: "/profile"
-    },
-    openGraph: {
-        title: 'Profile - Customize Your Information - Gen Z Blogger',
-        description: "Explore and customize your profile on Gen Z Blogger with our user-friendly editing tool. Update your information, add details, and personalize your user profile the way you want.",
-    },
-}
+
+const schema = yup.object({
+    name: yup.string().required()
+})
+
 const Profile = ({ data }: Props) => {
     const { data: session, update: sessionUpdate } = useSession()
     const [openBrowser, setBrowser] = useState(false)
     const { trigger, isMutating } = useSWRMutation("/auth/profile", (url: string, { arg }: { arg: { token: string, data: UpdateProfileData } }) => authService.updateProfile(arg.token, arg.data))
     const [error, setError] = useState("")
     const [previewImg, setPreviewImg] = useState<string>()
-    const inputNameRef = useRef<HTMLInputElement>(null)
     const router = useRouter()
 
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        setError("")
-        if (!inputNameRef.current || inputNameRef.current.value === "") {
-            setError("Name is required")
+
+
+    const handleSelectImg = (img: string) => {
+        setPreviewImg(img)
+        setBrowser(false)
+    }
+
+    const { handleSubmit, register, formState: { errors } } = useForm({
+        resolver: yupResolver(schema),
+        reValidateMode: "onChange"
+    })
+
+    const submitForm = handleSubmit(async (formData) => {
+        if (!session) return
+        if ((!previewImg || previewImg === "") && formData.name === data.name) {
             return
         }
-
-        if (!session) return
+        if (previewImg === data.avatar_url && formData.name === data.name) return
         try {
-            const value = inputNameRef.current.value
             const triggerPromise = trigger({
                 token: session.backendTokens.access_token,
-                data: { name: value, avatar_url: previewImg }
+                data: { name: formData.name, avatar_url: previewImg }
             })
 
             const res = await toast.promise(triggerPromise, {
@@ -59,7 +62,7 @@ const Profile = ({ data }: Props) => {
                 success: "Successfully update profile!",
                 loading: "saving!"
             })
-            const sessionRes = await sessionUpdate({
+            await sessionUpdate({
                 ...session,
                 user: res
             })
@@ -67,22 +70,23 @@ const Profile = ({ data }: Props) => {
         } catch (error: any) {
             setError(error.message)
         }
-    }
-
-    const handleSelectImg = (img: string) => {
-        setPreviewImg(img)
-        setBrowser(false)
-    }
+    })
 
     return (
         <>
-            <form action={"#"} onSubmit={handleSubmit} className='mt-4 space-y-6'>
+            <form action={"#"} onSubmit={submitForm} className='mt-4 space-y-6'>
+
                 <div className="flex items-center justify-center ">
                     <div className='relative cursor-pointer' onClick={() => setBrowser(true)}>
                         <Image src={previewImg ?? data.avatar_url} alt='avatar' height={72} width={72} className='rounded-full w-[72px] h-[72px]' />
                         <div className='text-xs text-center font-medium absolute bottom-0 w-full left-0 bg-black/60 text-white'>Change</div>
                     </div>
                 </div>
+                {
+                    error !== "" && <div>
+                        <ErrorFeedback message={error} className='p-0' />
+                    </div>
+                }
                 <div>
                     <div className='text-sm dark:text-gray-500 text-[#606266]'>Email</div>
                     <div className=' mt-2 flex items-center gap-6'>
@@ -98,20 +102,17 @@ const Profile = ({ data }: Props) => {
                     <label htmlFor="#new-pw" className='text-sm dark:text-gray-500 text-[#606266]'>
                         <span className='text-red-400'>*</span> Display Name
                     </label>
-                    <InputField ref={inputNameRef} className='mt-2 py-1 rounded' type='text' defaultValue={data.name} />
+                    <Input {...register("name")} className='mt-2 text-sm' inputSize={"xs"} type='text' defaultValue={data.name} error={errors.name?.message} valid={errors.name ? "invalid" : "none"} />
                 </div>
-                {
-                    error !== "" && <div>
-                        <ErrorFeedback message='error' />
-                    </div>
-                }
+
                 <div className='flex items-center justify-end gap-3 '>
-                    <Link href={"/me"} className='text-sm px-2 py-1.5 rounded border hover:bg-gray-100 dark:hover:bg-on_dark_card_bg border-on_light_border_2 dark:border-on_dark_border transition-all'>
+                    <Link href={"/me"} className={cn(buttonVariants({ size: "xs", variant: "outline" }))}>
                         Cancel
                     </Link>
-                    <button className='text-sm font-semibold rounded bg-primary-gradient text-white bg-200% hover:bg-right transition-all px-2 py-1.5'>
+                    <Button disabled={isMutating} disable={isMutating ? "disabled" : "none"} size={"xs"}>
                         Save Change
-                    </button>
+                    </Button>
+
                 </div>
             </form>
             <UploadImage onSelectImage={handleSelectImg} showBlankSelect={false} open={openBrowser} onRequestClose={() => setBrowser(false)} />

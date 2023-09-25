@@ -38,13 +38,13 @@ const SettingHome = async (props: Props) => {
             <div className='grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 mt-6 gap-4'>
                 <Link href={"/profile"} className='block'>
                     <div className='hover:shadow-md hover:shadow-black/10 dark:hover:shadow-white/10 w-full  transition-all rounded-sm flex items-center justify-center flex-col py-4 dark:bg-on_dark_card_bg bg-[#dfe6e9]'>
-                        <Image width={80} height={80} src={ProfileIcon} alt='profile_icon' />
+                        <Image width={80} height={80} src={ProfileIcon} alt='profile_icon' className='w-20 h-20' />
                         <h3 className='mt-2 font-medium'>Profile</h3>
                     </div>
                 </Link>
                 <Link href={"/security/password"} className='block'>
                     <div className='hover:shadow-md hover:shadow-black/10 dark:hover:shadow-white/10 w-full  transition-all rounded-sm flex items-center justify-center flex-col py-4 dark:bg-on_dark_card_bg bg-[#dfe6e9]'>
-                        <Image width={80} height={80} src={PasswordIcon} alt='profile_icon' />
+                        <Image width={80} height={80} src={PasswordIcon} alt='profile_icon' className='w-20 h-20' />
                         <h3 className='mt-2 font-medium'>Password</h3>
                     </div>
                 </Link>

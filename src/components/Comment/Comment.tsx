@@ -100,7 +100,7 @@ const Comment = ({ comment, canReply, onUpdate, onDelete }: Props) => {
         <div className='comment-box '>
             <div className='flex-col gap-y-4 md:flex-row flex justify-between items-start'>
                 <div className='flex items-center gap-x-2 md:flex-1 comment-head'>
-                    <Image src={comment.author.avatar_url} alt='avatar' width={40} height={40} className='rounded-full' />
+                    <Image src={comment.author.avatar_url} alt='avatar' width={40} height={40} className='rounded-full w-10 h-10' />
                     <div>
                         <div className='font-bold text-[#4e658a] dark:text-[#66768f]'>
                             {comment.author.name}

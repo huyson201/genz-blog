@@ -10,6 +10,7 @@ export const inputVariants = cva("", {
             transition-all outline-none bg-on_light_card_bg dark:placeholder-on_dark_placeholder placeholder-on_light_placeholder `
         },
         inputSize: {
+            default: "py-1 px-4 rounded-sm",
             xs: "py-2 px-4 rounded-sm",
             sm: "p-4 rounded-lg",
             custom: ""

@@ -7,6 +7,7 @@ const buttonVariants = cva("transition-all outline-none text-center ", {
     variants: {
         variant: {
             primary: 'primary-gradient-btn font-bold text-white hover:bg-right duration-500',
+            outline: "border hover:bg-gray-100 dark:hover:bg-on_dark_card_bg border-on_light_border_2 dark:border-on_dark_border",
             custom: ''
         },
         size: {
