@@ -4,6 +4,7 @@ import Breadcrumb from '@/components/Breadcrumb/Breadcrumb'
 import Wrapper from '@/components/Common/Wrapper/Wrapper'
 import BlogRowSkeleton from '@/components/Skeleton/BlogRowSkeleton'
 import tagService from '@/services/tag.service'
+import { createOpenGraphImg } from '@/utils'
 import { notFound } from 'next/navigation'
 import React, { Suspense } from 'react'
 
@@ -31,7 +32,7 @@ export async function generateMetadata({ params }: Props) {
         openGraph: {
             title: title,
             description: desc,
-            images: [`/api/screenshot?url=${process.env.VERCEL_URL || `http://localhost:${process.env.PORT || 3000}`}/tags/${params.slug}`]
+            images: [`/api/screenshot?url=${createOpenGraphImg()}/tags/${params.slug}`]
         },
 
     }

@@ -7,6 +7,7 @@ import Footer from '@/components/Common/Footer/Footer'
 import NavbarWrapper from '@/components/Navbar/NavbarWrapper/NavbarWrapper'
 import { Toaster } from 'react-hot-toast'
 import './globals.css'
+import { createOpenGraphImg } from '@/utils'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -18,6 +19,9 @@ const noto = Noto_Sans({
   subsets: ["latin", "vietnamese"],
   variable: "--noto-sans-font"
 })
+
+
+
 export const metadata: Metadata = {
   title: 'Discovering Code and Living Fully - Gen Z Blogger',
   description: 'Explore the world of programming, tech, and life through the eyes of a Gen Z blogger. Get coding tips, life lessons, and more.',
@@ -28,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Discovering Code and Living Fully - Gen Z Blogger',
     description: 'Explore the world of programming, tech, and life through the eyes of a Gen Z blogger. Get coding tips, life lessons, and more.',
-    images: [`/api/screenshot?url=${process.env.VERCEL_URL || `http://localhost:${process.env.PORT || 3000}`}`],
+    images: [`/api/screenshot?url=${createOpenGraphImg()}`],
     type: 'website',
     siteName: "Gen Z Blogger"
 

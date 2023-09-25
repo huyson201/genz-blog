@@ -4,6 +4,7 @@ import Breadcrumb from '@/components/Breadcrumb/Breadcrumb'
 import Wrapper from '@/components/Common/Wrapper/Wrapper'
 import GoogleMap from '@/components/GoogleMap/GoogleMap'
 import GradientText from '@/components/GradientText/GradientText'
+import { createOpenGraphImg } from '@/utils'
 import { Metadata } from 'next'
 import React from 'react'
 
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Contact - Gen Z Blogger',
         description: "Have questions or feedback? Contact us to get in touch with our team. We're here to assist you. Reach out today!",
-        images: [`/api/screenshot?url=${process.env.VERCEL_URL || `http://localhost:${process.env.PORT || 3000}`}/contact`]
+        images: [`/api/screenshot?url=${createOpenGraphImg()}/contact`]
     },
 }
 

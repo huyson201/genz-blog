@@ -12,7 +12,6 @@ export async function GET(req: Request, response: NextApiResponse) {
       }
     );
   }
-  let browser;
   try {
     const fetchUrl = `https://screenia.best/api/screenshot?url=${url}&type=png`;
     let options = { method: "GET" };

@@ -11,7 +11,7 @@ import TagList from '@/components/TagList/TagList'
 import { notFound } from 'next/navigation'
 import { Auth } from '@/types/type'
 import postService from '@/services/post.service'
-import { calcBlogReadingTime, formatDate } from '@/utils'
+import { calcBlogReadingTime, createOpenGraphImg, formatDate } from '@/utils'
 import MarkdownArea from '@/components/MarkdownArea/MarkdownArea'
 import CommentSection from '@/components/Comment/CommentSection'
 interface Props {
@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: Props) {
         openGraph: {
             title: title,
             description: post.description,
-            images: [`/api/screenshot?url=${process.env.VERCEL_URL || `http://localhost:${process.env.PORT || 3000}`}/blogs/${params.id}`]
+            images: [`/api/screenshot?url=${createOpenGraphImg()}/blogs/${params.id}`]
         },
 
     }

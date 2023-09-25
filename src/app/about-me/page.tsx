@@ -12,6 +12,7 @@ import { FaUserAlt } from 'react-icons/fa'
 import { BsFillCalendarDayFill, BsFillTelephoneFill } from 'react-icons/bs'
 import { IoMdMail } from 'react-icons/io'
 import { Metadata } from 'next'
+import { createOpenGraphImg } from '@/utils'
 
 
 type Props = {}
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'My Portfolio - Learn About Me and My Work - Gen Z Blogger',
         description: "Explore my portfolio to get to know me better and discover my work. Learn about my skills, experiences, and projects in web development, design, and more.",
-        images: [`/api/screenshot?url=${process.env.VERCEL_URL || `http://localhost:${process.env.PORT || 3000}`}/about-me`]
+        images: [`/api/screenshot?url=${createOpenGraphImg()}/about-me`]
     },
 }
 

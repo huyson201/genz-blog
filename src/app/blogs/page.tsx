@@ -5,6 +5,7 @@ import Wrapper from '@/components/Common/Wrapper/Wrapper'
 import GradientText from '@/components/GradientText/GradientText'
 import BlogRowSkeleton from '@/components/Skeleton/BlogRowSkeleton'
 import postService from '@/services/post.service'
+import { createOpenGraphImg } from '@/utils'
 import { Metadata } from 'next'
 import React, { Suspense } from 'react'
 
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Recent Blogs - Gen Z Blogger',
         description: "Discover the latest blog posts  on Gen Z blogger. Stay informed with our recent articles covering a wide range of topics, from technology to lifestyle.",
-        images: [`/api/screenshot?url=${process.env.VERCEL_URL || `http://localhost:${process.env.PORT || 3000}`}/blogs`]
+        images: [`/api/screenshot?url=${createOpenGraphImg()}/blogs`]
     },
 }
 

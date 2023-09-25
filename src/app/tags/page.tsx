@@ -6,6 +6,7 @@ import Pagination from '@/components/Pagination/Pagination'
 import TagGridSkeleton from '@/components/Skeleton/TagGridSkeleton'
 import tagService from '@/services/tag.service'
 import { HashTag, PaginateResponse } from '@/types/type'
+import { createOpenGraphImg } from '@/utils'
 import { Metadata } from 'next'
 import Link from 'next/link'
 import React, { Suspense } from 'react'
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Hashtags - Explore a Variety of Topics - Gen Z Blogger',
         description: "Discover a diverse collection of hashtags covering a wide range of topics. Explore and engage with discussions on your favorite subjects using our hashtag directory."
-        , images: [`/api/screenshot?url=${process.env.VERCEL_URL || `http://localhost:${process.env.PORT || 3000}`}/tags`]
+        , images: [`/api/screenshot?url=${createOpenGraphImg()}/tags`]
     },
 }
 const TagsPage = async ({ searchParams: { page = 1 } }: Props) => {

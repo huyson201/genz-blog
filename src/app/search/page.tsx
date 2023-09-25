@@ -3,6 +3,7 @@ import BlogRow from '@/components/BlogList/BlogRow/BlogRow'
 import Breadcrumb from '@/components/Breadcrumb/Breadcrumb'
 import Pagination from '@/components/Pagination/Pagination'
 import postService from '@/services/post.service'
+import { createOpenGraphImg } from '@/utils'
 import { notFound } from 'next/navigation'
 import React from 'react'
 
@@ -27,7 +28,7 @@ export async function generateMetadata(props: Props) {
         openGraph: {
             title: title,
             description: desc,
-            images: [`/api/screenshot?url=${process.env.VERCEL_URL || `http://localhost:${process.env.PORT || 3000}`}/search?q=${props.searchParams.q}`]
+            images: [`/api/screenshot?url=${createOpenGraphImg()}/search?q=${props.searchParams.q}`]
         },
 
     }

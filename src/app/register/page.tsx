@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import Register from '@/components/Page/Register'
+import { createOpenGraphImg } from '@/utils'
 
 
 type Props = {}
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Sign Up - Create Your Account - Gen Z Blogger',
         description: "Register and create your account today. Join our community and get started on your journey. Sign up now for access to exclusive features.",
-        images: [`/api/screenshot?url=${process.env.VERCEL_URL || `http://localhost:${process.env.PORT || 3000}`}/register`]
+        images: [`/api/screenshot?url=${createOpenGraphImg()}/register`]
     },
 }
 
