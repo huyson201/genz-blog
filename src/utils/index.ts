@@ -10,3 +10,11 @@ export * from "./textFormat";
 export const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs));
 };
+
+export const createOpenGraphImg = () => {
+  if (!process.env.VERCEL_URL)
+    return `http://localhost:${process.env.PORT || 3000}`;
+  if (!/https|http/i.test(process.env.VERCEL_URL))
+    return `https://${process.env.VERCEL_URL}`;
+  return `${process.env.VERCEL_URL}`;
+};

@@ -44,9 +44,11 @@ const Navbar = ({ onRequestOpenNavMobile }: Props) => {
                 if (navbarRef.current.classList.contains("sticky-bar")) return
                 navbarRef.current.classList.add("sticky-bar")
             }
-            if (window.scrollY < 80) {
+            else {
+                if (!navbarRef.current.classList.contains("sticky-bar")) return
                 navbarRef.current.classList.remove("sticky-bar")
             }
+
         }
 
         window.addEventListener("scroll", stickyEffect)
@@ -57,7 +59,6 @@ const Navbar = ({ onRequestOpenNavMobile }: Props) => {
 
     return (
         <nav
-            onScroll={(e) => { }}
             ref={navbarRef}
             className={twMerge(`dark:bg-on_dark_body_bg transition-all bg-on_light_body_bg py-2 sm:py-[15px] mt-[15px]`)}>
             <Wrapper className='relative flex items-center justify-between'>
