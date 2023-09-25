@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    html {
+      -webkit-tap-highlight-color: transparent;
+    }
+  }
 .gradient-text{
     @apply bg-gradient-to-r from-blue via-teal to-teal text-transparent bg-clip-text ;
 }

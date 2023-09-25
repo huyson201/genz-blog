@@ -27,14 +27,15 @@ export const metadata: Metadata = {
   description: 'Explore the world of programming, tech, and life through the eyes of a Gen Z blogger. Get coding tips, life lessons, and more.',
   applicationName: "Gen z Blogger",
   alternates: {
-    canonical: process.env.WEB_HOST_NAME
+    canonical: "/"
   },
   openGraph: {
     title: 'Discovering Code and Living Fully - Gen Z Blogger',
     description: 'Explore the world of programming, tech, and life through the eyes of a Gen Z blogger. Get coding tips, life lessons, and more.',
     images: [`/api/screenshot?url=${createOpenGraphImg()}`],
     type: 'website',
-    siteName: "Gen Z Blogger"
+    siteName: "Gen Z Blogger",
+    url: "/"
 
   },
 }

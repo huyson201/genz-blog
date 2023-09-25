@@ -28,7 +28,8 @@ export async function generateMetadata(props: Props) {
         openGraph: {
             title: title,
             description: desc,
-            images: [`/api/screenshot?url=${createOpenGraphImg()}/search?q=${props.searchParams.q}`]
+            images: [`/api/screenshot?url=${createOpenGraphImg()}/search?q=${props.searchParams.q}`],
+            url: `/search?q=${props.searchParams.q}`
         },
 
     }

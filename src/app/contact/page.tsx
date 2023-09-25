@@ -20,7 +20,8 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Contact - Gen Z Blogger',
         description: "Have questions or feedback? Contact us to get in touch with our team. We're here to assist you. Reach out today!",
-        images: [`/api/screenshot?url=${createOpenGraphImg()}/contact`]
+        images: [`/api/screenshot?url=${createOpenGraphImg()}/contact`],
+        url: "/contact"
     },
 }
 

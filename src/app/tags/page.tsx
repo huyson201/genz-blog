@@ -26,7 +26,8 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Hashtags - Explore a Variety of Topics - Gen Z Blogger',
         description: "Discover a diverse collection of hashtags covering a wide range of topics. Explore and engage with discussions on your favorite subjects using our hashtag directory."
-        , images: [`/api/screenshot?url=${createOpenGraphImg()}/tags`]
+        , images: [`/api/screenshot?url=${createOpenGraphImg()}/tags`],
+        url: "/tags"
     },
 }
 const TagsPage = async ({ searchParams: { page = 1 } }: Props) => {

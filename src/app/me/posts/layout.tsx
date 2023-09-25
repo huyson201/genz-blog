@@ -1,5 +1,5 @@
 "use client"
-import InputField from '@/components/Input/InputField'
+import Input from '@/components/Input/Input'
 import { useRouter, useSearchParams } from 'next/navigation'
 import React, { FormEvent, useRef } from 'react'
 
@@ -20,7 +20,7 @@ const Layout = ({ children }: Props) => {
         <div className='px-2 md:px-4'>
             <form action={"#"} method='get' className='mb-6' onSubmit={handleSubmit}>
                 <div className="flex w-full">
-                    <InputField ref={inputRef} wrapperClass='w-full' type='text' placeholder='Search' className='rounded text-sm py-2' defaultValue={searchParams.get("q") || ""} />
+                    <Input ref={inputRef} wrapperClass='w-full' type='text' placeholder='Search' className='rounded text-sm py-2' defaultValue={searchParams.get("q") || ""} />
                     <button type="submit" className=" p-2.5 text-sm 
                     font-medium h-full dark:text-[#7f92b0] dark:bg-on_dark_card_bg order dark:focus:border-on_text_gray_2
                     dark:border-on_dark_border outline-none bg-on_light_card_bg border-on_light_border_2 rounded ml-3 text-on_light_text_white  border">

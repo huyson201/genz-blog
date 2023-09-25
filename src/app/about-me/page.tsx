@@ -7,7 +7,6 @@ import GradientText from '@/components/GradientText/GradientText'
 import SocialCircle from '@/components/SocialCircle/SocialCircle'
 import { FaFacebookF, FaInstagram, FaLocationDot, FaTwitter } from 'react-icons/fa6'
 import { PiGithubLogoFill } from 'react-icons/pi'
-import { BiSolidUserRectangle } from 'react-icons/bi'
 import { FaUserAlt } from 'react-icons/fa'
 import { BsFillCalendarDayFill, BsFillTelephoneFill } from 'react-icons/bs'
 import { IoMdMail } from 'react-icons/io'
@@ -20,12 +19,13 @@ export const metadata: Metadata = {
     title: 'My Portfolio - Learn About Me and My Work - Gen Z Blogger',
     description: "Explore my portfolio to get to know me better and discover my work. Learn about my skills, experiences, and projects in web development, design, and more.",
     alternates: {
-        canonical: "about-me"
+        canonical: "/about-me"
     },
     openGraph: {
         title: 'My Portfolio - Learn About Me and My Work - Gen Z Blogger',
         description: "Explore my portfolio to get to know me better and discover my work. Learn about my skills, experiences, and projects in web development, design, and more.",
-        images: [`/api/screenshot?url=${createOpenGraphImg()}/about-me`]
+        images: [`/api/screenshot?url=${createOpenGraphImg()}/about-me`],
+        url: "/about-me"
     },
 }
 
