@@ -1,7 +1,5 @@
 import { NextApiResponse } from "next";
 import { NextResponse } from "next/server";
-import puppeteer from "puppeteer";
-
 export async function GET(req: Request, response: NextApiResponse) {
   const { searchParams } = new URL(req.url);
   const url = searchParams.get("url");
@@ -14,19 +12,17 @@ export async function GET(req: Request, response: NextApiResponse) {
       }
     );
   }
+  let browser;
   try {
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    await page.goto(url);
-    const screenshot = await page.screenshot({
-      omitBackground: true,
-    });
-    await browser.close();
-
-    const res = new NextResponse(screenshot);
+    const fetchUrl = `https://screenia.best/api/screenshot?url=${url}&type=png`;
+    let options = { method: "GET" };
+    const result = await fetch(fetchUrl, options);
+    const data = await result.blob();
+    const res = new NextResponse(data);
     res.headers.set("Content-Type", "image/png");
     return res;
   } catch (error) {
+    console.log(error);
     return NextResponse.json(
       { error: "Internal Server Error" },
       {
