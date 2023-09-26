@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      >
+
+
+<url>
+  <loc>https://genz-blog.vercel.app/</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/blogs</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/about-me</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/contact</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/blogs/java-read-text-file-65122f88c71b5635a7284c52</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/java</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/blogs/git-pull-va-git-fetch-tuong-tu-nhu-dinh-hon-va-ket-hon-tai-san-thuoc-ve-ai-65111b08153a97775a01420d</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/git</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/github</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/blogs/cau-truc-du-lieu-va-giai-thuat-hoc-o-dau-hoc-nhu-the-nao-va-ap-dung-nhu-the-nao-de-tang-level-va-luong-651118fb378d0d410c234705</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/javascript</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/nodejs</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/blogs/how-to-add-simple-pagination-to-your-next-js-13-app-65111752378d0d410c2346ed</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/nextjs</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/blogs/build-a-next-js-app-to-capture-website-screenshots-using-puppeteer-65110bc3d20dd3f97ee2970a</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/blogs/phan-trang-dinh-cao-nhu-stackoverflow-voi-es6-650c06f6edac00ce9e0053c2</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/tip-js</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/blogs/10-thu-thuat-xu-ly-chuoi-tuyet-voi-trong-javascript-650c03ff473b22f75b198310</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/reactjs</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/blogs/6-easy-steps-to-use-next-auth-in-next-js-13-using-route-handler-650ad7f5eb764e747ccde9f0</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/next-auth</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/blogs/add-nextauth-to-nextjs-13-and-authenticate-with-github-650ad3d2565d2ee8c91e077f</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/blogs/upgrading-to-next-js-13-and-opting-in-to-the-app-directory-beta-650a52338928083f671c80d9</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/announcement</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/blogs/page/1</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/blogs/page/2</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/house</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/life</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/trevel-tip</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/beauty</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/nature</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/demo</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/test-post</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/test</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/hello-world</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/asp-net</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/typescript</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/wordpress</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/windows</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/postgresql</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/angluar</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/python</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/ios</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/cpp</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/php</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/csharp</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/devops</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/net</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/mysql</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/sass</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/page/1</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/page/2</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/blogs/digital-design-that-will-help-you-start-your-business-65070112244a89af916be974</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/android</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/html5</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/css</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/nestjs</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/laravel</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/welcome</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/son-new-post</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://genz-blog.vercel.app/tags/new-blogs</loc>
+  <lastmod>2023-09-26T02:22:41+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+
+
+</urlset>
