@@ -1,4 +1,3 @@
-import Navbar from '@/components/Navbar/Navbar'
 import type { Metadata } from 'next'
 import { Inter, Noto_Sans } from 'next/font/google'
 import { twMerge } from 'tailwind-merge'
@@ -21,11 +20,13 @@ const noto = Noto_Sans({
 })
 
 
-
 export const metadata: Metadata = {
   title: 'Discovering Code and Living Fully - Gen Z Blogger',
   description: 'Explore the world of programming, tech, and life through the eyes of a Gen Z blogger. Get coding tips, life lessons, and more.',
   applicationName: "Gen z Blogger",
+  other: {
+    "google-site-verification": "bQvN6nvIxBuTp2W5D8Chnp8h2zU-fDfgokwzwN08vl0"
+  },
   alternates: {
     canonical: "/"
   },

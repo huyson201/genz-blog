@@ -20,6 +20,7 @@ export default function Home() {
 
   return (
     <main>
+
       {/* home cover */}
       <section className='home-cover'>
         <Wrapper className='relative z-[2]'>
