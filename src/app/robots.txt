@@ -4,4 +4,4 @@ Disallow: /security/
 Disallow: /publish/
 Disallow: /me
 
-
+Sitemap: https://genz-blog.vercel.app/sitemap.xml
