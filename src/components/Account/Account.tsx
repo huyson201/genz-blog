@@ -35,7 +35,7 @@ const Account = (props: Props) => {
             }
             {
                 status === "unauthenticated" && (
-                    <Link href={`/login${callbackUrl !== null ? `?callbackUrl=${callbackUrl}` : ""}`}
+                    <Link href={`/auth/login${callbackUrl !== null ? `?callbackUrl=${callbackUrl}` : ""}`}
                         className={cn(buttonVariants({ className: "hidden sm:inline-block", size: "xs" }))}>
                         Sign in
                     </Link>

@@ -25,7 +25,7 @@ export default function UserMenu({ auth, tokens }: Props) {
             signOut({
                 redirect: false
             }).then(res => {
-                router.push(`/login`)
+                router.push(`/auth/login`)
             })
         }
     }

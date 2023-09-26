@@ -9,7 +9,7 @@ interface Props {
 }
 const PrivateRoute = ({ children }: Props) => {
     const session = getServerSession(options)
-    if (!session) return redirect("/login")
+    if (!session) return redirect("/auth/login")
     return children;
 }
 

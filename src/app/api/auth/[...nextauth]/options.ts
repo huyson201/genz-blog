@@ -116,7 +116,8 @@ export const options: NextAuthOptions = {
     },
   },
   pages: {
-    signIn: "/login",
+    signIn: "/auth/login",
+    verifyRequest: "/auth/verify-request",
   },
   debug: process.env.NODE_ENV === "development",
 };

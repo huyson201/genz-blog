@@ -8,12 +8,13 @@ import { twMerge } from 'tailwind-merge'
 interface Props {
     className?: string,
     totalPage: number,
-    currentPage: number
+    currentPage: number,
+    pathname?: string
 }
 
-const Pagination = ({ className, totalPage, currentPage }: Props) => {
+const Pagination = ({ className, totalPage, currentPage, pathname }: Props) => {
     const data = usePagination(totalPage, currentPage)
-    const pathname = usePathname()
+    const currentPathname = usePathname()
 
     return (
         <div className={twMerge(className)} >
@@ -21,7 +22,7 @@ const Pagination = ({ className, totalPage, currentPage }: Props) => {
                 {
                     data && data.prevPage !== null && (
                         <li className='order-[10] sm:order-first'>
-                            <Link href={`${pathname}?page=${data.prevPage}`} className="flex items-center justify-center rounded-full w-10 h-10 ml-0 leading-tight 
+                            <Link href={pathname ? `${pathname}/page/${data.prevPage}` : `${currentPathname}?page=${data.prevPage}`} className="flex items-center justify-center rounded-full w-10 h-10 ml-0 leading-tight 
                                             dark:bg-on_dark_bg_2 bg-[#7f92b0] font-bold text-base text-white  hover:bg-blue dark:hover:bg-blue transition-all
                                             hover:scale-105 duration-500 ">
                                 <BsArrowLeftShort className={"text-xl"} />
@@ -33,7 +34,6 @@ const Pagination = ({ className, totalPage, currentPage }: Props) => {
                 {
                     data && data.pages.map((page, index) => {
                         if (typeof page === "string") {
-                            console.log("string", index)
                             return (
                                 <li key={`dot-${index}`}>
                                     <span className="flex items-center justify-center rounded-full w-10 h-10 leading-tight 
@@ -45,7 +45,7 @@ const Pagination = ({ className, totalPage, currentPage }: Props) => {
 
                         return (
                             <li key={`page-${page}`}>
-                                <Link href={`${pathname}?page=${page}`}
+                                <Link href={pathname ? `${pathname}/page/${page}` : `${currentPathname}?page=${page}`}
                                     className={twMerge(`flex items-center justify-center rounded-full w-10 h-10 leading-tight 
                                     dark:bg-on_dark_bg_2 bg-[#7f92b0] font-bold text-base text-white  hover:bg-blue dark:hover:bg-blue transition-all
                                     hover:scale-105 duration-500 [&.active]:bg-blue `, currentPage === page && 'active')}>
@@ -59,7 +59,7 @@ const Pagination = ({ className, totalPage, currentPage }: Props) => {
                 {
                     data && data.nextPage !== null && (
                         <li className='order-[11]'>
-                            <Link href={`${pathname}?page=${data.nextPage}`} className="flex items-center justify-center rounded-full w-10 h-10 leading-tight 
+                            <Link href={pathname ? `${pathname}/page/${data.nextPage}` : `${currentPathname}?page=${data.nextPage}`} className="flex items-center justify-center rounded-full w-10 h-10 leading-tight 
                                                 dark:bg-on_dark_bg_2 bg-[#7f92b0] font-bold text-base text-white  hover:bg-blue dark:hover:bg-blue transition-all
                                                 hover:scale-105 duration-500">
                                 <BsArrowRightShort className="text-xl" />

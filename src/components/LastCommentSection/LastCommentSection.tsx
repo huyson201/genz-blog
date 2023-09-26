@@ -14,8 +14,8 @@ const LastCommentSection = ({ data }: Props) => {
     return (
         <div className={twMerge('py-6')}
         >
-            <p className='text-sm text-[#708ab0] dark:text-on_dark_text_gray mb-4 transition-colors'>
-                &quot;{data.content}&quot;
+            <p className='text-sm text-[#708ab0] dark:text-on_dark_text_gray mb-4 transition-colors '>
+                &quot;{data.content.length > 125 ? data.content.slice(0, 125) + "..." : data.content}&quot;
             </p>
             <div className='flex items-center space-x-4 '>
                 <Image className='rounded-full w-8 h-8' src={author} alt='author' />

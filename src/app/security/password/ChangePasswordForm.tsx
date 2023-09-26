@@ -25,7 +25,7 @@ const ChangePasswordForm = (props: Props) => {
     const router = useRouter()
     const [error, setError] = useState<string>()
     const { data: session } = useSession()
-    const { trigger, isMutating, reset: resetMutate } = useSWRMutation("/auth/change-password",
+    const { trigger, isMutating } = useSWRMutation("/auth/change-password",
         (
             url: string,
             { arg }: { arg: { token: string; data: ChangePasswordData; } }
@@ -88,7 +88,7 @@ const ChangePasswordForm = (props: Props) => {
                     <Link href={"/me"} className={cn(buttonVariants({ variant: "outline", size: "sm" }))}>
                         Cancel
                     </Link>
-                    <Button type='submit' size={"sm"}>
+                    <Button disabled={isMutating} disable={isMutating ? "disabled" : "none"} type='submit' size={"sm"}>
                         Save Change
                     </Button>
 

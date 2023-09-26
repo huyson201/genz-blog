@@ -52,7 +52,7 @@ const CommentInput = ({ onSubmit, onRequestCancel, showCancelButton, rows, defau
                 {
                     status === "unauthenticated" && <Link
                         className={cn(buttonVariants({ size: "sm" }))}
-                        href={{ href: "/login", query: { callbackUrl }, pathname: "/login" }} >
+                        href={{ href: "/auth/login", query: { callbackUrl }, pathname: "/login" }} >
                         Login to post
                     </Link>
                 }

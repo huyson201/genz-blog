@@ -8,6 +8,18 @@ const nextConfig = {
         BACKEND_API_URL: process.env.BACKEND_API_URL,
         WEB_HOST_NAME: process.env.WEB_HOST_NAME
     },
+    async rewrites() {
+        return [
+            {
+                source: '/blogs',
+                destination: '/blogs/page/1',
+            },
+            {
+                source: '/tags',
+                destination: '/tags/page/1',
+            },
+        ]
+    }
 
 }
 

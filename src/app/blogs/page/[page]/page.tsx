@@ -6,12 +6,14 @@ import BlogRowSkeleton from '@/components/Skeleton/BlogRowSkeleton'
 import postService from '@/services/post.service'
 import { createOpenGraphImg } from '@/utils'
 import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 import React, { Suspense } from 'react'
 
 interface Props {
-
+    params: {
+        page: number | string
+    }
 }
-
 export const metadata: Metadata = {
     title: 'Recent Blogs - Gen Z Blogger',
     description: "Discover the latest blog posts  on Gen Z blogger. Stay informed with our recent articles covering a wide range of topics, from technology to lifestyle.",
@@ -25,9 +27,9 @@ export const metadata: Metadata = {
         url: "/blogs"
     },
 }
-
-const Blogs = async ({ ...props }: Props) => {
-    const post = postService.getPosts({ page: 1 })
+const page = async ({ params: { page } }: Props) => {
+    if (!Number(page)) return notFound()
+    const post = await postService.getPosts({ page: Number(page) })
     return (
         <div className='lg:px-24'>
             <div className='space-y-4 py-6 border-b border-b-[#c2d4ee] dark:border-b-on_dark_border'>
@@ -37,7 +39,7 @@ const Blogs = async ({ ...props }: Props) => {
                     </GradientText>
                 </h1>
                 <div className='flex justify-center'>
-                    <Breadcrumb />
+                    <Breadcrumb hiddenRoute={["page", `${page}`]} />
                 </div>
             </div>
             <Suspense fallback={(
@@ -47,12 +49,10 @@ const Blogs = async ({ ...props }: Props) => {
                     }
                 </div>
             )}>
-                <BlogList data={post} currentPage={1} pathname='/blogs' />
+                <BlogList pathname='/blogs' data={post} currentPage={Number(page)} />
             </Suspense>
         </div>
-
-
     )
 }
 
-export default Blogs
+export default page

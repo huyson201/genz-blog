@@ -98,7 +98,7 @@ const MobileNavbar = ({ }: Props) => {
                                     </div>
                                 }
                                 {
-                                    status === "unauthenticated" && (<Link href={{ pathname: "/login", query: { callbackUrl } }}
+                                    status === "unauthenticated" && (<Link href={{ pathname: "/auth/login", query: { callbackUrl } }}
                                         className={cn(buttonVariants({ className: "inline-block", size: "md" }))} >
                                         Sign in
                                     </Link>)

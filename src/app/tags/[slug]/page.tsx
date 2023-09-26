@@ -40,24 +40,23 @@ export async function generateMetadata({ params }: Props) {
 }
 
 const TagSlug = async ({ params: { slug }, searchParams: { page = 1 } }: Props) => {
-    const tagInfo = await tagService.getTagBySlug(slug)
+    const tagInfoPromise = tagService.getTagBySlug(slug)
+    const resPromise = tagService.getPostsBySlug(slug, { page })
+    const [tagInfo, res] = await Promise.all([tagInfoPromise, resPromise])
     if (!tagInfo) return notFound()
-    const res = await tagService.getPostsBySlug(slug, { page })
+
     return (
-        <section className='mb-24'>
-            <Wrapper>
-                <div className='lg:px-24 space-y-4 '>
-                    <h1 className='leading-[1.3] inline-block text-center mt-6 text-[30px] sm:text-[36px] md:text-[48px] lg:text-[64px] bg-primary-gradient text-transparent 
+        <div className='lg:px-24 space-y-4 '>
+            <h1 className='leading-[1.3] inline-block text-center mt-6 text-[30px] sm:text-[36px] md:text-[48px] lg:text-[64px] bg-primary-gradient text-transparent 
                                 bg-200% bg-clip-text font-extrabold'>
-                        {tagInfo.name}
-                    </h1>
-                    <div className=' pb-6  border-b border-b-[#c2d4ee] dark:border-b-on_dark_border'>
-                        <Breadcrumb replaceLastText={tagInfo.name} />
-                    </div>
-                    <BlogList data={res} currentPage={page} />
-                </div>
-            </Wrapper>
-        </section>
+                {tagInfo.name}
+            </h1>
+            <div className=' pb-6  border-b border-b-[#c2d4ee] dark:border-b-on_dark_border'>
+                <Breadcrumb replaceLastText={tagInfo.name} />
+            </div>
+            <BlogList data={res} currentPage={page} key={page} />
+        </div>
+
     )
 }
 

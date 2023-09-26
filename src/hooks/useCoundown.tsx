@@ -28,7 +28,7 @@ const useCountdown = (initValue: number) => {
     }
 
     const stop = () => {
-        setIsStart(true)
+        setIsStart(false)
     }
 
     const restart = () => {

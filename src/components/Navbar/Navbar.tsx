@@ -1,13 +1,13 @@
 "use client";
-import React, { useEffect } from 'react'
+import React from 'react'
 import Wrapper from '../Common/Wrapper/Wrapper'
 import Logo from '../Logo/Logo'
 import NavLink from '../Common/NavLink/NavLink'
-import { Bars3Icon } from '@heroicons/react/24/outline'
 import Search from '../Search/Search';
 import Account from '../Account/Account';
 import { useMobileNav } from '@/contexts/MobileNavContext';
 import { useScroll, useMotionValueEvent } from "framer-motion"
+import { HiBars3 } from 'react-icons/hi2';
 interface Props {
 
 }
@@ -73,7 +73,7 @@ const Navbar = ({ }: Props) => {
                     <Search />
                     <Account />
                     <button className='flex items-center text-on_dark_text_gray lg:hidden' onClick={() => mobileNav?.open()}>
-                        <Bars3Icon className='w-9 h-9' />
+                        <HiBars3 className='w-9 h-9' />
                     </button>
                 </div>
 

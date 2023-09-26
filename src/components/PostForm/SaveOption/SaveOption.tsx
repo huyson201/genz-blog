@@ -1,9 +1,9 @@
 import { SaveOptions } from '@/types/type'
 import { Popover, Transition } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import React, { Fragment, useEffect, forwardRef, useImperativeHandle, useState, useCallback } from 'react'
 import { BiSolidLockAlt } from 'react-icons/bi'
 import { FaEarthAsia } from 'react-icons/fa6'
+import { HiChevronDown } from 'react-icons/hi2'
 
 interface Props {
     onSelect?: (select: SaveOptions) => void,
@@ -63,7 +63,7 @@ const SaveOption = forwardRef<SaveOptionHandles, Props>(({ canSave, onSave, onCh
                 group inline-flex items-center rounded-sm bg-on_light_card_bg border border-on_light_border dark:border-on_dark_border dark:bg-on_dark_card_bg px-3 py-1 text-base font-medium text-black dark:text-white hover:text-opacity-100 focus:outline-none `}
                     >
                         <span>Save</span>
-                        <ChevronDownIcon
+                        <HiChevronDown
                             className={`${open ? '' : 'text-opacity-70'}
                   ml-2 h-5 w-5 text-orange-300 transition duration-150 ease-in-out group-hover:text-opacity-80`}
                             aria-hidden="true"

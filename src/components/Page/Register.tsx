@@ -44,7 +44,7 @@ const Register = (props: Props) => {
         try {
             const res = await trigger(data)
             toast.success('Successfully registered!')
-            return router.push("/login")
+            return router.push("/auth/login")
         } catch (error) {
             if (error instanceof CustomError) {
                 setError(error.message)
@@ -92,7 +92,7 @@ const Register = (props: Props) => {
                         </Button>
 
                         <p className="text-sm  text-on_dark_text_gray">
-                            Already have an account? <Link href="/login" >
+                            Already have an account? <Link href="/auth/login" >
                                 <GradientText>Sign in</GradientText>
                             </Link>
 

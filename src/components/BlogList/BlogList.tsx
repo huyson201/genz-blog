@@ -6,10 +6,11 @@ import { PaginateResponse, Post } from '@/types/type'
 
 interface Props {
     data: PaginateResponse<Post> | Promise<PaginateResponse<Post>>,
-    currentPage: number
+    currentPage: number,
+    pathname?: string
 }
 
-const BlogList = async ({ data }: Props) => {
+const BlogList = async ({ data, pathname }: Props) => {
     let cloneData = data
     if (cloneData instanceof Promise) {
         cloneData = await cloneData
@@ -35,7 +36,7 @@ const BlogList = async ({ data }: Props) => {
                     })
                 }
             </div>
-            {cloneData.totalPages > 1 && <Pagination className='mb-24' currentPage={cloneData.page} totalPage={cloneData.totalPages} />}
+            {cloneData.totalPages > 1 && <Pagination pathname={pathname} className='mb-24' currentPage={cloneData.page} totalPage={cloneData.totalPages} />}
         </>
     )
 }

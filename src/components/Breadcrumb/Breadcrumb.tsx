@@ -5,10 +5,11 @@ import React, { useMemo } from 'react'
 import { BiHomeAlt2 } from 'react-icons/bi'
 import { FaAngleRight } from 'react-icons/fa6'
 type Props = {
-    replaceLastText?: string
+    replaceLastText?: string,
+    hiddenRoute?: string[]
 }
 
-const Breadcrumb = ({ replaceLastText }: Props) => {
+const Breadcrumb = ({ replaceLastText, hiddenRoute = [] }: Props) => {
     const pathname = usePathname()
 
     const breadcrumbs = useMemo(() => {
@@ -20,9 +21,10 @@ const Breadcrumb = ({ replaceLastText }: Props) => {
         const asPathNestedRoutes = asPathWithoutQuery.split("/")
             .filter(v => v.length > 0);
 
+        const asPathWithoutHiddenRoutes = asPathNestedRoutes.filter(path => !hiddenRoute.includes(path))
         // Iterate over the list of nested route parts and build
         // a "crumb" object for each one.
-        const crumblist = asPathNestedRoutes.map((subpath, idx) => {
+        const crumblist = asPathWithoutHiddenRoutes.map((subpath, idx) => {
             // We can get the partial nested route for the crumb
             // by joining together the path parts up to this point.
             const href = "/" + asPathNestedRoutes.slice(0, idx + 1).join("/");
@@ -33,7 +35,7 @@ const Breadcrumb = ({ replaceLastText }: Props) => {
 
         // Add in a default "Home" crumb for the top-level
         return [{ href: "/", text: "Home" }, ...crumblist];
-    }, [pathname])
+    }, [pathname, hiddenRoute])
 
     return (
         <div className="flex" aria-label="Breadcrumb">
