@@ -9,7 +9,7 @@ const CommentSkeleton = ({ children }: Props) => {
     return (
         <div className='comment-box animate-pulse'>
             <div className='flex-col gap-y-4 md:flex-row flex justify-between items-start'>
-                <div className='flex items-center gap-x-2 md:flex-1 comment-head'>
+                <div className='flex items-center gap-x-2 w-full md:w-auto md:flex-1 comment-head'>
                     <span className='w-10 h-10 rounded-full bg-gray-400 dark:bg-gray-700' />
                     <div className='w-3/5 space-y-3'>
                         <div className='rounded-full bg-gray-400 dark:bg-gray-700 w-full h-3'>

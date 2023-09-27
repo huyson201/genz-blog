@@ -13,5 +13,11 @@ export default withAuth(function middleware(req: NextRequestWithAuth) {
   }
 });
 export const config = {
-  matcher: ["/publish/post", "/me/(.*)", "/security", "/profile"],
+  matcher: [
+    "/publish/post",
+    "/me/(.*)",
+    "/security",
+    "/profile",
+    "/auth/verify-request",
+  ],
 };

@@ -89,7 +89,7 @@ const Login = (props: Props) => {
                         </Button>
                         <p className="text-sm  text-on_dark_text_gray">
                             Don’t have an account yet?
-                            <Link href="/register" >
+                            <Link href="/auth/register" >
                                 <GradientText className='whitespace-pre-wrap'> Sign up</GradientText>
                             </Link>
 

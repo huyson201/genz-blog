@@ -89,9 +89,11 @@ const Profile = ({ data }: Props) => {
                 }
                 <div>
                     <div className='text-sm dark:text-gray-500 text-[#606266]'>Email</div>
-                    <div className=' mt-2 flex items-center gap-6'>
+                    <div className=' mt-2 flex  gap-6'>
                         <div className='opacity-80 text-on_text_gray_2 '>{data.email}</div>
                         <button
+                            type='button'
+                            onClick={() => router.push("/auth/verify-request")}
                             disabled={data.verified}
                             className={twMerge(`text-xs border text-center rounded px-1 py-0.5 `, !data.verified ? 'text-red-400 border-red-400' : 'text-green-500 border-green-500')}>
                             Verified

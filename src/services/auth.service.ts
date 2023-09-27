@@ -228,7 +228,7 @@ const authService = {
         authorization: `Bearer ${token}`,
       },
       method: "Get",
-      next: { revalidate: 0 },
+      cache: "no-store",
     });
     const data = await res.json();
 
@@ -236,6 +236,24 @@ const authService = {
       throw new CustomError(res.status, data.message, data);
     }
     return data;
+  },
+  requestVerify: (token: string) => {
+    return fetch(`${apiConfig.baseUrl}/auth/send-verify`, {
+      method: "Post",
+      headers: {
+        ...apiConfig.headers,
+        authorization: `Bearer ${token}`,
+      },
+    });
+  },
+  verifyEmail: (verifyToken: string) => {
+    return fetch(`${apiConfig.baseUrl}/auth/verify-email`, {
+      method: "Post",
+      headers: {
+        ...apiConfig.headers,
+      },
+      body: JSON.stringify({ verifyToken }),
+    });
   },
 };
 

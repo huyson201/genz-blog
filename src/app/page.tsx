@@ -24,7 +24,7 @@ export default function Home() {
       {/* home cover */}
       <section className='home-cover'>
         <Wrapper className='relative z-[2]'>
-          <div className='flex py-24 xl:px-16'>
+          <div className='flex md:py-24 xl:px-16 py-16'>
             <div className='w-full lg:w-2/4'>
               <span className='dark:text-on_dark_text_gray font-bold text-[#7e9cc7] text-sm transition-colors'>Hello Everyone!</span>
               <h1 className='text-on_light_text_white dark:text-white text-[29px] xs:text-[34px] sm:text-[44px] md:text-[64px] font-extrabold transition-colors'>I&lsquo;m</h1>
@@ -36,7 +36,7 @@ export default function Home() {
 
               <form className='subscribe-form'>
                 <input className='w-full text-sm outline-none placeholder-[#7f92b0] text-[#7f92b0] bg-transparent' type="email" placeholder='Type your email address' />
-                <Button size={"md"} >
+                <Button size={"custom"} className='px-4 sm:py-1.5 py-1 rounded' >
                   Subscribe
                 </Button>
               </form>

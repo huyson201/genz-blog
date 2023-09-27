@@ -12,6 +12,7 @@ import postService from '@/services/post.service'
 import { calcBlogReadingTime, createOpenGraphImg, formatDate } from '@/utils'
 import MarkdownArea from '@/components/MarkdownArea/MarkdownArea'
 import CommentSection from '@/components/Comment/CommentSection'
+import DetailSkeleton from '@/components/Skeleton/DetailSkeleton'
 interface Props {
     params: {
         id: string
@@ -47,6 +48,7 @@ const BlogDetail = async ({ params }: Props) => {
     const postId = arrayString[arrayString.length - 1]
     const post = await postService.getPostById(postId)
     if (!post) return notFound();
+
     return (
         <div className='xl:px-16 pt-12'>
             <div className='pb-6 border-b dark:border-b-on_dark_border border-b-[#c2d4ee]'>

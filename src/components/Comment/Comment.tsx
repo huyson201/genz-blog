@@ -112,7 +112,7 @@ const Comment = ({ comment, canReply, onUpdate, onDelete }: Props) => {
 
                 <div className='w-full md:w-3/5'>
                     <div className='bg-on_light_card_bg dark:bg-on_dark_card_bg border text-sm md:text-base
-                 dark:border-on_dark_border border-on_light_border_2 p-4  rounded-lg text-[#c2d4ee] dark:text-[#94a9c9]'>
+                 dark:border-on_dark_border border-on_light_border_2 p-4  rounded-lg text-[#708ab0] dark:text-[#94a9c9]'>
 
                         {
                             commentState?.updateId === comment._id ? (
@@ -121,13 +121,13 @@ const Comment = ({ comment, canReply, onUpdate, onDelete }: Props) => {
                                     </textarea>
                                     <div className='space-x-3 flex justify-end'>
                                         <button
-                                            className=' text-sm text-[#c2d4ee] dark:text-[#94a9c9] hover:text-blue dark:hover:text-blue'
+                                            className=' text-sm text-[#708ab0] dark:text-[#94a9c9] hover:text-blue dark:hover:text-blue'
                                             onClick={() => commentState.setUpdate(null)}>
                                             Cancel
                                         </button>
                                         <button
                                             onClick={handleUpdate}
-                                            className='text-sm text-[#c2d4ee] dark:text-[#94a9c9] hover:text-blue dark:hover:text-blue'>
+                                            className='text-sm text-[#708ab0] dark:text-[#94a9c9] hover:text-blue dark:hover:text-blue'>
                                             Save
                                         </button>
                                     </div>
@@ -139,7 +139,7 @@ const Comment = ({ comment, canReply, onUpdate, onDelete }: Props) => {
                                         {
                                             canReply && <button
                                                 onClick={() => commentState?.setReply(comment._id)}
-                                                className='text-xs flex items-center   text-[#c2d4ee] dark:text-[#94a9c9] hover:text-blue dark:hover:text-blue'>
+                                                className='text-xs flex items-center   text-[#708ab0] dark:text-[#94a9c9] hover:text-blue dark:hover:text-blue'>
                                                 <BsFillReplyFill className='mr-0.5 text-base inline-block' />
                                                 Reply
                                             </button>
@@ -147,7 +147,7 @@ const Comment = ({ comment, canReply, onUpdate, onDelete }: Props) => {
                                         {
                                             comment.author._id === session?.user._id && <button
                                                 onClick={() => commentState?.setUpdate(comment._id)}
-                                                className='text-xs flex items-center  text-[#c2d4ee] dark:text-[#94a9c9] hover:text-blue dark:hover:text-blue'>
+                                                className='text-xs flex items-center  text-[#708ab0] dark:text-[#94a9c9] hover:text-blue dark:hover:text-blue'>
                                                 <BsPencilSquare className='mr-0.5 text-sm inline-block' />
                                                 Change
                                             </button>
@@ -155,7 +155,7 @@ const Comment = ({ comment, canReply, onUpdate, onDelete }: Props) => {
                                         {
                                             comment.author._id === session?.user._id && <button
                                                 onClick={() => onDelete?.(comment._id)}
-                                                className='text-xs flex items-center  text-[#c2d4ee] dark:text-[#94a9c9] hover:text-blue dark:hover:text-blue'>
+                                                className='text-xs flex items-center  text-[#708ab0] dark:text-[#94a9c9] hover:text-blue dark:hover:text-blue'>
                                                 <MdRestoreFromTrash className='mr-0.5 text-sm inline-block' />
                                                 Delete
                                             </button>

@@ -21,8 +21,11 @@ const config: Config = {
           "linear-gradient(90deg,#0ea5ea,#0bd1d1 51%,#0ea5ea)",
       },
       fontFamily: {
-        sans: ["var(--inter-font)", ...defaultTheme.fontFamily.sans],
-        noto_sans: "var(--noto-sans-font)",
+        noto_sans: [
+          "var(--noto-sans-font)",
+          "var(--inter-font)",
+          ...defaultTheme.fontFamily.sans,
+        ],
       },
       colors: {
         teal: "#0bd1d1",

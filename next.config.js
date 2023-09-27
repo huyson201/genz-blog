@@ -8,7 +8,7 @@ const nextConfig = {
         BACKEND_API_URL: process.env.BACKEND_API_URL,
         WEB_HOST_NAME: process.env.WEB_HOST_NAME
     },
-    async rewrites() {
+    rewrites() {
         return [
             {
                 source: '/blogs',

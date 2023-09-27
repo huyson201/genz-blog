@@ -8,9 +8,9 @@ type Props = {}
 
 const Page404 = (props: Props) => {
   return (
-    <section className='relative -z-[1] after:w-full after:h-[110%] pb-[150px]  after:top-0 after:bg-[bottom_100%_right_0] after:left-0 after:bg-no-repeat after:absolute  after:bg-shadow-3'>
+    <section className='relative z-[1] after:w-full after:h-[110%] pb-[150px]  after:top-0 after:bg-[bottom_100%_right_0] after:left-0 after:bg-no-repeat after:absolute  after:bg-shadow-3'>
       <Wrapper >
-        <div className='flex flex-col lg:flex-row py-24 md:px-16 justify-center lg:justify-start lg:items-center gap-12'>
+        <div className='flex flex-col relative z-[3] lg:flex-row py-24 md:px-16 justify-center lg:justify-start lg:items-center gap-12'>
           <Image src={Error404} alt='error-404' />
           <div className='space-y-4'>
             <h1 className='bg-primary-gradient inline-block bg-clip-text bg-200% text-transparent xs:text-[25px] text-[20px] sm:text-[35px] md:text-[45px] font-bold'>Don&apos;t be spooked !</h1>

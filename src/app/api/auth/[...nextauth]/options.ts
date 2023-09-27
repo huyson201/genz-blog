@@ -52,12 +52,26 @@ export const options: NextAuthOptions = {
   },
   callbacks: {
     async jwt({ token, user, account, trigger, session }) {
-      if (trigger === "update" && session.user) {
-        token = {
-          ...session.user,
-          backendTokens: token.backendTokens,
-          error: undefined,
-        };
+      if (trigger === "update" && session) {
+        console.log("update");
+        if (session.user) {
+          token = {
+            ...session.user,
+            backendTokens: token.backendTokens,
+            error: undefined,
+          };
+        }
+        if (session.refreshProfile) {
+          const profile = await authService.getProfile(
+            token.backendTokens.access_token
+          );
+          console.log(profile);
+          token = {
+            ...profile,
+            backendTokens: token.backendTokens,
+            error: undefined,
+          };
+        }
       }
 
       if (account && account.provider === "google") {
@@ -69,6 +83,7 @@ export const options: NextAuthOptions = {
           ...data,
         };
       }
+
       if (user) {
         return {
           ...token,
@@ -76,9 +91,8 @@ export const options: NextAuthOptions = {
         };
       }
 
-      if (new Date().getTime() < token.backendTokens.expiresIn) return token;
-
       token.backendTokens = backendTokens ? backendTokens : token.backendTokens;
+      if (new Date().getTime() < token.backendTokens.expiresIn) return token;
 
       try {
         isRefresh ??= authService.refreshToken(

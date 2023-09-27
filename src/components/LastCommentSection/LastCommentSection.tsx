@@ -1,6 +1,5 @@
 "use client"
 import React from 'react'
-import author from '@/assets/profile.jpg'
 import Image from 'next/image'
 import { twMerge } from 'tailwind-merge'
 import { Comment } from '@/types/type'
@@ -18,7 +17,7 @@ const LastCommentSection = ({ data }: Props) => {
                 &quot;{data.content.length > 125 ? data.content.slice(0, 125) + "..." : data.content}&quot;
             </p>
             <div className='flex items-center space-x-4 '>
-                <Image className='rounded-full w-8 h-8' src={author} alt='author' />
+                <Image className='rounded-full w-8 h-8' width={40} height={40} src={data.author.avatar_url} alt='author' />
                 <div className='text-sm dark:text-on_text_gray_2 text-on_light_text_gray transition-colors' >
                     <div>{data.author.name}</div>
                     <div className='text-xs'>{formatDate(data.createdAt, "D MMMM YYYY")}</div>

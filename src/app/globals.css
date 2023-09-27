@@ -66,7 +66,7 @@ body {
 .home-cover{
     @apply dark:bg-on_dark_body_bg bg-on_light_body_bg  relative overflow-hidden
     before:content-[""] before:w-[500px] before:h-full before:bg-cover before:bg-no-repeat before:absolute before:top-0 
-    before:-left-20 before:bg-shadow transition-colors
+    before:-left-20 before:bg-shadow transition-colors before:hidden md:before:block
     after:content-[""] after:w-full after:h-full after:top-0 after:left-0 after:bg-[100%] after:bg-no-repeat after:absolute  after:bg-shadow-2;
 }
 .subscribe-form{
