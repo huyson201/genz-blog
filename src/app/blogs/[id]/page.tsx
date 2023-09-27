@@ -12,7 +12,9 @@ import postService from '@/services/post.service'
 import { calcBlogReadingTime, createOpenGraphImg, formatDate } from '@/utils'
 import MarkdownArea from '@/components/MarkdownArea/MarkdownArea'
 import CommentSection from '@/components/Comment/CommentSection'
-import DetailSkeleton from '@/components/Skeleton/DetailSkeleton'
+import TableOfContent from '@/components/TableOfContent/TableOfContent'
+import GradientText from '@/components/GradientText/GradientText'
+
 interface Props {
     params: {
         id: string
@@ -23,7 +25,13 @@ export async function generateMetadata({ params }: Props) {
     const arrayString = params.id.split("-")
     const postId = arrayString[arrayString.length - 1]
     const post = await postService.getPostById(postId)
-    const title = `${post.title} - Gen Z Blogger`
+    if (!post) {
+        return {
+            title: "Not found",
+            description: "The page you are looking for dose not exist",
+        }
+    }
+    const title = `${post.title}`
     return {
         title: title,
         description: post.description,
@@ -54,31 +62,35 @@ const BlogDetail = async ({ params }: Props) => {
             <div className='pb-6 border-b dark:border-b-on_dark_border border-b-[#c2d4ee]'>
                 <Breadcrumb replaceLastText={post.title} />
             </div>
-            <div className='pt-12'>
+            <div className=' pt-6 md:pt-12'>
                 <div>
                     <h1 className='gradient-text text-[20px] xs:text-[25px] sm:text-[35px] md:text-[45px] font-bold'>
                         {post.title}
                     </h1>
-                    <div className='flex items-center gap-4 mt-4'>
-                        <Image className='w-12 h-12 rounded-full' src={(post.author as Auth).avatar_url} height={48} width={48} alt='author' />
-                        <div>
-
-                            <div className='font-bold text-on_light_text_gray dark:text-on_text_gray_2'>{(post.author as Auth).name}</div>
-                            <div>
-                                <span className='text-sm text-on_light_text_gray mr-6 dark:text-on_text_gray_2'>{formatDate(post.createdAt || "", "D MMMM YYYY")}</span>
-                                <span className='text-sm text-on_light_text_gray dark:text-on_text_gray_2'>{calcBlogReadingTime(post.content, 200)} mins to read</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='mt-6 lg:hidden'>
-                        <h2 className='section-title text-xl'>
-                            Tags
-                        </h2>
-                        <TagList tags={post.hashtags} />
-                    </div>
-                    <div className='flex mt-12 flex-col lg:flex-row '>
+                    <div className='flex  flex-col lg:flex-row '>
                         <div className='lg:w-3/4 lg:px-3  '>
-                            <div className='pb-12 blog-content border-b border-b-[#c2d4ee] dark:border-b-on_dark_border'>
+                            <div className='flex items-center gap-4 mt-4'>
+                                <Image className='w-12 h-12 rounded-full' src={(post.author as Auth).avatar_url} height={48} width={48} alt='author' />
+                                <div>
+
+                                    <div className='font-bold text-on_light_text_gray dark:text-on_text_gray_2'>{(post.author as Auth).name}</div>
+                                    <div>
+                                        <span className='text-sm text-on_light_text_gray mr-6 dark:text-on_text_gray_2'>{formatDate(post.createdAt || "", "D MMMM YYYY")}</span>
+                                        <span className='text-sm text-on_light_text_gray dark:text-on_text_gray_2'>{calcBlogReadingTime(post.content, 200)} mins to read</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='mt-6'>
+                                <TableOfContent />
+                            </div>
+                            <div className='mt-4 xs:mt-6 lg:hidden'>
+                                <GradientText size={"default"}
+                                    className='text-base xs:text-xl font-bold relative after:absolute after:w-full  after:h-0.5 after:bg-primary-gradient
+                            pb-2 after:bottom-0 after:left-0 mb-4'>Tags</GradientText>
+
+                                <TagList tags={post.hashtags} />
+                            </div>
+                            <div className='pb-12 mt-8 blog-content border-b border-b-[#c2d4ee] dark:border-b-on_dark_border'>
                                 <MarkdownArea>
                                     {post.content}
                                 </MarkdownArea>
@@ -97,11 +109,13 @@ const BlogDetail = async ({ params }: Props) => {
                                 <Link href={"#"} className='text-[rgba(152,162,179)] transition-colors dark:hover:text-blue hover:text-blue'>
                                     <FaPinterest />
                                 </Link>
+
                             </div>
+
                             <div className='mt-6 hidden lg:block'>
-                                <h2 className='section-title text-xl'>
+                                <div className='section-title text-xl'>
                                     Tags
-                                </h2>
+                                </div>
                                 <TagList tags={post.hashtags} />
                             </div>
                         </div>

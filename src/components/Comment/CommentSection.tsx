@@ -68,7 +68,7 @@ const CommentSection = ({ postId }: Props) => {
     }
     return (
         <div>
-            <h4 className='text-3xl text-[#7f92b0] font-bold mt-6 dark:text-[#b8cdeb]'>Comments</h4>
+            <div className='text-3xl text-[#7f92b0] font-bold mt-6 dark:text-[#b8cdeb]'>Comments</div>
 
             {
                 loading ? <div className='mt-6 space-y-8'>
@@ -100,7 +100,7 @@ const CommentSection = ({ postId }: Props) => {
                     }}>Load more</Button>
             </div>}
             {/* comment form */}
-            <h4 className='text-3xl text-[#7f92b0] font-bold mt-8 dark:text-[#b8cdeb]'>Leave a comment</h4>
+            <div className='text-3xl text-[#7f92b0] font-bold mt-8 dark:text-[#b8cdeb]'>Leave a comment</div>
             <CommentInput onSubmit={onSubmit} />
         </div>
     )

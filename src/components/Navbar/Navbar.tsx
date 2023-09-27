@@ -1,12 +1,11 @@
 "use client";
-import React from 'react'
+import React, { useEffect } from 'react'
 import Wrapper from '../Common/Wrapper/Wrapper'
 import Logo from '../Logo/Logo'
 import NavLink from '../Common/NavLink/NavLink'
 import Search from '../Search/Search';
 import Account from '../Account/Account';
 import { useMobileNav } from '@/contexts/MobileNavContext';
-import { useScroll, useMotionValueEvent } from "framer-motion"
 import { HiBars3 } from 'react-icons/hi2';
 interface Props {
 
@@ -38,17 +37,21 @@ export const navMenu = [
 const Navbar = ({ }: Props) => {
     const navbarRef = React.useRef<HTMLDivElement | null>(null)
     const mobileNav = useMobileNav()
-    const { scrollY } = useScroll()
 
-    useMotionValueEvent(scrollY, "change", (latest) => {
-        if (!navbarRef.current) return
-        if (latest > 100) {
-            navbarRef.current.classList.add("sticky-bar")
+    useEffect(() => {
+        const handleScrollStickyNav = () => {
+            if (!navbarRef.current) return
+            if (window.scrollY > 100) {
+                navbarRef.current.classList.add("sticky-bar")
+            }
+            if (window.scrollY === 0) {
+                navbarRef.current.classList.remove("sticky-bar")
+            }
         }
-        else {
-            navbarRef.current.classList.remove("sticky-bar")
-        }
-    })
+        window.addEventListener("scroll", handleScrollStickyNav)
+        return () => window.removeEventListener("scroll", handleScrollStickyNav)
+    }, [])
+
     return (
 
         <nav

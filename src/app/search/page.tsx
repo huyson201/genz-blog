@@ -16,7 +16,7 @@ type Props = {
 
 
 export async function generateMetadata(props: Props) {
-    const title = `Search Results for '${props.searchParams.q}' - Find What You're Looking For - Gen Z Blogger`
+    const title = `Search Results for '${props.searchParams.q}' - Find What You're Looking For`
     const desc = `Explore search results related to '${props.searchParams.q}' and find exactly what you're looking for. Discover a wide range of content, articles, and resources related to '${props.searchParams.q}' in our search results.`
 
     return {

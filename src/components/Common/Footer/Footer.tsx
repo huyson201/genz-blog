@@ -19,13 +19,13 @@ const Footer = (props: Props) => {
                             <Logo />
                             <p className='text-sm dark:text-on_dark_text_gray text-[#708ab0] transition-colors'>When an unknown prnoto sans took a galley and scrambled it to make specimen book not only five When an unknown prnoto sans took a galley and scrambled it to five centurie.</p>
                             <div>
-                                <h4 className='text-on_light_text_white dark:text-on_dark_text_white font-bold mb-2 transition-colors'>Address</h4>
+                                <div className='text-on_light_text_white dark:text-on_dark_text_white font-bold mb-2 transition-colors'>Address</div>
                                 <div className='dark:text-on_dark_text_gray text-sm text-[#708ab0] transition-colors'>123 Main Street New York, NY 10001</div>
                             </div>
                         </div>
 
                         <div>
-                            <h4 className='text-on_light_text_white dark:text-on_dark_text_white mb-2  sm:my-10 sm:mt-0  sm:mb-8 text-[18px] transition-colors'>Newsletter</h4>
+                            <div className='text-on_light_text_white dark:text-on_dark_text_white mb-2  sm:my-10 sm:mt-0  sm:mb-8 text-[18px] transition-colors'>Newsletter</div>
                             <p className='text-sm text-[#708ab0] dark:text-on_dark_text_gray mb-6 transition-colors'>Sign up to be first to receive the latest stories inspiring us, case studies, and industry news.</p>
                             <form action={"#"} className='space-y-4'>
                                 <div className='flex gap-2 items-center py-2 border-b border-on_dark_text_gray  dark:text-white

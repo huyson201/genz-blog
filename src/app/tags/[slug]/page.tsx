@@ -20,7 +20,7 @@ type Props = {
 export async function generateMetadata({ params }: Props) {
 
     const tagInfo = await tagService.getTagBySlug(params.slug)
-    const title = `${tagInfo.name} Tag - Explore ${tagInfo.name} Blog Posts - Gen Z Blogger`
+    const title = `${tagInfo.name} Tag - Explore ${tagInfo.name} Blog Posts`
     const desc = `Discover a curated list of blog posts related to the ${tagInfo.name} tag. Find and engage with content related to your interests using our hashtag collection.`
 
     return {

@@ -19,12 +19,12 @@ const displayOption: Record<string, SaveOptions> = {
 
 const displayMetaData: Record<string, { title: string, desc: string }> = {
     "public": {
-        title: "Manage Public Posts - Your Published Content - Gen Z Blogger",
+        title: "Manage Public Posts - Your Published Content",
         desc: "Effortlessly manage your public posts, published content, and share your work with the world on Gen Z Blogger. Edit, update, and maintain your online presence using our user-friendly post management dashboard."
 
     },
     "drafts": {
-        title: "Manage Drafts - Your Unpublished Content - Gen Z Blogger",
+        title: "Manage Drafts - Your Unpublished Content",
         desc: "Efficiently manage your drafts, unpublished content, and work in progress on  Gen Z Blogger. Edit, organize, and prepare your content for publication using our user-friendly draft management dashboard."
 
     }

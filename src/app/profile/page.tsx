@@ -11,13 +11,13 @@ import { Metadata } from 'next'
 type Props = {}
 
 export const metadata: Metadata = {
-    title: 'Profile - Customize Your Information - Gen Z Blogger',
+    title: 'Profile - Customize Your Information',
     description: "Explore and customize your profile on Gen Z Blogger with our user-friendly editing tool. Update your information, add details, and personalize your user profile the way you want.",
     alternates: {
         canonical: "/profile"
     },
     openGraph: {
-        title: 'Profile - Customize Your Information - Gen Z Blogger',
+        title: 'Profile - Customize Your Information',
         description: "Explore and customize your profile on Gen Z Blogger with our user-friendly editing tool. Update your information, add details, and personalize your user profile the way you want.",
     },
 }

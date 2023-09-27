@@ -5,13 +5,13 @@ import React from 'react'
 
 type Props = {}
 export const metadata: Metadata = {
-    title: 'Create a New Post - Gen Z Blogger',
+    title: 'Create a New Post',
     description: "Start writing and create a new post to share your ideas with the world. Express yourself through your content on Gen Z Blogger, your platform for creative expression and meaningful discussions.",
     alternates: {
         canonical: "/publish/post"
     },
     openGraph: {
-        title: 'Create a New Post - Gen Z Blogger',
+        title: 'Create a New Post',
         description: "Start writing and create a new post to share your ideas with the world. Express yourself through your content on Gen Z Blogger, your platform for creative expression and meaningful discussions.",
     },
 }

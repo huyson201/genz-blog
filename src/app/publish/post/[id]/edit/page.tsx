@@ -10,7 +10,7 @@ interface Props {
 
 
 export async function generateMetadata(props: Props) {
-    const title = `Edit Post #${props.params.id} - Modify Your Content - Gen Z Blogger`
+    const title = `Edit Post #${props.params.id} - Modify Your Content`
     const desc = `Edit Post #${props.params.id} to make modifications and updates to your content. Customize your work on Gen Z Blogger, your platform for creative expression and storytelling.`
 
     return {

@@ -12,13 +12,13 @@ interface Props {
 
 }
 export const metadata: Metadata = {
-    title: 'Recent Blogs - Gen Z Blogger',
+    title: 'Recent Blogs',
     description: "Discover the latest blog posts  on Gen Z blogger. Stay informed with our recent articles covering a wide range of topics, from technology to lifestyle.",
     alternates: {
         canonical: "/blogs"
     },
     openGraph: {
-        title: 'Recent Blogs - Gen Z Blogger',
+        title: 'Recent Blogs',
         description: "Discover the latest blog posts  on Gen Z blogger. Stay informed with our recent articles covering a wide range of topics, from technology to lifestyle.",
         images: [`/api/screenshot?url=${createOpenGraphImg()}/blogs`],
         url: "/blogs"

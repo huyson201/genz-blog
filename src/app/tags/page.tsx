@@ -12,13 +12,13 @@ type Props = {
 
 }
 export const metadata: Metadata = {
-    title: 'Hashtags - Explore a Variety of Topics - Gen Z Blogger',
+    title: 'Hashtags - Explore a Variety of Topics',
     description: "Discover a diverse collection of hashtags covering a wide range of topics. Explore and engage with discussions on your favorite subjects using our hashtag directory.",
     alternates: {
         canonical: "/tags"
     },
     openGraph: {
-        title: 'Hashtags - Explore a Variety of Topics - Gen Z Blogger',
+        title: 'Hashtags - Explore a Variety of Topics',
         description: "Discover a diverse collection of hashtags covering a wide range of topics. Explore and engage with discussions on your favorite subjects using our hashtag directory."
         , images: [`/api/screenshot?url=${createOpenGraphImg()}/tags`],
         url: "/tags"

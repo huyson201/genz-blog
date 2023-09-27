@@ -11,14 +11,14 @@ import React from 'react'
 type Props = {}
 
 export const metadata: Metadata = {
-    title: 'Contact - Gen Z Blogger',
+    title: 'Contact',
     description: "Have questions or feedback? Contact us to get in touch with our team. We're here to assist you. Reach out today!"
     ,
     alternates: {
         canonical: "/contact"
     },
     openGraph: {
-        title: 'Contact - Gen Z Blogger',
+        title: 'Contact',
         description: "Have questions or feedback? Contact us to get in touch with our team. We're here to assist you. Reach out today!",
         images: [`/api/screenshot?url=${createOpenGraphImg()}/contact`],
         url: "/contact"

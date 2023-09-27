@@ -21,7 +21,10 @@ const noto = Noto_Sans({
 
 
 export const metadata: Metadata = {
-  title: 'Discovering Code and Living Fully - Gen Z Blogger',
+  title: {
+    default: "Discovering Code and Living Fully | Gen Z Blogger",
+    template: "%s | Gen Z Blogger"
+  },
   description: 'Explore the world of programming, tech, and life through the eyes of a Gen Z blogger. Get coding tips, life lessons, and more.',
   applicationName: "Gen z Blogger",
   other: {
@@ -31,7 +34,10 @@ export const metadata: Metadata = {
     canonical: "/"
   },
   openGraph: {
-    title: 'Discovering Code and Living Fully - Gen Z Blogger',
+    title: {
+      default: "Discovering Code and Living Fully | Gen Z Blogger",
+      template: "%s | Gen Z Blogger"
+    },
     description: 'Explore the world of programming, tech, and life through the eyes of a Gen Z blogger. Get coding tips, life lessons, and more.',
     images: [`/api/screenshot?url=${createOpenGraphImg()}`],
     type: 'website',

@@ -64,7 +64,7 @@ export default function Home() {
       </section>
 
       {/* recent posts */}
-      <section>
+      <section className='relative before:absolute before:w-full before:bottom-full before:h-[100px] before:bg-gradient-to-t before:from-on_light_body_bg dark:before:from-on_dark_body_bg before:to-transparent'>
         <Wrapper>
           <div className='py-12 xl:px-16'>
             <div>
