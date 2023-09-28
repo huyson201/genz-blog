@@ -6,7 +6,6 @@ import CodeBlock from './CodeBlock/CodeBlock'
 import MarkdownLink from './Link/MarkdownLink'
 import BlockQuote from './BlockQuote/BlockQuote'
 import Paragraph from './Paragraph/Paragraph'
-import { OrderList, UnOrderList } from './List/List'
 
 
 
@@ -18,7 +17,7 @@ const MarkdownArea = ({ children }: Props) => {
 
     return (
 
-        <div className=' text-base text-[#708ab0] dark:text-on_dark_text_gray'>
+        <div className=' text-lg text-[#708ab0] dark:text-on_dark_text_gray'>
             <Markdown
                 options={{
                     overrides: {

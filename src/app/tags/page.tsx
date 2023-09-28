@@ -1,5 +1,6 @@
 
 import Breadcrumb from '@/components/Breadcrumb/Breadcrumb'
+import GradientText from '@/components/GradientText/GradientText'
 import Pagination from '@/components/Pagination/Pagination'
 import tagService from '@/services/tag.service'
 import { createOpenGraphImg } from '@/utils'
@@ -27,7 +28,12 @@ export const metadata: Metadata = {
 const page = async (props: Props) => {
     const data = await tagService.getTags({ page: 1 })
     return (
-        <>
+        <div className='lg:px-24 space-y-4'>
+            <h1 className='text-center '>
+                <GradientText size={"xl"} className='font-extrabold' >
+                    Tags
+                </GradientText>
+            </h1>
             <div className='text-center text-on_dark_text_gray text-sm sm:text-base my-4'>
                 We found &#34;{data.totalDocs}&#34; Tags
             </div>
@@ -45,7 +51,7 @@ const page = async (props: Props) => {
                 }
             </div>
             {data.totalPages > 1 && <Pagination pathname='/tags' className='pt-6' currentPage={data.page} totalPage={data.totalPages} />}
-        </>
+        </div>
     )
 }
 

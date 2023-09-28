@@ -1,11 +1,17 @@
 import React from 'react'
 import Breadcrumb from '../Breadcrumb/Breadcrumb'
+import GradientText from '../GradientText/GradientText'
 
 type Props = {}
 
 const TagGridSkeleton = (props: Props) => {
     return (
         <div className='animate-pulse'>
+            <h1 className='text-center '>
+                <GradientText size={"xl"} className='font-extrabold' >
+                    Tags
+                </GradientText>
+            </h1>
             <div className='flex justify-center items-center mb-6'>
                 <span className='w-2/3 h-2 inline-block rounded-full bg-gray-400 dark:bg-gray-700'></span>
             </div>

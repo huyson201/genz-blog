@@ -71,7 +71,7 @@ const ListPost = ({ type, page, q }: Props) => {
                 }
             </div>
             {
-                data && data.page > 1 && <Pagination currentPage={page} totalPage={data.totalPages} />
+                data && data.totalPages > 1 && <Pagination currentPage={page} totalPage={data.totalPages} />
             }
             <ConfirmDialog onRequestClose={handleCloseDialog} onConfirm={handleConfirmDel} isOpen={isOpenDialog} />
         </>

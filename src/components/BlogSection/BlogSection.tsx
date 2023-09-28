@@ -32,12 +32,12 @@ const BlogSection = ({ post }: Props) => {
             <p className=" text-[#4e658a]  dark:text-on_dark_text_gray  line-clamp-3">
                 {post.description}
             </p>
-            <div className='space-y-2 mt-auto'>
+            <div className='space-y-2 mt-auto flex items-center gap-2.5'>
                 {
                     post.hashtags.map(tag => (<Link
                         key={tag._id}
                         href={`/tags/${tag.slug}`}
-                        className="transition-colors mr-2 dark:bg-on_dark_bg_2 text-xs font-medium 
+                        className="transition-colors  dark:bg-on_dark_bg_2 text-xs font-medium 
                                     inline-flex items-center px-2.5 py-1 rounded-lg dark:text-on_dark_text_gray
                                      text-on_light_text_gray hover:text-blue dark:hover:text-blue bg-white/60">
                         {tag.name}

@@ -18,7 +18,7 @@ const Pagination = ({ className, totalPage, currentPage, pathname }: Props) => {
 
     return (
         <div className={twMerge(className)} >
-            <ul className="flex gap-x-1 text-sm flex-wrap gap-y-1 justify-center items-center sm:justify-start">
+            <ul className="flex gap-x-1.5 text-sm flex-wrap gap-y-1.5 justify-center items-center sm:justify-start">
                 {
                     data && data.prevPage !== null && (
                         <li className='order-[10] sm:order-first'>
@@ -48,7 +48,7 @@ const Pagination = ({ className, totalPage, currentPage, pathname }: Props) => {
                                 <Link href={pathname ? `${pathname}/page/${page}` : `${currentPathname}?page=${page}`}
                                     className={twMerge(`flex items-center justify-center rounded-full w-10 h-10 leading-tight 
                                     dark:bg-on_dark_bg_2 bg-[#7f92b0] font-bold text-base text-white  hover:bg-blue dark:hover:bg-blue transition-all
-                                    hover:scale-105 duration-500 [&.active]:bg-blue `, currentPage === page && 'active')}>
+                                    hover:scale-105 duration-500 [&.active]:bg-blue `, Number(currentPage) === Number(page) && 'active')}>
                                     {page}
                                 </Link>
                             </li>

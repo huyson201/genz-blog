@@ -27,7 +27,7 @@ const TableOfContent = (props: Props) => {
         <div className='mb-4'>
             <div className='flex items-center gap-1 cursor-pointer' onClick={() => setShow(prev => !prev)}>
                 <GradientText size={"default"}
-                    className='text-base xs:text-xl font-bold relative after:absolute after:w-[80%]  after:h-0.5 after:bg-primary-gradient
+                    className='text-xl font-bold relative after:absolute after:w-[80%]  after:h-0.5 after:bg-primary-gradient
                             pb-2 after:bottom-0 after:left-0'>Table of contents</GradientText>
 
                 {
