@@ -56,7 +56,7 @@ const Navbar = ({ }: Props) => {
 
         <nav
             ref={navbarRef}
-            className='dark:bg-on_dark_body_bg transition-all bg-on_light_body_bg py-2 sm:py-[15px] mt-[15px]'
+            className='dark:bg-on_dark_body_bg  bg-on_light_body_bg py-2 sm:py-[15px] mt-[15px]'
         >
             <Wrapper className='relative flex items-center justify-between'>
                 <Logo />

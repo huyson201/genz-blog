@@ -51,6 +51,7 @@ export interface Post {
   hashtags: HashTag[];
   description: string;
   content: string;
+  viewCount: number;
   display: Display;
   createdAt: string;
   updatedAt: string;
@@ -59,7 +60,7 @@ export interface Post {
 export interface PostFormData
   extends Omit<
     Post,
-    "hashtags" | "_id" | "author" | "createdAt" | "updatedAt"
+    "hashtags" | "_id" | "author" | "createdAt" | "updatedAt" | "viewCount"
   > {
   hashtags: string[];
 }

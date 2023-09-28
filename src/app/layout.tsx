@@ -7,6 +7,7 @@ import NavbarWrapper from '@/components/Navbar/NavbarWrapper/NavbarWrapper'
 import { Toaster } from 'react-hot-toast'
 import './globals.css'
 import { createOpenGraphImg } from '@/utils'
+import SearchModal from '@/components/Search/SearchModal'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -54,7 +55,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={twMerge(noto.variable, inter.variable, "bg-on_light_body_bg dark:bg-on_dark_body_bg transition-all")}>
+      <body className={twMerge(noto.variable, inter.variable, "bg-on_light_body_bg dark:bg-on_dark_body_bg")}>
         <Provider>
           <header>
             <NavbarWrapper />
@@ -66,6 +67,7 @@ export default function RootLayout({
               position="top-center"
               reverseOrder={false} />
           </div>
+          <SearchModal />
         </Provider>
       </body>
     </html>

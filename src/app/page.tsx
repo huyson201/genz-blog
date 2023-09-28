@@ -68,7 +68,7 @@ export default function Home() {
         <Wrapper>
           <div className='py-12 xl:px-16'>
             <div>
-              <h2 className='gradient-text text-[25px] md:text-[35px] lg:text-[45px] font-bold'>Recent posts</h2>
+              <h2 ><GradientText size={"md"} className='font-bold'>Recent posts</GradientText></h2>
               <p className='dark:text-on_dark_text_gray text-[18px] text-[#708ab0] transition-colors'>Don&#39;t miss the latest trends</p>
             </div>
             <div className='mt-12 md:space-x-6 md:flex space-y-12 md:space-y-0'>
@@ -88,7 +88,7 @@ export default function Home() {
 
               {/* sidebar  */}
               <div className='md:w-1/3'>
-                <div className='dark:border-on_dark_border border-gray-300 border rounded-xl bg-on_light_card_bg dark:bg-on_dark_card_bg p-6 transition-colors'>
+                <div className='dark:border-on_dark_border border-gray-300 border rounded-xl bg-on_light_card_bg dark:bg-on_dark_card_bg p-6 '>
                   <h2 className='pb-[10px] relative after:content-[""] after:absolute after:w-1/3 after:h-0.5 mb-4 after:bg-primary-gradient
                                  after:bottom-0 after:left-0'>
                     <GradientText className='text-xl font-bold'>

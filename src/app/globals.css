@@ -67,13 +67,13 @@ body {
 .home-cover{
     @apply dark:bg-on_dark_body_bg bg-on_light_body_bg  relative overflow-hidden
     before:content-[""] before:w-[500px] before:h-full before:bg-cover before:bg-no-repeat before:absolute before:top-0 
-    before:-left-20 before:bg-shadow transition-colors before:hidden md:before:block
+    before:-left-20 before:bg-shadow  before:hidden md:before:block
     after:content-[""] after:w-full after:h-full after:top-0 after:left-0 after:bg-[100%] after:bg-no-repeat after:absolute  after:bg-shadow-2;
 }
 .subscribe-form{
     @apply relative md:w-[400px] gap-4 rounded flex items-center p-[10px] bg-on_light_body_bg dark:bg-on_dark_bg_2 mt-8
     before:rounded before:content-[""] before:absolute before:top-[-1px] before:left-[-1px]
-    before:right-[-1px] before:bottom-[-1px] before:z-[-1] before:bg-primary-gradient transition-colors;
+    before:right-[-1px] before:bottom-[-1px] before:z-[-1] before:bg-primary-gradient;
 }
 
 .social-links{
@@ -223,4 +223,12 @@ body {
 }
 .comment-box .comment-box .comment-head{
    @apply md:ml-10;
+}
+
+/* search result */
+.search-results::-webkit-scrollbar{
+    width: 6px;
+}
+.search-results::-webkit-scrollbar-thumb{
+    @apply rounded-full bg-gray-300 hover:bg-gray-400 transition-colors;
 }

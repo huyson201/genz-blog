@@ -5,6 +5,7 @@ import { slugify } from '@/utils/slugify'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import { BsEye } from 'react-icons/bs'
 import { FiArrowRight } from 'react-icons/fi'
 interface Props {
     post: Post
@@ -14,11 +15,11 @@ const BlogSection = ({ post }: Props) => {
     return (
         <article className=" flex flex-col lg:w-[calc(50%_-_12px)] p-4 bg-on_light_card_bg rounded-lg border
                              dark:border-on_dark_border shadow-md dark:bg-on_dark_card_bg border-on_light_border
-                             transition-all hover:-translate-y-1 gap-y-2">
+                             transition-transform hover:-translate-y-1 gap-y-2">
 
             <div className="flex items-center space-x-1.5 ">
                 <Image className="w-7 h-7 rounded-full" width={28} height={28} src={(post.author as Auth).avatar_url} alt={`${(post.author as Auth).name}_avatar`} />
-                <span className="text-sm flex items-center dark:text-on_dark_text_gray text-[#4e658a] transition-colors">
+                <span className="text-sm flex items-center dark:text-on_dark_text_gray text-[#4e658a] ">
                     {formatDate(post.createdAt || "", "MMMM D, YYYY")}
                 </span>
             </div>
@@ -28,7 +29,7 @@ const BlogSection = ({ post }: Props) => {
                     {post.title}
                 </Link>
             </h3>
-            <p className=" text-[#4e658a]  dark:text-on_dark_text_gray transition-colors line-clamp-3">
+            <p className=" text-[#4e658a]  dark:text-on_dark_text_gray  line-clamp-3">
                 {post.description}
             </p>
             <div className='space-y-2 mt-auto'>
@@ -43,11 +44,17 @@ const BlogSection = ({ post }: Props) => {
                     </Link>))
                 }
             </div>
-            <Link href={`/blogs/${slugify(post.title)}-${post._id}`}
-                className="inline-block">
-                <FiArrowRight className="inline-block mr-1 text-blue" />
-                <span className='text-sm font-semibold text-[#4e658a] dark:text-on_dark_text_gray hover:text-blue dark:hover:text-blue transition-colors'>Read more</span>
-            </Link>
+            <div className='flex items-center'>
+                <span className='ark:text-on_dark_text_gray text-sm text-on_light_text_gray'>
+                    <BsEye className="inline-block text-base mr-1 align-middle" />
+                    <span className='inline-block align-middle'>{post.viewCount}</span>
+                </span>
+                <Link href={`/blogs/${slugify(post.title)}-${post._id}`}
+                    className="inline-block ml-auto">
+                    <FiArrowRight className="inline-block mr-1 text-blue" />
+                    <span className='text-sm font-semibold text-[#4e658a] dark:text-on_dark_text_gray hover:text-blue dark:hover:text-blue transition-colors'>Read more</span>
+                </Link>
+            </div>
         </article>
     )
 }

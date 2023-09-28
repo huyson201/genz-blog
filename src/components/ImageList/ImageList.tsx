@@ -16,7 +16,12 @@ const ImageList = ({ showBlankSelect, onSelectImage }: Props) => {
 
     if (isLoading) return <div>Loading...</div>
     const handleDelete = async (id: string) => {
+
         if (!session || !data) return
+        if (session.user.avatar_url.includes(id)) {
+            toast.error("You cannot delete the image. You are using this image as your profile picture.")
+            return
+        }
         const promiseDelete = authService.deleteImage(id, session.backendTokens.access_token)
         toast.promise(promiseDelete, {
             error: "Delete image fail!",

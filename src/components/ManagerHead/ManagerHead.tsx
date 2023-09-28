@@ -1,5 +1,5 @@
 "use"
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { AiOutlineMenuUnfold } from 'react-icons/ai'
 import SidebarMenu from '@/components/SidebarNav/SidebarMenu'
@@ -18,16 +18,20 @@ const headTitle = {
 }
 const ManagerHead = (props: Props) => {
     const [open, setOpen] = useState(false)
-    const pathName = usePathname()
+    const pathname = usePathname()
 
     const title = React.useMemo(() => {
-        if (!pathName) return
-        const splitPath = pathName.split("/")
+        if (!pathname) return
+        const splitPath = pathname.split("/")
         const parserPath = splitPath[splitPath.length - 1] as (keyof typeof headTitle)
         return headTitle[parserPath]
-    }, [pathName])
+    }, [pathname])
 
-    console.log()
+    useEffect(() => {
+        setOpen(false)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [pathname])
+
     return (
         <div>
             <h1 className='text-xl md:text-2xl dark:text-on_dark_text_gray relative before:absolute before:w-full before:h-[1px] before:bg-[#c2d4ee] dark:before:bg-on_dark_border
