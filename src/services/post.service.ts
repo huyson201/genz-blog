@@ -103,6 +103,14 @@ const postService = {
     }
     return data;
   },
+  increaseView: async (postId: string) => {
+    return fetch(`${apiConfig.baseUrl}/posts/${postId}/view/increase`, {
+      headers: {
+        ...apiConfig.headers,
+      },
+      method: "Patch",
+    });
+  },
 };
 
 export default postService;

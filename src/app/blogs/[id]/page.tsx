@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: Props) {
 const BlogDetail = async ({ params }: Props) => {
     const arrayString = params.id.split("-")
     const postId = arrayString[arrayString.length - 1]
-    const post = await postService.getPostById(postId)
+    const [post, increaseView] = await Promise.all([postService.getPostById(postId), postService.increaseView(postId)])
     if (!post) return notFound();
 
 
