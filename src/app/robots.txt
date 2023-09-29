@@ -1,9 +1,6 @@
 User-agent: *
-Disallow: /profile
-Disallow: /security/
-Disallow: /publish/
-Disallow: /me
-Disallow: /auth/verify-email
-Disallow: /auth/verify-request
 
 Sitemap: https://genz-blog.vercel.app/sitemap.xml
+Sitemap: https://genz-blog.vercel.app/sitemap_index.xml
+Sitemap: https://genz-blog.vercel.app/blogs/sitemap.xml
+Sitemap: https://genz-blog.vercel.app/tags/sitemap.xml

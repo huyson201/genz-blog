@@ -28,11 +28,19 @@ export const metadata: Metadata = {
   },
   description: 'Explore the world of programming, tech, and life through the eyes of a Gen Z blogger. Get coding tips, life lessons, and more.',
   applicationName: "Gen z Blogger",
-  other: {
-    "google-site-verification": "bQvN6nvIxBuTp2W5D8Chnp8h2zU-fDfgokwzwN08vl0"
+  verification: {
+    google: "bQvN6nvIxBuTp2W5D8Chnp8h2zU-fDfgokwzwN08vl0",
+    other: {
+      me: ["sonnguyen201.dev@gmail.com"]
+    }
   },
   alternates: {
-    canonical: "/"
+    canonical: "/",
+  },
+  robots: {
+    index: false,
+    nocache: true,
+    follow: true
   },
   openGraph: {
     title: {
@@ -44,7 +52,6 @@ export const metadata: Metadata = {
     type: 'website',
     siteName: "Gen Z Blogger",
     url: "/"
-
   },
 }
 
