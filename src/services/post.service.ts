@@ -15,7 +15,6 @@ const postService = {
       },
       method: "Post",
       body: JSON.stringify(arg.post),
-      cache: "no-store",
     });
     const data = await res.json();
     if (!res.ok) {
@@ -43,21 +42,28 @@ const postService = {
     }
     return data;
   },
-  getPostById: async (id: string): Promise<Post> => {
-    const res = await fetch(`${apiConfig.baseUrl}/posts/${id}`, {
-      headers: {
-        ...apiConfig.headers,
-      },
-      method: "Get",
-      cache: "no-store",
-    });
+  getPostById: async (id: string) => {
+    try {
+      const res = await fetch(`${apiConfig.baseUrl}/posts/${id}`, {
+        headers: {
+          ...apiConfig.headers,
+        },
+        method: "Get",
+        cache: "no-store",
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (!res.ok) {
-      throw new CustomError(res.status, data.message, data);
+      if (!res.ok) {
+        if (res.status < 500) {
+          return { error: data };
+        }
+        throw new Error(data.message || "Something went wrong");
+      }
+      return { data: data as Post };
+    } catch (error) {
+      throw error;
     }
-    return data;
   },
   getPosts: async ({
     page = 1,
@@ -72,7 +78,7 @@ const postService = {
         ...apiConfig.headers,
       },
       method: "Get",
-      cache: "no-cache",
+      cache: "no-store",
     });
 
     const data = await res.json();
@@ -108,7 +114,7 @@ const postService = {
       headers: {
         ...apiConfig.headers,
       },
-      method: "Patch",
+      method: "PATCH",
     });
   },
 };

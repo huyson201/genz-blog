@@ -23,7 +23,7 @@ interface Props {
 export async function generateMetadata({ params }: Props) {
     const arrayString = params.id.split("-")
     const postId = arrayString[arrayString.length - 1]
-    const post = await postService.getPostById(postId)
+    const { data: post, error } = await postService.getPostById(postId)
     if (!post) {
         return {
             title: "Not found",
@@ -53,10 +53,8 @@ export async function generateMetadata({ params }: Props) {
 const BlogDetail = async ({ params }: Props) => {
     const arrayString = params.id.split("-")
     const postId = arrayString[arrayString.length - 1]
-    const [post, increaseView] = await Promise.all([postService.getPostById(postId), postService.increaseView(postId)])
+    const [{ data: post, error }, increaseView] = await Promise.all([postService.getPostById(postId), postService.increaseView(postId)])
     if (!post) return notFound();
-
-
     return (
         <div className='xl:px-16 pt-12'>
             <div className='pb-6 border-b dark:border-b-on_dark_border border-b-[#c2d4ee]'>

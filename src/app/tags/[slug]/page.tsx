@@ -19,7 +19,13 @@ type Props = {
 
 export async function generateMetadata({ params }: Props) {
 
-    const tagInfo = await tagService.getTagBySlug(params.slug)
+    const { data: tagInfo, error } = await tagService.getTagBySlug(params.slug)
+    if (!tagInfo) {
+        return {
+            title: "Not found",
+            description: "The page you are looking for dose not exist",
+        }
+    }
     const title = `${tagInfo.name} Tag - Explore ${tagInfo.name} Blog Posts`
     const desc = `Discover a curated list of blog posts related to the ${tagInfo.name} tag. Find and engage with content related to your interests using our hashtag collection.`
 
@@ -42,8 +48,8 @@ export async function generateMetadata({ params }: Props) {
 const TagSlug = async ({ params: { slug }, searchParams: { page = 1 } }: Props) => {
     const tagInfoPromise = tagService.getTagBySlug(slug)
     const resPromise = tagService.getPostsBySlug(slug, { page })
-    const [tagInfo, res] = await Promise.all([tagInfoPromise, resPromise])
-    if (!tagInfo) return notFound()
+    const [{ data: tagInfo, error }, { data: posts, error: postsError }] = await Promise.all([tagInfoPromise, resPromise])
+    if (!tagInfo || !posts) return notFound()
 
     return (
         <div className='lg:px-24 space-y-4 '>
@@ -54,7 +60,7 @@ const TagSlug = async ({ params: { slug }, searchParams: { page = 1 } }: Props) 
             <div className=' pb-6  border-b border-b-[#c2d4ee] dark:border-b-on_dark_border'>
                 <Breadcrumb replaceLastText={tagInfo.name} />
             </div>
-            <BlogList data={res} currentPage={page} key={page} />
+            <BlogList data={posts} currentPage={page} key={page} />
         </div>
 
     )

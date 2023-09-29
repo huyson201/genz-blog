@@ -20,7 +20,6 @@ const noto = Noto_Sans({
   variable: "--noto-sans-font"
 })
 
-
 export const metadata: Metadata = {
   title: {
     default: "Discovering Code and Living Fully | Gen Z Blogger",

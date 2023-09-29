@@ -29,7 +29,7 @@ const BlogList = async ({ data, pathname }: Props) => {
 
     return (
         <>
-            <div className='pt-12 pb-6  divide-y divide-on_light_border_2 dark:divide-on_dark_border'>
+            <div className='pt-0 lg:pt-12 pb-6  divide-y divide-on_light_border_2 dark:divide-on_dark_border'>
                 {
                     cloneData.docs.map((post, index) => {
                         return <BlogRow key={index} post={post} />

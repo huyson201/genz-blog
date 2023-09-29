@@ -6,9 +6,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { HiOutlineClock } from 'react-icons/hi2'
 import { Auth, Post } from '@/types/type'
-import { calcBlogReadingTime, formatDate } from '@/utils'
+import { calcBlogReadingTime, convertNumberToShortFormat, formatDate } from '@/utils'
 import { slugify } from '@/utils/slugify'
 import { FiArrowRight } from 'react-icons/fi'
+import { BsEye } from 'react-icons/bs'
 interface Props {
     post: Post
 }
@@ -44,11 +45,16 @@ const BlogRow = ({ post }: Props) => {
 
                 </div>
                 <div className='flex items-center justify-between'>
-                    <div className='text-on_light_text_gray text-sm dark:text-[#66768f] flex items-center justify-end'>
-                        <HiOutlineClock className="mr-2 text-xl" />
-                        {calcBlogReadingTime(post.content, 200)} mins read
+                    <div className='flex items-end gap-x-4'>
+                        <span className='text-on_light_text_gray inline-flex items-center  text-sm dark:text-[#66768f] '>
+                            <HiOutlineClock className="mr-1 text-xl" />
+                            {calcBlogReadingTime(post.content, 200)} mins read
+                        </span>
+                        <span className='dark:text-[#66768f] text-sm text-on_light_text_gray inline-flex items-center'>
+                            <BsEye className=" text-base mr-1 inline-block" />
+                            <span >{convertNumberToShortFormat(post.viewCount)}</span>
+                        </span>
                     </div>
-
                     <div>
                         <Link href={`/blogs/${slugify(post.title)}-${post._id}`}
                             className="inline-block">

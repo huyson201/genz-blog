@@ -16,7 +16,9 @@ const tagService = {
         ...apiConfig.headers,
       },
       method: "Get",
-      cache: "no-store",
+      next: {
+        revalidate: 3600,
+      },
     });
     const data = await res.json();
     if (!res.ok) {
@@ -33,40 +35,54 @@ const tagService = {
       page?: number;
       limit?: number;
     }
-  ): Promise<PaginateResponse<Post>> => {
-    const query = queryStringify({ page, limit });
-    const res = await fetch(
-      `${apiConfig.baseUrl}/tags/${slug}/posts?${query}`,
-      {
+  ) => {
+    try {
+      const query = queryStringify({ page, limit });
+      const res = await fetch(
+        `${apiConfig.baseUrl}/tags/${slug}/posts?${query}`,
+        {
+          headers: {
+            ...apiConfig.headers,
+          },
+          method: "Get",
+          cache: "no-store",
+        }
+      );
+      const data = await res.json();
+      if (!res.ok) {
+        if (res.status < 500) {
+          return { error: data };
+        }
+        throw new CustomError(res.status, data.message, data);
+      }
+      return { data: data as PaginateResponse<Post> };
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  getTagBySlug: async (slug: string) => {
+    try {
+      const res = await fetch(`${apiConfig.baseUrl}/tags/${slug}`, {
         headers: {
           ...apiConfig.headers,
         },
         method: "Get",
-        cache: "no-store",
+        next: {
+          revalidate: 3600 * 24,
+        },
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        if (res.status < 500) {
+          return { error: data };
+        }
+        throw new Error(data.message || "Something went wrong!");
       }
-    );
-    const data = await res.json();
-    if (!res.ok) {
-      throw new CustomError(res.status, data.message, data);
+      return { data: data as HashTag };
+    } catch (error) {
+      throw error;
     }
-    return data;
-  },
-
-  getTagBySlug: async (slug: string): Promise<HashTag> => {
-    const res = await fetch(`${apiConfig.baseUrl}/tags/${slug}`, {
-      headers: {
-        ...apiConfig.headers,
-      },
-      method: "Get",
-      next: {
-        revalidate: 3600,
-      },
-    });
-    const data = await res.json();
-    if (!res.ok) {
-      throw new CustomError(res.status, data.message, data);
-    }
-    return data;
   },
 };
 

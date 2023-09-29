@@ -77,7 +77,7 @@ const commentService = {
         ...apiConfig.headers,
       },
       next: {
-        revalidate: 60 * 5,
+        revalidate: 3600,
       },
     });
 

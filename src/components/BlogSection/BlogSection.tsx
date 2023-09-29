@@ -1,6 +1,6 @@
 
 import { Auth, Post } from '@/types/type'
-import { formatDate } from '@/utils'
+import { convertNumberToShortFormat, formatDate } from '@/utils'
 import { slugify } from '@/utils/slugify'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -29,10 +29,10 @@ const BlogSection = ({ post }: Props) => {
                     {post.title}
                 </Link>
             </h3>
-            <p className=" text-[#4e658a]  dark:text-on_dark_text_gray  line-clamp-3">
+            <p className=" text-[#4e658a]  dark:text-on_dark_text_gray mb-2 line-clamp-3">
                 {post.description}
             </p>
-            <div className='space-y-2 mt-auto flex items-center gap-2.5'>
+            <div className='mt-auto flex items-center gap-2.5 flex-wrap'>
                 {
                     post.hashtags.map(tag => (<Link
                         key={tag._id}
@@ -47,7 +47,7 @@ const BlogSection = ({ post }: Props) => {
             <div className='flex items-center'>
                 <span className='ark:text-on_dark_text_gray text-sm text-on_light_text_gray'>
                     <BsEye className="inline-block text-base mr-1 align-middle" />
-                    <span className='inline-block align-middle'>{post.viewCount}</span>
+                    <span className='inline-block align-middle'>{convertNumberToShortFormat(post.viewCount)}</span>
                 </span>
                 <Link href={`/blogs/${slugify(post.title)}-${post._id}`}
                     className="inline-block ml-auto">

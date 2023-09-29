@@ -18,3 +18,20 @@ export const createOpenGraphImg = () => {
     return `https://${process.env.VERCEL_URL}`;
   return `${process.env.VERCEL_URL}`;
 };
+
+export function convertNumberToShortFormat(number: number) {
+  if (number === 0) return `${number}`;
+  const suffixes = ["", "k", "m", "b", "t"];
+  const magnitude = Math.floor(Math.log10(number) / 3);
+
+  // Đảm bảo không vượt quá các hậu tố đã xác định
+  const index = Math.min(magnitude, suffixes.length - 1);
+
+  // Chuyển đổi số và thêm hậu tố
+  const convertedNumber = number / Math.pow(10, index * 3);
+  const formattedNumber =
+    convertedNumber % 1 === 0
+      ? convertedNumber.toFixed(0)
+      : convertedNumber.toFixed(1);
+  return formattedNumber + suffixes[index];
+}
