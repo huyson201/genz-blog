@@ -24,6 +24,7 @@ export const metadata: Metadata = {
 const SettingHome = async (props: Props) => {
     const session = await getServerSession(options)
     if (!session) throw new RequireAuthException()
+
     return (
         <div className='py-6'>
             <div className='flex items-center justify-center'>

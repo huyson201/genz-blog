@@ -10,13 +10,32 @@ import { Fragment, useEffect, useState } from 'react'
 import { BsSearch } from 'react-icons/bs'
 import { RotatingLines } from 'react-loader-spinner'
 import useSWR from 'swr'
+
 type Props = {}
+
+const loadingElement = <p className='dark:text-[#e2e8f0] flex flex-col gap-3 items-center justify-center p-6 text-on_light_text_gray  border-t border-on_light_border_2'>
+    <RotatingLines
+        strokeColor="grey"
+        strokeWidth="5"
+        animationDuration="0.75"
+        width="30"
+        visible={true} />
+    Loading...
+</p>
+
+const noResultElements = <p className='dark:text-[#e2e8f0] text-center p-10 text-on_light_text_gray text-lg border-t border-on_light_border_2'>
+    No results...
+</p>
+
+const searchFetcher = ([_, value]: [string, string]) => postService.search(value, { page: 1 })
 
 export default function SearchModal() {
     const [searchValue, setSearchValue] = useState("")
-    const value = useDebounce(searchValue, 500)
-    const { data, isLoading, error } = useSWR(value && value !== "" ? ["/search", value] : null, ([url, value]) => postService.search(value, { page: 1 }))
     const searchModal = useSearchModal()
+
+    const value = useDebounce(searchValue, 500)
+    const swrKey = value && value !== "" ? ["/search", value] : null
+    const { data, isLoading, error } = useSWR(swrKey, searchFetcher)
 
     useEffect(() => {
         const handleKeydown = (e: KeyboardEvent) => {
@@ -27,12 +46,23 @@ export default function SearchModal() {
 
         window.addEventListener("keydown", handleKeydown)
         return () => window.removeEventListener("keydown", handleKeydown)
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
     useEffect(() => {
         if (searchModal?.isOpen) return
         setSearchValue("")
     }, [searchModal])
 
+
+    const isNoResults = !isLoading && data && data.totalDocs === 0
+
+    const hasResults = !isLoading && data && data.totalDocs > 0
+
+    const showViewMoreLink = data && data.nextPage !== null
+
+    const handleCloseModal = () => searchModal?.close()
 
     return (
         <>
@@ -75,7 +105,7 @@ export default function SearchModal() {
                                                 onChange={(e) => setSearchValue(e.currentTarget.value)} />
 
                                             <div className='absolute inset-y-0 flex items-center right-0'>
-                                                <button onClick={() => searchModal?.close()} type='button' className='dark:bg-[#2d3748] dark:text-white text-gray-900 bg-[#e2e8f0] text-xs font-semibold rounded-md focus:outline-none  uppercase tracking-wider 
+                                                <button onClick={handleCloseModal} type='button' className='dark:bg-[#2d3748] dark:text-white text-gray-900 bg-[#e2e8f0] text-xs font-semibold rounded-md focus:outline-none  uppercase tracking-wider 
                                                         p-1.5'>
                                                     Esc
                                                 </button>
@@ -83,11 +113,11 @@ export default function SearchModal() {
                                         </div>
                                     </form>
                                     {
-                                        !isLoading && data && data.totalDocs > 0 && (
+                                        hasResults && (
                                             <ul className='search-results py-2 border-t border-on_light_border_2 dark:border-on_dark_border overflow-auto divide-y dark:divide-on_dark_border divide-on_light_border'>
                                                 {
                                                     data.docs.map(post => (
-                                                        <li className='py-2.5 px-4 group' key={post._id} onClick={() => searchModal?.close()}>
+                                                        <li className='py-2.5 px-4 group' key={post._id} onClick={handleCloseModal}>
                                                             <Link href={`/blogs/${slugify(post.title)}-${post._id}`} className='text-left'>
                                                                 <div className='font-semibold text-xl text-black/90 dark:text-[#f7fafc] line-clamp-1 group-hover:text-blue transition-colors'>{post.title}</div>
                                                                 <div className='line-clamp-2 text-sm text-gray-900 dark:text-[#e2e8f0]'>{post.description}</div>
@@ -96,7 +126,7 @@ export default function SearchModal() {
                                                     ))
                                                 }
                                                 {
-                                                    data && data.nextPage !== null && <li className='py-2.5 px-4' onClick={() => searchModal?.close()}>
+                                                    showViewMoreLink && <li className='py-2.5 px-4' onClick={handleCloseModal}>
                                                         <Link href={`/search?q=${value}`} className='text-center text-blue underline text-sm font-semibold'>
                                                             View more
                                                         </Link>
@@ -107,28 +137,8 @@ export default function SearchModal() {
                                         )
                                     }
 
-                                    {
-                                        !isLoading && data && data.totalDocs === 0 && (
-                                            <p className='dark:text-[#e2e8f0] text-center p-10 text-on_light_text_gray text-lg border-t border-on_light_border_2'>
-                                                No results...
-                                            </p>
-                                        )
-                                    }
-
-                                    {
-                                        isLoading && (
-                                            <p className='dark:text-[#e2e8f0] flex flex-col gap-3 items-center justify-center p-6 text-on_light_text_gray  border-t border-on_light_border_2'>
-                                                <RotatingLines
-                                                    strokeColor="grey"
-                                                    strokeWidth="5"
-                                                    animationDuration="0.75"
-                                                    width="30"
-                                                    visible={true}
-                                                />
-                                                Loading...
-                                            </p>
-                                        )
-                                    }
+                                    {isNoResults && noResultElements}
+                                    {isLoading && loadingElement}
                                 </Dialog.Panel>
                             </Transition.Child>
                         </div>

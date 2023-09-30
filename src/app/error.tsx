@@ -1,8 +1,5 @@
 "use client"
-
-import Image from 'next/image'
 import React from 'react'
-import wrongIcon from '@/assets/wrong.png'
 import Link from 'next/link'
 import Wrapper from '@/components/Common/Wrapper/Wrapper'
 type Props = {

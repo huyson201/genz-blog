@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Contact',
         description: "Have questions or feedback? Contact us to get in touch with our team. We're here to assist you. Reach out today!",
-        images: [`/api/screenshot?url=${createOpenGraphImg()}/contact`],
+        images: [`https://i.ibb.co/1XJrRtD/kg65iy08j6orh3g1tbnub09v.png`],
         url: "/contact"
     },
 }

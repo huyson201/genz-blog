@@ -5,9 +5,9 @@ import Provider from '@/components/Provider/Provider'
 import Footer from '@/components/Common/Footer/Footer'
 import NavbarWrapper from '@/components/Navbar/NavbarWrapper/NavbarWrapper'
 import { Toaster } from 'react-hot-toast'
-import './globals.css'
-import { createOpenGraphImg } from '@/utils'
+import { createOpenGraphImg, getSiteURL } from '@/utils'
 import SearchModal from '@/components/Search/SearchModal'
+import './globals.css'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -21,6 +21,7 @@ const noto = Noto_Sans({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(getSiteURL()),
   title: {
     default: "Discovering Code and Living Fully | Gen Z Blogger",
     template: "%s | Gen Z Blogger"
@@ -46,12 +47,13 @@ export const metadata: Metadata = {
       template: "%s | Gen Z Blogger"
     },
     description: 'Explore the world of programming, tech, and life through the eyes of a Gen Z blogger. Get coding tips, life lessons, and more.',
-    images: [`/api/screenshot?url=${createOpenGraphImg()}`],
+    images: [`https://i.ibb.co/LDTX2nv/home-Open-Graph.png`],
     type: 'website',
     siteName: "Gen Z Blogger",
     url: "/"
   },
 }
+
 
 export default function RootLayout({
   children,

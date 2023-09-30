@@ -20,6 +20,8 @@ type Props = {
     onDelete?: (_id: string) => void
 }
 
+const replyLoadingSkeleton = Array(4).fill(1).map((_, index) => <CommentSkeleton key={index} />)
+
 const Comment = ({ comment, canReply, onUpdate, onDelete }: Props) => {
     const [showReply, setShowReply] = useState(false)
     const [loadReply, setLoadReply] = useState(false)
@@ -29,6 +31,11 @@ const Comment = ({ comment, canReply, onUpdate, onDelete }: Props) => {
     const commentState = useComment()
     const textareaRef = useRef<HTMLTextAreaElement>(null)
 
+
+    const isShowReplyInput = canReply && commentState?.reply === comment._id
+    const hasUpdate = commentState?.updateId === comment._id
+    const isCommentAuth = comment.author._id === session?.user._id
+    const hasReplyCount = comment.replyCount > 0 && !showReply
 
     const handleSubmit = async (value: string) => {
         if (!session) return
@@ -96,6 +103,7 @@ const Comment = ({ comment, canReply, onUpdate, onDelete }: Props) => {
         }
     }
 
+
     return (
         <div className='comment-box '>
             <div className='flex-col gap-y-4 md:flex-row flex justify-between items-start'>
@@ -115,7 +123,7 @@ const Comment = ({ comment, canReply, onUpdate, onDelete }: Props) => {
                  dark:border-on_dark_border border-on_light_border_2 p-4  rounded-lg text-[#708ab0] dark:text-[#94a9c9]'>
 
                         {
-                            commentState?.updateId === comment._id ? (
+                            hasUpdate ? (
                                 <>
                                     <textarea className='w-full bg-transparent resize-y outline-none border-none' ref={textareaRef} autoFocus defaultValue={comment.content} >
                                     </textarea>
@@ -145,7 +153,7 @@ const Comment = ({ comment, canReply, onUpdate, onDelete }: Props) => {
                                             </button>
                                         }
                                         {
-                                            comment.author._id === session?.user._id && <button
+                                            isCommentAuth && <button
                                                 onClick={() => commentState?.setUpdate(comment._id)}
                                                 className='text-xs flex items-center  text-[#708ab0] dark:text-[#94a9c9] hover:text-blue dark:hover:text-blue'>
                                                 <BsPencilSquare className='mr-0.5 text-sm inline-block' />
@@ -153,7 +161,7 @@ const Comment = ({ comment, canReply, onUpdate, onDelete }: Props) => {
                                             </button>
                                         }
                                         {
-                                            comment.author._id === session?.user._id && <button
+                                            isCommentAuth && <button
                                                 onClick={() => onDelete?.(comment._id)}
                                                 className='text-xs flex items-center  text-[#708ab0] dark:text-[#94a9c9] hover:text-blue dark:hover:text-blue'>
                                                 <MdRestoreFromTrash className='mr-0.5 text-sm inline-block' />
@@ -166,7 +174,7 @@ const Comment = ({ comment, canReply, onUpdate, onDelete }: Props) => {
                         }
                     </div>
                     {
-                        comment.replyCount > 0 && !showReply && <div className='text-center md:text-left'>
+                        hasReplyCount && <div className='text-center md:text-left'>
                             <button
                                 onClick={handleClickShowReply}
                                 className='inline-flex text-sm mt-4 hover:text-blue dark:hover:text-blue transition-colors
@@ -178,14 +186,14 @@ const Comment = ({ comment, canReply, onUpdate, onDelete }: Props) => {
                 </div>
             </div>
             {
-                loadReply && Array(4).fill(1).map((_, index) => <CommentSkeleton key={index} />)
+                loadReply && replyLoadingSkeleton
             }
             {
                 replyComment.length > 0 && replyComment.map(comment => <Comment onUpdate={handleUpdateChild} onDelete={deleteCommentChild} comment={comment} key={comment._id} />)
             }
 
             {
-                canReply && commentState?.reply === comment._id && <CommentInput showCancelButton onRequestCancel={() => commentState.setReply(null)} onSubmit={handleSubmit} />
+                isShowReplyInput && <CommentInput showCancelButton onRequestCancel={() => commentState.setReply(null)} onSubmit={handleSubmit} />
             }
             {
                 errorReply && <div className='mt-4 text-sm text-red-500'>{errorReply}</div>

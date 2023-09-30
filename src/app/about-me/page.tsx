@@ -24,12 +24,78 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'My Portfolio - Learn About Me and My Work',
         description: "Explore my portfolio to get to know me better and discover my work. Learn about my skills, experiences, and projects in web development, design, and more.",
-        images: [`/api/screenshot?url=${createOpenGraphImg()}/about-me`],
+        images: [`https://i.ibb.co/h1YB2N4/kea64p064kaz4inli0tcp44w.png`],
         url: "/about-me"
     },
 }
 
+const skillIcons = [
+    {
+        url: "https://svgshare.com/i/xqv.svg",
+        alt: "html"
+    },
+    {
+        url: 'https://svgshare.com/i/xqE.svg',
+        alt: "css"
+    },
+    {
+        url: 'https://svgshare.com/i/xoq.svg',
+        alt: "sass"
+    },
+    {
+        url: 'https://svgshare.com/i/xqt.svg',
+        alt: "nodejs"
+    },
+    {
+        url: 'https://svgshare.com/i/xqi.svg',
+        alt: "js"
+    },
+    {
+        url: 'https://svgshare.com/i/xqj.svg',
+        alt: "ts"
+    },
+    {
+        url: 'https://svgshare.com/i/xoH.svg',
+        alt: "react"
+    },
+    {
+        url: 'https://svgshare.com/i/xor.svg',
+        alt: "redux"
+    },
+    {
+        url: 'https://svgshare.com/i/xqk.svg',
+        alt: "mysql"
+    },
+    {
+        url: 'https://svgshare.com/i/xqw.svg',
+        alt: "mongo"
+    },
+    {
+        url: 'https://svgshare.com/i/xqY.svg',
+        alt: "redis"
+    },
+    {
+        url: 'https://svgshare.com/i/xqP.svg',
+        alt: "git"
+    },
+    {
+        url: 'https://svgshare.com/i/xqu.svg',
+        alt: "express"
+    },
+    {
+        url: 'https://svgshare.com/i/xqD.svg',
+        alt: "nestJs"
+    },
+    {
+        url: 'https://svgshare.com/i/xqZ.svg',
+        alt: "nextJs"
+    },
+]
 const page = (props: Props) => {
+    const skillImages = skillIcons.map((icon, idx) => (
+        <Image key={idx.toString()} className='w-full' src={icon.url} width={300} height={300} alt={icon.alt} />
+
+    ))
     return (
         <div className='mb-12'>
             <div className='bg-on_dark_card_bg dark:bg-on_dark_card_bg '>
@@ -139,28 +205,12 @@ const page = (props: Props) => {
                         </GradientText>
                     </h2>
                     <div className='mt-4 grid grid-cols-3 sm:grid-cols-6 gap-6 md:grid-cols-7'>
-                        <Image className='w-full' src={'https://svgshare.com/i/xqv.svg'} width={300} height={300} alt='html' />
-                        <Image className='w-full' src={'https://svgshare.com/i/xqE.svg'} width={300} height={300} alt='css' />
-                        <Image className='w-full' src={' https://svgshare.com/i/xoq.svg'} width={300} height={300} alt="sass" />
-                        <Image className='w-full' src={'https://svgshare.com/i/xqt.svg'} width={300} height={300} alt="nodejs" />
-                        <Image className='w-full' src={'https://svgshare.com/i/xqi.svg'} width={300} height={300} alt="js" />
-                        <Image className='w-full' src={'https://svgshare.com/i/xqj.svg'} width={300} height={300} alt="ts" />
-                        <Image className='w-full' src={'https://svgshare.com/i/xoH.svg'} width={300} height={300} alt="react" />
-                        <Image className='w-full' src={'https://svgshare.com/i/xor.svg'} width={300} height={300} alt="redux" />
-                        <Image className='w-full' src={'https://svgshare.com/i/xqk.svg'} width={300} height={300} alt="mysql" />
-                        <Image className='w-full' src={'https://svgshare.com/i/xqw.svg'} width={300} height={300} alt="mongo" />
-                        <Image className='w-full' src={'https://svgshare.com/i/xqY.svg'} width={300} height={300} alt="redis" />
-                        <Image className='w-full' src={'https://svgshare.com/i/xqP.svg'} width={300} height={300} alt="git" />
-                        <Image className='w-full' src={'https://svgshare.com/i/xqu.svg'} width={300} height={300} alt="express" />
-                        <Image className='w-full' src={'https://svgshare.com/i/xqD.svg'} width={300} height={300} alt="express" />
-                        <Image className='w-full' src={'https://svgshare.com/i/xqZ.svg'} width={300} height={300} alt="express" />
+                        {skillImages}
                     </div>
                 </div>
             </Wrapper>
-
-
-
         </div>
+
 
     )
 }

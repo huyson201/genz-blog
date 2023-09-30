@@ -45,27 +45,34 @@ const Profile = ({ data }: Props) => {
         reValidateMode: "onChange"
     })
 
+
+    const isProfileChange = (currentData: Auth, changeData: { previewImg?: string, name: string }) => {
+        return (changeData.previewImg !== currentData.avatar_url || changeData.name !== currentData.name)
+
+    }
+
     const submitForm = handleSubmit(async (formData) => {
         if (!session) return
-        if ((!previewImg || previewImg === "") && formData.name === data.name) {
-            return
-        }
-        if (previewImg === data.avatar_url && formData.name === data.name) return
+        if (!isProfileChange(data, { previewImg: previewImg, name: formData.name })) return
+
         try {
             const triggerPromise = trigger({
                 token: session.backendTokens.access_token,
                 data: { name: formData.name, avatar_url: previewImg }
             })
 
-            const res = await toast.promise(triggerPromise, {
+            const toastMessage = {
                 error: "Update profile fail!",
                 success: "Successfully update profile!",
                 loading: "saving!"
-            })
-            await sessionUpdate({
+            }
+            const res = await toast.promise(triggerPromise, toastMessage)
+
+            const profileUpdatingData = {
                 ...session,
                 user: res
-            })
+            }
+            await sessionUpdate(profileUpdatingData)
             router.refresh()
         } catch (error: any) {
             setError(error.message)

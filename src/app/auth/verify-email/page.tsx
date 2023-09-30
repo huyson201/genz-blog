@@ -16,19 +16,20 @@ type Props = {
 const page = async ({ searchParams: { code } }: Props) => {
     const session = await getServerSession(options)
 
-    if (!code && session && session.user.verified) return (
-        <Wrapper>
-            <div className='pb-24 py-14 flex items-center justify-center dark:text-on_text_gray_2'>
-                <VerifyMessageCard />
-            </div>
-        </Wrapper>
-    )
-
-
+    if (!code && session && session.user.verified) {
+        return (
+            <Wrapper>
+                <div className='pb-24 py-14 flex items-center justify-center dark:text-on_text_gray_2'>
+                    <VerifyMessageCard />
+                </div>
+            </Wrapper>
+        )
+    }
     if (!code) return notFound()
-    const res = await authService.verifyEmail(code)
-    const data = await res.json()
-    if (!res.ok) throw new Error(data.message || "Something went wrong!")
+    const verifyEmailResponse = await authService.verifyEmail(code)
+    const data = await verifyEmailResponse.json()
+    if (!verifyEmailResponse.ok) throw new Error(data.message || "Something went wrong!")
+
     return (
         <Wrapper>
             <div className='pb-24 py-14 flex items-center justify-center dark:text-on_text_gray_2'>

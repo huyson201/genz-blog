@@ -8,8 +8,8 @@ type Props = {
 
 const TypingAnimation = ({ words, className }: Props) => {
     const wordRef = useRef<HTMLSpanElement | null>(null)
+    const defaultWord = words[words.length - 1]
     useEffect(() => {
-
         let wordIndex = 0
         let charIndex = 0
         let isDelete = false
@@ -36,7 +36,7 @@ const TypingAnimation = ({ words, className }: Props) => {
     return (
         <div>
             <span ref={wordRef} className={twMerge(className)}>
-
+                {defaultWord}
             </span>
             <span className='text-[29px] xs:text-[34px] sm:text-[44px] md:text-[60px] dark:text-white cursor-animate'>|</span>
         </div>

@@ -1,7 +1,5 @@
 import BlogList from '@/components/BlogList/BlogList'
-import BlogRow from '@/components/BlogList/BlogRow/BlogRow'
 import Breadcrumb from '@/components/Breadcrumb/Breadcrumb'
-import Pagination from '@/components/Pagination/Pagination'
 import postService from '@/services/post.service'
 import { createOpenGraphImg } from '@/utils'
 import { notFound } from 'next/navigation'

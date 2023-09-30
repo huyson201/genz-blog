@@ -22,9 +22,12 @@ const Account = (props: Props) => {
             signOut()
         }
     }, [session?.error])
+
+    const isAdmin = session && session.user.role === Role.Admin
+
     return (
         <>
-            {session && session.user.role === Role.Admin && (
+            {isAdmin && (
                 <Link href={"/publish/post"} className='text-2xl text-on_text_gray_2' title='Add new post'>
                     <BsPencilSquare />
                 </Link>
@@ -33,6 +36,7 @@ const Account = (props: Props) => {
             {
                 status === "authenticated" && <UserMenu auth={session.user} tokens={session.backendTokens} />
             }
+
             {
                 status === "unauthenticated" && (
                     <Link href={`/auth/login${callbackUrl !== null ? `?callbackUrl=${callbackUrl}` : ""}`}
@@ -41,6 +45,7 @@ const Account = (props: Props) => {
                     </Link>
                 )
             }
+
             <span className='hidden md:inline-block'>
                 <RotatingLines
                     strokeColor="grey"

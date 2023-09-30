@@ -1,12 +1,10 @@
 
 import BlogList from '@/components/BlogList/BlogList'
 import Breadcrumb from '@/components/Breadcrumb/Breadcrumb'
-import Wrapper from '@/components/Common/Wrapper/Wrapper'
-import BlogRowSkeleton from '@/components/Skeleton/BlogRowSkeleton'
 import tagService from '@/services/tag.service'
 import { createOpenGraphImg } from '@/utils'
 import { notFound } from 'next/navigation'
-import React, { Suspense } from 'react'
+import React from 'react'
 
 type Props = {
     params: {

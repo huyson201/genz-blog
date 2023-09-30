@@ -29,7 +29,8 @@ export const metadata: Metadata = {
 }
 const page = async ({ params: { page } }: Props) => {
     if (!Number(page)) return notFound()
-    const post = await postService.getPosts({ page: Number(page) })
+    const posts = await postService.getPosts({ page: Number(page) })
+    const blogsLoadingSkeleton = Array.from({ length: 10 }).map((_, index) => <BlogRowSkeleton key={`row-${index}`} />)
     return (
         <div className='lg:px-24'>
             <div className='space-y-4 py-6 border-b border-b-[#c2d4ee] dark:border-b-on_dark_border'>
@@ -44,12 +45,10 @@ const page = async ({ params: { page } }: Props) => {
             </div>
             <Suspense fallback={(
                 <div className='pt-12 pb-6  divide-y divide-on_light_border_2 dark:divide-on_dark_border'>
-                    {
-                        Array(10).fill(1).map((_, index) => <BlogRowSkeleton key={`row-${index}`} />)
-                    }
+                    {blogsLoadingSkeleton}
                 </div>
             )}>
-                <BlogList pathname='/blogs' data={post} currentPage={Number(page)} />
+                <BlogList pathname='/blogs' data={posts} currentPage={Number(page)} />
             </Suspense>
         </div>
     )

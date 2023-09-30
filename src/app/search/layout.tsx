@@ -1,5 +1,4 @@
 import React from 'react'
-import Breadcrumb from '@/components/Breadcrumb/Breadcrumb'
 import Wrapper from '@/components/Common/Wrapper/Wrapper'
 type Props = {
     children: React.ReactNode

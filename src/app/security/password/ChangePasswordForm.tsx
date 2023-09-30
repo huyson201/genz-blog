@@ -21,15 +21,15 @@ const schema = yup.object({
 })
 type Props = {}
 
+const changePasswordFetcher = (_: string, { arg }: { arg: { token: string; data: ChangePasswordData } }) => authService.changePassword(arg.token, arg.data)
+
 const ChangePasswordForm = (props: Props) => {
     const router = useRouter()
     const [error, setError] = useState<string>()
     const { data: session } = useSession()
-    const { trigger, isMutating } = useSWRMutation("/auth/change-password",
-        (
-            url: string,
-            { arg }: { arg: { token: string; data: ChangePasswordData; } }
-        ) => authService.changePassword(arg.token, arg.data))
+
+
+    const { trigger, isMutating } = useSWRMutation("/auth/change-password", changePasswordFetcher)
 
     const { handleSubmit, register, formState: { errors }, reset } = useForm({
         resolver: yupResolver(schema),
@@ -39,6 +39,7 @@ const ChangePasswordForm = (props: Props) => {
     const submit = handleSubmit(async (data) => {
         if (!session) return
         setError("")
+
         try {
             await toast.promise(trigger({ token: session.backendTokens.access_token, data }), {
                 loading: "Changing password!",

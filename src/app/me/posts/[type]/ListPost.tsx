@@ -24,20 +24,19 @@ const ListPost = ({ type, page, q }: Props) => {
     const { data, isLoading, mutate, error } = useSWR(!session ? null : ["me/posts", session.backendTokens.access_token, type, page, q],
         ([url, token, type, page, q]) => authService.getPosts(token, { page: page, display: type, q }))
 
-
-    if (isLoading) {
-        return <div className='divide-y dark:divide-on_dark_border divide-on_light_border'>
+    const loadingDisplayElement = (
+        <div className='divide-y dark:divide-on_dark_border divide-on_light_border'>
             {
                 Array(10).fill(1).map((_, index) => <PostRowSkeleton key={index} />)
             }
         </div>
-    }
-    if (!data || data.totalDocs === 0) {
-        return (
-            <div className='text-center text-on_light_text_gray dark:text-on_dark_text_gray'>There&apos;s nothing here</div>
-        )
-    }
+    )
 
+    const dataEmptyDisplayElement = (
+        <div className='text-center text-on_light_text_gray dark:text-on_dark_text_gray'>There&apos;s nothing here</div>
+    )
+
+    const isShowPagination = data && data.totalPages > 1
 
     const handleDelete = (data: Post) => {
         setIsOpenDialog(true)
@@ -54,15 +53,23 @@ const ListPost = ({ type, page, q }: Props) => {
     const handleConfirmDel = () => {
         if (!delData || !session) return
         const delPostPromise = authService.deletePost(session.backendTokens.access_token, delData._id)
-        toast.promise(delPostPromise, {
+        const toastMessage = {
             loading: "Post is deleting",
             error: "Delete post fail!",
             success: "Successfully delete post!"
-        }).then(() => {
-
-            mutate()
-        })
+        }
+        toast.promise(delPostPromise, toastMessage).then(() => mutate())
     }
+
+
+    if (isLoading) {
+        return loadingDisplayElement
+    }
+
+    if (!data || data.totalDocs === 0) {
+        return dataEmptyDisplayElement
+    }
+
     return (
         <>
             <div className='divide-y dark:divide-on_dark_border divide-on_light_border'>
@@ -71,7 +78,7 @@ const ListPost = ({ type, page, q }: Props) => {
                 }
             </div>
             {
-                data && data.totalPages > 1 && <Pagination currentPage={page} totalPage={data.totalPages} />
+                isShowPagination && <Pagination currentPage={page} totalPage={data.totalPages} />
             }
             <ConfirmDialog onRequestClose={handleCloseDialog} onConfirm={handleConfirmDel} isOpen={isOpenDialog} />
         </>

@@ -15,10 +15,11 @@ const VerifyMessageCard = ({ data }: Props) => {
     const { data: session, update, status } = useSession()
     const [updated, setUpdated] = useState(false)
     useEffect(() => {
-        console.log(updated)
         if (updated) return
         update({ refreshProfile: true }).then(res => res === undefined ? setUpdated(false) : null)
         setUpdated(true)
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [update])
 
 
@@ -48,7 +49,6 @@ const VerifyMessageCard = ({ data }: Props) => {
                         </>
                     )
                 }
-
             </div>
         </div>
     )

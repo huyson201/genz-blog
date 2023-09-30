@@ -1,23 +1,25 @@
 import postService from "@/services/post.service";
-import { slugify } from "@/utils";
+import { getSiteURL, slugify } from "@/utils";
 import { MetadataRoute } from "next";
 
 export default async function sitemap(
   props: any
 ): Promise<MetadataRoute.Sitemap> {
-  const post = await postService.getPosts({ page: 1 });
-  if (!post) return [];
+  const currentPost = await postService.getPosts({ page: 1 });
+
+  if (!currentPost) return [];
+
   const posts = await Promise.all(
-    Array.from({ length: post.totalPages }).map((_, key) =>
+    Array.from({ length: currentPost.totalPages }).map((_, key) =>
       postService.getPosts({ page: key + 1 })
     )
   );
 
-  const results = posts
+  const blogDetailSitemaps = posts
     .map((data) => {
       return data.docs.map((postData) => {
         return {
-          url: `https://genz-blog.vercel.app/blogs/${slugify(postData.title)}-${
+          url: `${getSiteURL()}/blogs/${slugify(postData.title)}-${
             postData._id
           }`,
           lastModified: new Date(),
@@ -27,14 +29,17 @@ export default async function sitemap(
       });
     })
     .flat(1) as MetadataRoute.Sitemap;
-  const sitemapPage = Array.from({ length: post.totalPages }).map((_, key) => {
+
+  const blogPageSitemaps = Array.from({
+    length: currentPost.totalPages,
+  }).map((_, key) => {
     return {
-      url: `https://genz-blog.vercel.app/blogs/page/${key + 1}`,
+      url: `${getSiteURL()}/blogs/page/${key + 1}`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.64,
     };
   }) as MetadataRoute.Sitemap;
 
-  return [...results, ...sitemapPage];
+  return [...blogDetailSitemaps, ...blogPageSitemaps];
 }

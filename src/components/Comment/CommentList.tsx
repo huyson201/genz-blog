@@ -12,16 +12,15 @@ type Props = {
 
 const CommentList = ({ comments, onUpdate, onDelete }: Props) => {
 
+    const hasComments = comments.length > 0
     return (
         <div className='mt-6 space-y-8'>
-
             <CommentContextProvider>
                 {
-                    comments.length > 0 ?
+                    hasComments ?
                         comments.map(comment => (<Comment onUpdate={onUpdate} onDelete={onDelete} canReply comment={comment} key={comment._id} />))
                         : (<div className='text-on_light_text_gray dark:text-on_dark_text_gray'>The post still has no comments.</div>)
                 }
-
             </CommentContextProvider>
 
         </div>

@@ -20,13 +20,9 @@ export default function UserMenu({ auth, tokens }: Props) {
     const router = useRouter()
     const { data: session } = useSession()
     const handleLogout = async () => {
-        const res = await authService.logout(tokens.access_token)
-        if (res.ok) {
-            signOut({
-                redirect: false
-            }).then(res => {
-                router.push(`/auth/login`)
-            })
+        const logoutResponse = await authService.logout(tokens.access_token)
+        if (logoutResponse.ok) {
+            signOut({ redirect: false }).then(_ => { router.push(`/auth/login`) })
         }
     }
     return (

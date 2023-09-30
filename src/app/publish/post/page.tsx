@@ -4,15 +4,17 @@ import { Metadata } from 'next'
 import React from 'react'
 
 type Props = {}
+const metaTitle = 'Create a New Post'
+const metaDesc = "Start writing and create a new post to share your ideas with the world. Express yourself through your content on Gen Z Blogger, your platform for creative expression and meaningful discussions."
 export const metadata: Metadata = {
-    title: 'Create a New Post',
-    description: "Start writing and create a new post to share your ideas with the world. Express yourself through your content on Gen Z Blogger, your platform for creative expression and meaningful discussions.",
+    title: metaTitle,
+    description: metaDesc,
     alternates: {
         canonical: "/publish/post"
     },
     openGraph: {
-        title: 'Create a New Post',
-        description: "Start writing and create a new post to share your ideas with the world. Express yourself through your content on Gen Z Blogger, your platform for creative expression and meaningful discussions.",
+        title: metaTitle,
+        description: metaDesc
     },
 }
 const CreatePost = (props: Props) => {

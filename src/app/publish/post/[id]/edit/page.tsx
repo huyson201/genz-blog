@@ -22,7 +22,6 @@ export async function generateMetadata(props: Props) {
         openGraph: {
             title: title,
             description: desc,
-
         },
 
     }

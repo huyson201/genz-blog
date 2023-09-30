@@ -17,7 +17,8 @@ const BlogList = async ({ data, pathname }: Props) => {
     }
 
 
-    if (cloneData.totalDocs <= 0) {
+    const isNoResults = cloneData.totalDocs <= 0
+    if (isNoResults) {
         return (
             <div className='pt-12 pb-6  divide-y divide-on_light_border_2 dark:divide-on_dark_border'>
                 <div className='text-center text-on_light_text_gray dark:text-on_dark_text_gray'>
@@ -27,6 +28,7 @@ const BlogList = async ({ data, pathname }: Props) => {
         )
     }
 
+    const isShowPagination = cloneData.totalPages > 1
     return (
         <>
             <div className='pt-0 lg:pt-12 pb-6  divide-y divide-on_light_border_2 dark:divide-on_dark_border'>
@@ -36,7 +38,7 @@ const BlogList = async ({ data, pathname }: Props) => {
                     })
                 }
             </div>
-            {cloneData.totalPages > 1 && <Pagination pathname={pathname} className='mb-24' currentPage={cloneData.page} totalPage={cloneData.totalPages} />}
+            {isShowPagination && <Pagination pathname={pathname} className='mb-24' currentPage={cloneData.page} totalPage={cloneData.totalPages} />}
         </>
     )
 }

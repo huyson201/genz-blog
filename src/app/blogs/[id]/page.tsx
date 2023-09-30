@@ -50,10 +50,15 @@ export async function generateMetadata({ params }: Props) {
     }
 }
 
-const BlogDetail = async ({ params }: Props) => {
-    const arrayString = params.id.split("-")
+function extractPostIdFromIdSlug(id: string) {
+    const arrayString = id.split("-")
     const postId = arrayString[arrayString.length - 1]
-    const [{ data: post, error }, increaseView] = await Promise.all([postService.getPostById(postId), postService.increaseView(postId)])
+    return postId
+}
+
+const BlogDetail = async ({ params }: Props) => {
+    const postId = extractPostIdFromIdSlug(params.id)
+    const [{ data: post, error }, _] = await Promise.all([postService.getPostById(postId), postService.increaseView(postId)])
     if (!post) return notFound();
     return (
         <div className='xl:px-16 pt-12'>
@@ -124,6 +129,8 @@ const BlogDetail = async ({ params }: Props) => {
         </div>
 
     )
+
+
 }
 
 export default BlogDetail

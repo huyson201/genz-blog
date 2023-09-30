@@ -5,16 +5,18 @@ import { Metadata } from 'next'
 
 type Props = {}
 
+const metaTitle = 'Change Password - Secure Your Account'
+const metaDesc = "Protect your account by changing your password securely. Follow our step-by-step guide to update your password and enhance your online security. Gen Z Blogger - Your Trusted Online Security Partner."
 export const metadata: Metadata = {
-    title: 'Change Password - Secure Your Account',
-    description: "Protect your account by changing your password securely. Follow our step-by-step guide to update your password and enhance your online security. Gen Z Blogger - Your Trusted Online Security Partner."
+    title: metaTitle,
+    description: metaDesc
     ,
     alternates: {
         canonical: "/security/change-password"
     },
     openGraph: {
-        title: 'Change Password - Secure Your Account',
-        description: "Protect your account by changing your password securely. Follow our step-by-step guide to update your password and enhance your online security. Gen Z Blogger - Your Trusted Online Security Partner.",
+        title: metaTitle,
+        description: metaDesc
     },
 }
 const Page = (props: Props) => {

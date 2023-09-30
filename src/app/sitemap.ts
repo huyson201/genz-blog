@@ -1,48 +1,44 @@
+import { getSiteURL } from "@/utils";
 import { MetadataRoute } from "next";
 
+const defaultSitemapUrls = [
+  {
+    url: getSiteURL(),
+    priority: 1,
+  },
+  {
+    url: `${getSiteURL()}/blogs`,
+    priority: 0.8,
+  },
+  {
+    url: `${getSiteURL()}/tags`,
+    priority: 0.8,
+  },
+  {
+    url: `${getSiteURL()}/contact`,
+    priority: 0.8,
+  },
+  {
+    url: `${getSiteURL()}/about-me`,
+    priority: 0.8,
+  },
+  {
+    url: `${getSiteURL()}/login`,
+    priority: 0.8,
+  },
+  {
+    url: `${getSiteURL()}/register`,
+    priority: 0.8,
+  },
+];
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    {
-      url: "https://genz-blog.vercel.app/",
+  return defaultSitemapUrls.map((value) => {
+    return {
+      url: value.url,
       lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-    {
-      url: "https://genz-blog.vercel.app/blogs",
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: "https://genz-blog.vercel.app/tags",
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: "https://genz-blog.vercel.app/contact",
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: "https://genz-blog.vercel.app/about-me",
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: "https://genz-blog.vercel.app/auth/login",
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: "https://genz-blog.vercel.app/auth/register",
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-  ];
+      changeFrequency: `weekly`,
+      priority: value.priority,
+    };
+  });
 }

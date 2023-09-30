@@ -14,10 +14,28 @@ import LastCommentList from '@/components/LastCommentSection/LastCommentList'
 import LastCommentSkeleton from '@/components/Skeleton/LastCommentSkeleton'
 import commentService from '../services/comment.service'
 
+
 export default function Home() {
   const posts = postService.getPosts({ page: 1 })
   const lastComments = commentService.getLastComments()
 
+  const lastCommentsSkeletonLoading = (
+    <div className='divide-y divide-[#c2d4ee] dark:divide-on_dark_border space-y-6'>
+      {
+        Array(5).fill(0).map((_, index) => {
+          return <LastCommentSkeleton key={`cmt-${index}`} />
+        })
+      }
+    </div>
+  )
+
+  const sectionBlogSkeletonLoading = (
+    <div className='lg:flex lg:flex-wrap lg:gap-6 space-y-6 lg:space-y-0'>
+      {
+        Array(8).fill(0).map((_, index) => <SectionBlogSkeleton key={index} />)
+      }
+    </div>
+  )
   return (
     <main>
 
@@ -75,13 +93,7 @@ export default function Home() {
               {/* blogs list */}
               <div className='md:w-2/3'>
                 <Suspense
-                  fallback={(
-                    <div className='lg:flex lg:flex-wrap lg:gap-6 space-y-6 lg:space-y-0'>
-                      {
-                        Array(8).fill(0).map((_, index) => <SectionBlogSkeleton key={index} />)
-                      }
-                    </div>
-                  )}>
+                  fallback={sectionBlogSkeletonLoading}>
                   <BlogSectionList postPromise={posts} />
                 </Suspense>
               </div>
@@ -96,18 +108,9 @@ export default function Home() {
                     </GradientText>
                   </h2>
                   <Suspense
-                    fallback={(
-                      <div className='divide-y divide-[#c2d4ee] dark:divide-on_dark_border space-y-6'>
-                        {
-                          Array(5).fill(0).map((_, index) => {
-                            return <LastCommentSkeleton key={`cmt-${index}`} />
-                          })
-                        }
-                      </div>
-                    )}>
+                    fallback={lastCommentsSkeletonLoading}>
                     <LastCommentList data={lastComments} />
                   </Suspense>
-
                 </div>
               </div>
             </div>

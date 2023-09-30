@@ -11,23 +11,29 @@ interface Props {
 }
 
 const BlogSectionList = async ({ postPromise }: Props) => {
-    const res = await postPromise
+    const posts = await postPromise
+    const isShowViewMoreBtn = posts.totalPages > 1
     return (
         <>
             <div className='lg:flex lg:flex-wrap lg:gap-6 space-y-6 lg:space-y-0'>
                 {
-                    res.docs.map(post => <BlogSection post={post} key={post._id} />)
+                    posts.docs.map(post => <BlogSection post={post} key={post._id} />)
                 }
             </div>
 
             {/* pagination */}
-            <div className='mt-12 flex items-center justify-center'>
-                <Link
-                    href={"/blogs"}
-                    className={cn(buttonVariants({ size: "sm", className: "w-full sm:w-[60%]" }))}>
-                    View more
-                </Link>
-            </div>
+            {
+                isShowViewMoreBtn && (
+                    <div className='mt-12 flex items-center justify-center'>
+                        <Link
+                            href={"/blogs"}
+                            className={cn(buttonVariants({ size: "sm", className: "w-full sm:w-[60%]" }))}>
+                            View more
+                        </Link>
+                    </div>
+                )
+            }
+
         </>
     )
 }
