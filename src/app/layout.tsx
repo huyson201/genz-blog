@@ -37,7 +37,6 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   robots: {
-    index: false,
     nocache: true,
     follow: true
   },
