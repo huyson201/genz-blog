@@ -1,3 +1,4 @@
+import { handleResponse } from "@/utils";
 import { PaginateResponse, Post, PostFormData } from "@/types/type";
 import { apiConfig } from "./Api";
 import CustomError from "@/CustomError";
@@ -44,23 +45,18 @@ const postService = {
   },
   getPostById: async (id: string) => {
     try {
-      const res = await fetch(`${apiConfig.baseUrl}/posts/${id}`, {
-        headers: {
-          ...apiConfig.headers,
-        },
-        method: "Get",
-        cache: "no-store",
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        if (res.status < 500) {
-          return { error: data };
+      const getPostByIdResponse = await fetch(
+        `${apiConfig.baseUrl}/posts/${id}`,
+        {
+          headers: {
+            ...apiConfig.headers,
+          },
+          method: "Get",
+          cache: "no-store",
         }
-        throw new Error(data.message || "Something went wrong");
-      }
-      return { data: data as Post };
+      );
+
+      return handleResponse<Post>(getPostByIdResponse);
     } catch (error) {
       throw error;
     }

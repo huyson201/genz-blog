@@ -12,7 +12,7 @@ export async function handleResponse<T>(response: Response) {
       return { error: data as ErrorResponse };
     }
 
-    throw new Error(data.message);
+    throw new Error(data.message || "Something went wrong!");
   } catch (error) {
     throw error;
   }
