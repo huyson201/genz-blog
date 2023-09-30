@@ -145,28 +145,26 @@ const Comment = ({ comment, canReply, onUpdate, onDelete }: Props) => {
                                     {comment.content}
                                     <div className='mt-3 space-x-4 flex items-baseline'>
                                         {
-                                            canReply && <button
-                                                onClick={() => commentState?.setReply(comment._id)}
-                                                className='text-xs flex items-center   text-[#708ab0] dark:text-[#94a9c9] hover:text-blue dark:hover:text-blue'>
+                                            canReply && <CommentActionButton
+                                                onClick={() => commentState?.setReply(comment._id)}>
                                                 <BsFillReplyFill className='mr-0.5 text-base inline-block' />
                                                 Reply
-                                            </button>
+                                            </CommentActionButton>
                                         }
                                         {
-                                            isCommentAuth && <button
-                                                onClick={() => commentState?.setUpdate(comment._id)}
-                                                className='text-xs flex items-center  text-[#708ab0] dark:text-[#94a9c9] hover:text-blue dark:hover:text-blue'>
+                                            isCommentAuth && <CommentActionButton
+                                                onClick={() => commentState?.setUpdate(comment._id)}>
                                                 <BsPencilSquare className='mr-0.5 text-sm inline-block' />
                                                 Change
-                                            </button>
+                                            </CommentActionButton>
                                         }
                                         {
-                                            isCommentAuth && <button
-                                                onClick={() => onDelete?.(comment._id)}
-                                                className='text-xs flex items-center  text-[#708ab0] dark:text-[#94a9c9] hover:text-blue dark:hover:text-blue'>
-                                                <MdRestoreFromTrash className='mr-0.5 text-sm inline-block' />
-                                                Delete
-                                            </button>
+                                            isCommentAuth && (
+                                                <CommentActionButton
+                                                    onClick={() => onDelete?.(comment._id)}>
+                                                    <MdRestoreFromTrash className='mr-0.5 text-sm inline-block' />
+                                                    Delete
+                                                </CommentActionButton>)
                                         }
                                     </div>
                                 </>
@@ -205,3 +203,16 @@ const Comment = ({ comment, canReply, onUpdate, onDelete }: Props) => {
 
 
 export default Comment
+
+
+interface CommentActionButtonProp {
+    onClick?: () => void,
+    children: any
+}
+const CommentActionButton = ({ onClick, children }: CommentActionButtonProp) => {
+    return <button
+        onClick={onClick}
+        className='text-xs flex items-center  text-[#708ab0] dark:text-[#94a9c9] hover:text-blue dark:hover:text-blue'>
+        {children}
+    </button>
+}

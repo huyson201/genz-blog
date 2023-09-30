@@ -25,11 +25,14 @@ const MobileNavbar = ({ }: Props) => {
     const callbackUrl = useCallbackUrl()
     const mobileNav = useMobileNav()
     const pathname = usePathname()
+    const isAdminRole = session?.user.role === Role.Admin;
+
     useEffect(() => {
         if (!mobileNav?.isOpen) return
         mobileNav?.close()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pathname])
+
     return (
         <Transition.Root show={mobileNav?.isOpen} as={Fragment}>
             <Dialog as="div" className="relative z-[6] lg:hidden" onClose={() => mobileNav?.close()}>
@@ -125,7 +128,7 @@ const MobileNavbar = ({ }: Props) => {
                                                 </Link>
 
                                                 {
-                                                    session?.user.role === Role.Admin && (
+                                                    isAdminRole && (
                                                         <>
 
                                                             <Link

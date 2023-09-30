@@ -16,11 +16,14 @@ const Pagination = ({ className, totalPage, currentPage, pathname }: Props) => {
     const data = usePagination(totalPage, currentPage)
     const currentPathname = usePathname()
 
+    const hasNextPage = data && data.nextPage !== null
+    const hasPrevPage = data && data.prevPage !== null
+
     return (
         <div className={twMerge(className)} >
             <ul className="flex gap-x-1.5 text-sm flex-wrap gap-y-1.5 justify-center items-center sm:justify-start">
                 {
-                    data && data.prevPage !== null && (
+                    hasPrevPage && (
                         <li className='order-[10] sm:order-first'>
                             <Link href={pathname ? `${pathname}/page/${data.prevPage}` : `${currentPathname}?page=${data.prevPage}`} className="flex items-center justify-center rounded-full w-10 h-10 ml-0 leading-tight 
                                             dark:bg-on_dark_bg_2 bg-[#7f92b0] font-bold text-base text-white  hover:bg-blue dark:hover:bg-blue transition-all
@@ -57,7 +60,7 @@ const Pagination = ({ className, totalPage, currentPage, pathname }: Props) => {
                 }
 
                 {
-                    data && data.nextPage !== null && (
+                    hasNextPage && (
                         <li className='order-[11]'>
                             <Link href={pathname ? `${pathname}/page/${data.nextPage}` : `${currentPathname}?page=${data.nextPage}`} className="flex items-center justify-center rounded-full w-10 h-10 leading-tight 
                                                 dark:bg-on_dark_bg_2 bg-[#7f92b0] font-bold text-base text-white  hover:bg-blue dark:hover:bg-blue transition-all

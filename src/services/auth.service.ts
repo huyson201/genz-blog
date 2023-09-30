@@ -9,6 +9,7 @@ import {
 } from "@/types/type";
 import { apiConfig } from "./Api";
 import CustomError from "@/CustomError";
+import { handleResponse } from "@/utils";
 
 const authService = {
   loginWithCredential: async (email: string, password: string) => {
@@ -20,23 +21,32 @@ const authService = {
       body: JSON.stringify({ email, password }),
     });
   },
-  register: (url: string, { arg }: { arg: RegisterData }) => {
-    console.log(arg);
-    return fetch(`${apiConfig.baseUrl}/auth/register`, {
-      headers: {
-        ...apiConfig.headers,
-      },
-      method: "POST",
-      body: JSON.stringify(arg),
-    }).then(async (res) => {
-      const data = await res.json();
-      if (res.ok) return data;
-      throw new CustomError(
-        res.status || 500,
-        data.message || "Server internal error!",
-        data
+  register: async (data: RegisterData) => {
+    try {
+      const registerResponse = await fetch(
+        `${apiConfig.baseUrl}/auth/register`,
+        {
+          headers: {
+            ...apiConfig.headers,
+          },
+          method: "POST",
+          body: JSON.stringify(data),
+        }
       );
-    });
+      return handleResponse<Auth>(registerResponse);
+    } catch (error) {
+      throw error;
+    }
+
+    // .then(async (res) => {
+    //   const data = await res.json();
+    //   if (res.ok) return data;
+    //   throw new CustomError(
+    //     res.status || 500,
+    //     data.message || "Server internal error!",
+    //     data
+    //   );
+    // });
   },
   refreshToken: async (refresh_token: string) => {
     try {

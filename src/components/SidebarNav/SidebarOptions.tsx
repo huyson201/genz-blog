@@ -10,10 +10,11 @@ type Props = {}
 
 const SidebarOptions = (props: Props) => {
   const { data: session } = useSession()
+  const isAdminRole = session && session.user.role === Role.Admin
   return (
     <ul className="space-y-2 font-medium">
       <SidebarNavItem href='/me' title='Home' icon={<FaHome />} />
-      {session && session.user.role === Role.Admin && <SidebarMenu />}
+      {isAdminRole && <SidebarMenu />}
       <SidebarNavItem href='/me/gallery' title='Pictures' icon={<BiImage />} />
     </ul>
   )

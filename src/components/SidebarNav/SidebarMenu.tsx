@@ -19,9 +19,6 @@ const SidebarMenu = (props: Props) => {
                             </span>
                             <span className=' flex-1 text-left ml-5 text-sm whitespace-nowrap '>
                                 Posts
-                                {/* <span className="ml-1 tracking-widest text-sm font-light text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">
-                                    {`(0)`}
-                                </span> */}
                             </span>
                             <HiChevronUp
                                 className={`text-gray-500 transition duration-200 group-hover:text-gray-900 mt-0.5

@@ -13,9 +13,8 @@ interface Props extends LinkProps {
 const NavLink = ({ className, exact, href, children, ...props }: Props) => {
     const pathName = usePathname()
     const isActive = useMemo(() => {
-        if (!pathName) return false
         return exact ? pathName === href : pathName.startsWith(href.toString());
-    }, [pathName])
+    }, [pathName, exact, href])
 
     return (
         <Link href={href} className={twMerge(className, isActive && "active", pathName)} {...props}>

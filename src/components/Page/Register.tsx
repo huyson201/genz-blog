@@ -13,11 +13,11 @@ import ErrorFeedback from '@/components/ErrorFeedback/ErrorFeedback'
 import authService from '@/services/auth.service'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { toast } from 'react-hot-toast'
-import CustomError from '@/CustomError'
 import { signIn } from 'next-auth/react'
 import { Button } from '@/components/Button/Button'
 import { ColorRing } from 'react-loader-spinner'
 import GradientText from '@/components/GradientText/GradientText'
+import { RegisterData } from '@/types/type'
 
 const validateSchema = yup.object({
     name: yup.string().required(),
@@ -28,9 +28,10 @@ const validateSchema = yup.object({
 
 type Props = {}
 
+const registerMutate = (url: string, { arg }: { arg: RegisterData }) => authService.register(arg)
 
 const Register = (props: Props) => {
-    const { trigger, isMutating } = useSWRMutation('/auth/register', authService.register)
+    const { trigger, isMutating } = useSWRMutation('/auth/register', registerMutate)
     const searchParams = useSearchParams()
     const callbackUrl = searchParams.get("callbackUrl")
     const router = useRouter()
@@ -42,15 +43,15 @@ const Register = (props: Props) => {
     const submit = handleSubmit(async (data) => {
         setError('')
         try {
-            const res = await trigger(data)
-            toast.success('Successfully registered!')
-            return router.push("/auth/login")
-        } catch (error) {
-            if (error instanceof CustomError) {
+            const { data: registerData, error } = await trigger(data)
+            if (error) {
                 setError(error.message)
                 return
             }
+            toast.success('Successfully registered!')
+            router.push("/auth/login")
 
+        } catch (error) {
             throw error
         }
     })

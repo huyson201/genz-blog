@@ -2,7 +2,7 @@
 import authService from '@/services/auth.service'
 import { useSession } from 'next-auth/react'
 import React from 'react'
-import useSWR, { useSWRConfig } from 'swr'
+import useSWR from 'swr'
 import ImagePreview from './ImagePreview'
 import toast from 'react-hot-toast'
 type Props = {
@@ -10,11 +10,15 @@ type Props = {
     showBlankSelect?: boolean
 }
 
+const fetchGallery = ([_, token]: [string, string]) => authService.gallery(token)
+
 const ImageList = ({ showBlankSelect, onSelectImage }: Props) => {
     const { data: session } = useSession()
-    const { data, isLoading, mutate } = useSWR(!session ? null : ["/auth/gallery", session.backendTokens.access_token], ([url, token]) => authService.gallery(token))
+    const fetchGalleryKey = !session ? null : ["/auth/gallery", session.backendTokens.access_token]
+    const { data, isLoading, mutate } = useSWR(fetchGalleryKey, fetchGallery)
 
-    if (isLoading) return <div>Loading...</div>
+    if (isLoading) return <div className='flex items-center justify-center py-4 text-xl font-medium'>Loading...</div>
+
     const handleDelete = async (id: string) => {
 
         if (!session || !data) return
@@ -23,11 +27,14 @@ const ImageList = ({ showBlankSelect, onSelectImage }: Props) => {
             return
         }
         const promiseDelete = authService.deleteImage(id, session.backendTokens.access_token)
-        toast.promise(promiseDelete, {
+
+        const delImgMessage = {
             error: "Delete image fail!",
             loading: "Image deleting",
             success: "Image deleted!"
-        }).then(() => {
+        }
+
+        toast.promise(promiseDelete, delImgMessage).then(() => {
             const cloneData = [...data]
             cloneData.splice(cloneData.findIndex(img => img.public_id === id))
             mutate(cloneData)
