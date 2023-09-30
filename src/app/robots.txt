@@ -1,6 +1,6 @@
 User-agent: *
 
-Sitemap: https://genz-block.click/sitemap.xml
-Sitemap: https://genz-block.click/sitemap_index.xml
-Sitemap: https://genz-block.click/blogs/sitemap.xml
-Sitemap: https://genz-block.click/tags/sitemap.xml
+Sitemap: https://genz-blog.click/sitemap.xml
+Sitemap: https://genz-blog.click/sitemap_index.xml
+Sitemap: https://genz-blog.click/blogs/sitemap.xml
+Sitemap: https://genz-blog.click/tags/sitemap.xml
