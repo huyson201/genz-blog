@@ -1,4 +1,12 @@
 User-agent: *
+Disallow: /publish
+Disallow: /security
+Disallow: /profile
+Disallow: /me
+
+User-agent: *
+Allow: /
+
 
 Sitemap: https://genz-blog.click/sitemap.xml
 Sitemap: https://genz-blog.click/sitemap_index.xml
