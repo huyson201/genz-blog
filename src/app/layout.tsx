@@ -26,6 +26,7 @@ export const metadata: Metadata = {
     default: "Discovering Code and Living Fully | Gen Z Blogger",
     template: "%s | Gen Z Blogger"
   },
+  publisher: "Son Nguyen",
   description: 'Explore the world of programming, tech, and life through the eyes of a Gen Z blogger. Get coding tips, life lessons, and more.',
   applicationName: "Gen z Blogger",
   verification: {
@@ -60,8 +61,10 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+
   return (
     <html lang="en" suppressHydrationWarning>
+
       <body className={twMerge(noto.variable, inter.variable, "bg-on_light_body_bg dark:bg-on_dark_body_bg")}>
         <Provider>
           <header>
