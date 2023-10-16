@@ -15,6 +15,7 @@ export default withAuth(function middleware(req: NextRequestWithAuth) {
 export const config = {
   matcher: [
     "/publish/post",
+    "/me",
     "/me/(.*)",
     "/security",
     "/profile",
